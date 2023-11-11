@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class = "box" id = "register">
+        <form action = "">
+            <div id = "container">
+                <h2 id="head">สมัครสมาชิก</h2>
+                <label for = "firstname">ชื่อ: <input id = "firstname" name = "firstname" type = "text" placeholder="ชื่อ" required></label>
+                <label for = "lastname">นามสกุล: <input id = "lastname" name = "lastname" type = "text" placeholder="นามสกุล" required></label>
+                <label for = "birthday">วัน/เดือน/ปีเกิด: <input id = "birthday" name = "birthday" type = "text" placeholder="วัน/เดือน/ปีเกิด"required></label>
+                <label for = "tol">เบอร์โทร: <input id = "tol" name = "tol" type = "text" pattern="[0-9]{10}" placeholder="เบอร์โทร"required></label>
+                <label for = "id_number">รหัสบัตรประชาชน: <input id = "id_number" name = "id_number" type = "text" placeholder="รหัสบัตรประชาชน" pattern="[0-9]{13}" required></label>
+                <label for = "email">อีเมล: <input id = "email" name = "email" type = "email" placeholder="อีเมล" required></label>
+                <label for = "password">รหัสผ่าน: <input id = "password" name = "password" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <label for = "password_confirm">ยืนยันรหัสผ่าน: <input id = "password_confirm" name = "password_confirm" type = "text" placeholder="ยืนยันรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <input id = "submit" type="submit" value="ยันยืน">
+            </div>
+        </form>
+    </div>
+</body>
+<html>

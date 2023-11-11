@@ -1,12 +1,10 @@
 <html>
 <head>
+    <title>{% block title %}{% endblock %}</title>
     <script src='/static/js/js.js'></script>
     <link rel='stylesheet' href='/static/css/style.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jomhuria">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-    
-    {% block script %}
-    {% endblock %}    
 </head>
 <body>
     <div class="nav">
@@ -19,8 +17,8 @@
             <li><a href="#">ลงทะเบียน</a></li>
           </ul>
     </div>
-    <div class="content">
-    </div>
+    {% block contend %}
+    {% endblock %}
     <footer>
         <div>
             <li><p>ช่องทางติดต่อ</p></li>

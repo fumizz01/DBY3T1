@@ -1,0 +1,14 @@
+{% extends 'hotel_base.html'%}
+{% block title %}Login{% endblock %}
+{% block contend %}
+    <div class = "box" id = "login">
+        <form action = "">
+            <div id = "container">
+                <h2 id="head">เข้าสู่ระบบ</h2>
+                <label for = "email">อีเมล/ชื่อผู้ใช้/id: <input id = "email" name = "email" type = "text" placeholder="กรุณาใส่ อีเมล/ชื่อผู้ใช้/id" required></label>
+                <label for = "password">รหัสผ่าน: <input id = "password" name = "password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <input id = "submit" type="submit" value="ยันยืน">
+            </div>
+        </form>
+    </div>
+{% endblock %}

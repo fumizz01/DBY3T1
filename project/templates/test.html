@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/receipt_cpe.css' %}">
+</head>
+<body>
+    <div class = "register">
+        <form action = "">
+            <div id = "container">
+                <h2>สมัครสมาชิก</h2>
+                <label for = "firstname">ชื่อ: <input id = "firstname" name = "firstname" type = "text" required></label>
+                <label for = "lastname">นามสกุล: <input id = "lastname" name = "lastname" type = "text" required></label>
+                <label for = "birthday">วัน/เดือน/ปีเกิด: <input id = "birthday" name = "birthday" type = "text" required></label>
+                <label for = "tol">เบอร์โทร: <input id = "tol" name = "tol" type = "text" pattern="[0-9]{10}" required></label>
+                <label for = "id_number">รหัสบัตรประชาชน: <input id = "id_number" name = "id_number" type = "text" pattern="[0-9]{13}" required></label>
+                <label for = "email">อีเมล: <input id = "email" name = "email" type = "email" required></label>
+                <label for = "password">รหัสผ่าน: <input id = "password" name = "password" type = "text" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <label for = "password_confirm">ยืนยันรหัสผ่าน: <input id = "password_confirm" name = "password_confirm" type = "text" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+<html>
