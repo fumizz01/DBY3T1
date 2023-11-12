@@ -5,8 +5,22 @@
         <form class='login' action = "">
             <div id="login-container" class = "login-container">
                 <h2 id="head">เข้าสู่ระบบ</h2>
-                <label class='login' for = "email">อีเมล/ชื่อผู้ใช้/id: <input id = "login-user" class='login' name = "email" type = "text" placeholder="กรุณาใส่ อีเมล/ชื่อผู้ใช้/id" required></label>
-                <label class='login' for = "password">รหัสผ่าน: <input id = "login-password" class='login' name = "password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <label class='login' for = "login-user">อีเมล/ชื่อผู้ใช้/id: 
+                    <input id = "login-user" class='login' name = "login-user" type = "text" placeholder="กรุณาใส่ อีเมล/ชื่อผู้ใช้/id" required>
+                </label>
+                <label class='login' for = "login-password">รหัสผ่าน:
+                    <input id = "login-password" class='login' name = "login-password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
+                    maxlength="15" required>
+                    <i class="bx bx-hide eye-icon"></i>
+                    <div id="password-strength-status"></div>
+                    <ul class="pswd_info" id="passwordCriterion">
+                        <li data-criterion="length" class="invalid">8-15 <strong>Characters</strong></li>
+                        <li data-criterion="capital" class="invalid">At least <strong>one capital letter</strong></li>
+                        <li data-criterion="small" class="invalid">At least <strong>one small letter</strong></li>
+                        <li data-criterion="number" class="invalid">At least <strong>one number</strong></li>
+                        <li data-criterion="special" class="invalid">At least <strong>one Specail Characters </strong></li>
+                    </ul>
+                </label>
                 <input id = "login-button" class='login' type="submit" value="ยันยืน">
             </div>
         </form>
