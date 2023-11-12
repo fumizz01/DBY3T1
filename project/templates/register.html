@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class = "box" id = "register">
-        <form action = "">
-            <div id = "container">
-                <h2 id="head">สมัครสมาชิก</h2>
-                <label for = "firstname">ชื่อ: <input id = "firstname" name = "firstname" type = "text" placeholder="ชื่อ" required></label>
-                <label for = "lastname">นามสกุล: <input id = "lastname" name = "lastname" type = "text" placeholder="นามสกุล" required></label>
-                <label for = "birthday">วัน/เดือน/ปีเกิด: <input id = "birthday" name = "birthday" type = "text" placeholder="วัน/เดือน/ปีเกิด"required></label>
-                <label for = "tol">เบอร์โทร: <input id = "tol" name = "tol" type = "text" pattern="[0-9]{10}" placeholder="เบอร์โทร"required></label>
-                <label for = "id_number">รหัสบัตรประชาชน: <input id = "id_number" name = "id_number" type = "text" placeholder="รหัสบัตรประชาชน" pattern="[0-9]{13}" required></label>
-                <label for = "email">อีเมล: <input id = "email" name = "email" type = "email" placeholder="อีเมล" required></label>
-                <label for = "password">รหัสผ่าน: <input id = "password" name = "password" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
-                <label for = "password_confirm">ยืนยันรหัสผ่าน: <input id = "password_confirm" name = "password_confirm" type = "text" placeholder="ยืนยันรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
-                <input id = "submit" type="submit" value="ยันยืน">
+{% extends 'login_base.html'%}
+{% block title %}Register{% endblock %}
+{% block contend %}
+    <div class = "register-body" id = "register-body">
+        <form class='register' action = "">
+            <div class = "register-container">
+                <h2 class="head">สมัครสมาชิก</h2>
+                <label class='register' for = "firstname">ชื่อ: <input class='register' id = "firstname" name = "firstname" type = "text" placeholder="ชื่อ" required></label>
+                <label class='register' for = "lastname">นามสกุล: <input class='register' id = "lastname" name = "lastname" type = "text" placeholder="นามสกุล" required></label>
+                <label class='register' for = "birthday">วัน/เดือน/ปีเกิด: <input class='register' id = "birthday" name = "birthday" type = "text" placeholder="วัน/เดือน/ปีเกิด"required></label>
+                <label class='register' for = "tol">เบอร์โทร: <input class='register' id = "tol" name = "tol" type = "text" pattern="[0-9]{10}" placeholder="เบอร์โทร"required></label>
+                <label class='register' for = "id_number">รหัสบัตรประชาชน: <input class='register' id = "id_number" name = "id_number" type = "text" placeholder="รหัสบัตรประชาชน" pattern="[0-9]{13}" required></label>
+                <label class='register' for = "email">อีเมล: <input class='register' id = "email" name = "email" type = "email" placeholder="อีเมล" required></label>
+                <label class='register' for = "password">รหัสผ่าน: <input class='register' id = "password" name = "password" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <label class='register' for = "password_confirm">ยืนยันรหัสผ่าน: <input class='register' id = "password_confirm" name = "password_confirm" type = "text" placeholder="ยืนยันรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                <input class='register-submit' id = "register-button" type="submit" value="ยันยืน">
             </div>
         </form>
     </div>
-</body>
-<html>
+{% endblock %}
