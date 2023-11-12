@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2 class = "header-hotelpage" id="head">ค้นหาห้องพัก</h2>
+    <div class = "hotelpage-box" id = "hotelpage">
+        <form action = "">
+            <div class = "hotelpage-container" id = "hotelpage-container">
+                <label class = "checkin" for = "checkin">เช็คอิน: 
+                    <input class = "checkin" id = "checkin" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
+                </label>
+                <label class = "checkout" for = "checkout">เช็คเอาท์: 
+                    <input class = "checkout" id = "checkout" name = "checout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
+                </label>  
+                <label class = "guest" for = "guests">ผู้เข้าพัก
+                    <button class = "guest" id = "guests" name = "guests" type = "text" placeholder="กรุณาเลือกห้อง" required > </button>
+                </label>
+                <ul class = "dropdown">
+                    <li> <label class = "down-menu" for = "adult">ผู้ใหญ่ <input class = "down-menu" id = "adult" name = "adult" type = "number" required></button></label> </li>
+                    <li> <label class = "down-menu" for = "child">เด็ก <input class = "down-menu" id = "child" name = "child" type = "number"  required></button></label> </li>
+                </ul>     
+                <input class = "serch_room" id = "serch_room" type="submit" value="ค้นหา">
+            </div>
+        </form>
+    </div>
+</body>
+<html>

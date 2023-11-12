@@ -206,3 +206,112 @@ h2.head {
 	background-color: #229954;
 }
 /* password */
+
+/*hotel*/
+
+body{
+    background: black;
+}
+
+.header-hotelpage{
+    width: 374px;
+    height: 77px;
+    color: #FFF;
+
+    text-align: center;
+    font-family: Inter;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.hotelpage-box {
+    width: 1151px;
+    height: 340px;
+    border-radius: 25px;
+    background: #F6F6F6;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 50px auto;
+    padding: 20px;
+}
+
+
+label.checkin, label.checkout{
+    color: #000;
+    font-family: Jomhuria;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+label.guest{
+    color: #000;
+    font-family: Jomhuria;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: block;
+    margin-top: 20px;
+}
+
+button.guest{
+    height: 62px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.19);
+    background: #FFF;   
+    width: 100%;
+}
+
+input.checkin, input.checkout{
+    width: 490px;
+    height: 62px;
+    margin: auto;
+    display: inline-block;
+    display: flex;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.19);
+    background: #FFF;   
+}
+
+.hotelpage-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+.hotelpage-container ul li {
+    display: block;
+    margin-right: 10px; 
+    border-radius: 10px;
+}
+
+input.serch_room{
+    margin-top: 165px;
+    border-radius: 10px;
+    background: #4FD2FC;
+    width: 456px;
+    height: 82px;
+
+    color: #FFF;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.hotelpage-container{
+    display: block;
+    justify-content: space-between;
+    position: relative;
+}
+
+label.checkout {
+    float: right;
+}
