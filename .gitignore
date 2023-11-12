@@ -1,4 +1,4 @@
 # dependencies
-.DS_stores
+.DS_store
 project/.DS_Store
 project/__pycache__/views.cpython-311.pyc
