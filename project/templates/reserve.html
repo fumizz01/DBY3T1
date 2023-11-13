@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+    <head>
+        <title>Reserve Hotel's Room</title>
+
+        {% include 'general_use/general-script.html' %}
+
+        <script src="{% static 'js/js.js' %}"></script>
+        <link rel='stylesheet' href="{% static 'css/reserve.css' %}">
+    </head>
+    <body>
+        {% include 'general_use/header.html' %}
+
+        <div class='head'>
+        <h2 class="head">จองห้องพัก</h2>
+        </div>
+
+        {% include 'general_use/footer.html' %}
+    </body>
+</html>

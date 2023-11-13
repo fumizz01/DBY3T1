@@ -9,3 +9,6 @@ def register(request):
 
 def login(request):
     return render(request, 'login.html')
+
+def reserve(request):
+    return render(request, 'reserve.html')

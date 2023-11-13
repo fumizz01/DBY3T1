@@ -1,0 +1,11 @@
+div.head {
+    height: 200px;
+    padding: 1px;
+    border: solid;
+}
+
+h2.head {
+    margin: auto auto;
+    display: block;
+    border: solid;
+}

@@ -42,7 +42,7 @@ H1.header-logo {
     justify-content: center;
 } */
 
-footer.footer-page{
+div.footer{
     width: 100%;
     bottom: 0;
     display: flex;
@@ -51,6 +51,7 @@ footer.footer-page{
     list-style: none;
     background-color: #9F9F9F;
     height: 25%;
+    position: absolute;
     & li{
         color: white;
     }
