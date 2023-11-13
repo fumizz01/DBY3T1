@@ -1,0 +1,126 @@
+/* login */
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #ECECEC;
+    font-family: Arial, sans-serif;
+}
+
+body.login {
+    overflow: hidden;
+}
+
+div.box {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #ECECEC;
+    margin: 0;
+    padding: 0;
+    height:100vh;
+}
+
+div.login-container {
+    height: fit-content;
+    width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+div.register-container {
+    width: 574px;
+    height: fit-content;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+.eye-icon{
+    cursor: pointer;
+    padding: 5px;
+    top: 45%;
+    transform: translateY(-25%);
+    margin-left: 370px;
+    position: absolute;
+    font-size: 18px;
+    color: #8b8b8b;
+}
+
+label{
+    display: block;
+}
+
+input {
+    display: block;
+    padding: 5px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input.submit {
+    color: white;
+    margin: 35px auto 0 auto;
+    display: block;
+    background-color: #4FD2FC;
+    width: 20%;
+}
+
+h2 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+
+/* password */
+.pswd_info {
+	list-style: none;
+	margin: 5px 0px;
+	padding: 0;
+}
+.pswd_info .invalid {
+	padding-left: 20px;
+	background:url(img/invalid.png) no-repeat 0 50%;
+	color:#ec3f41;
+}
+.pswd_info .valid {
+	padding-left: 20px;
+	background:url(img/valid.png) no-repeat 0 50%;   
+	color:#3a7d34;
+}
+#password-strength-status {
+    color: white;
+	font-size:small;
+	padding: 5px 10px;
+	border-radius: 4px;
+	margin-top: 5px;
+}
+.veryweak-password {
+	background-color: #FF0000;
+}
+.weak-password {
+	background-color: #d35400;
+}
+.medium-password {
+	background-color: #f39c12;
+}
+.average-password {
+	background-color: #f1c40f;	
+}
+.strong-password {
+	background-color: #229954;
+}
+/* password */
