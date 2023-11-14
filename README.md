@@ -1,11 +1,7 @@
 <h1 align="center">DBY3T1</h1>
 <p align="center">
-  <a aria-label="contributors graph" href="https://github.com/fumizz01/DBY3T1/graphs/contributors">
-    <img alt="" src="https://img.shields.io/github/contributors/fumizz01/DBY3T1.svg">
-  </a>
-  <a aria-label="last commit" href="https://github.com/fumizz01/DBY3T1/commits/main">
-    <img alt="" src="https://img.shields.io/github/last-commit/fumizz01/DBY3T1.svg">
-  </a>
+  <img alt="" src="https://img.shields.io/github/contributors/fumizz01/DBY3T1.svg">
+  <img alt="" src="https://img.shields.io/github/last-commit/fumizz01/DBY3T1.svg">
 </p>
 
 # Require
