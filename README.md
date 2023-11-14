@@ -27,7 +27,7 @@ Live server for Django
 pip install django-livereload-server
 ```
 # Edit Data Base for PostgreSQL
-edit setting.py
+edit [setting.py](DatabaseProject/settings.py)
 ```py
 DATABASES = {
   'default': {
