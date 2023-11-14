@@ -3,7 +3,6 @@ body{
     margin: 0;
     padding: 0;
     background-color: #ECECEC;
-    font-family: Arial, sans-serif;
     & .login{
         overflow: hidden;
     }
@@ -16,14 +15,15 @@ form {
         margin:auto;
     }
 }
-input {
+.submit{
     cursor: pointer;
 }
 
 .box {
     width: 100%;
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: Kanit;
+    /* font-family: Arial, sans-serif; */
     background-color: #ECECEC;
     margin: 0;
     padding: 0;
@@ -31,8 +31,8 @@ input {
 }
 
 .login-container {
-    min-width: 581px;
-    min-height: 321px;
+    min-width: 400px;
+    min-height: 300px;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;
