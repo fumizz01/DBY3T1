@@ -10,18 +10,36 @@
     </head>
     <body>
         {% include 'general_use/header.html' %}
-        <div class = "box" id = "register-box">
-            <form action = "">
+        <div class = "box" >
+            <form action = "" class="inline">
                 <div class = "register-container">
                     <h2 class="head">สมัครสมาชิก</h2>
-                    <label for = "firstname">ชื่อ: <input id = "firstname" name = "firstname" type = "text" placeholder="ชื่อ" required></label>
-                    <label for = "lastname">นามสกุล: <input id = "lastname" name = "lastname" type = "text" placeholder="นามสกุล" required></label>
-                    <label for = "birthday">วัน/เดือน/ปีเกิด: <input id = "birthday" name = "birthday" type = "text" placeholder="วัน/เดือน/ปีเกิด"required></label>
-                    <label for = "tol">เบอร์โทร: <input id = "tol" name = "tol" type = "text" pattern="[0-9]{10}" placeholder="เบอร์โทร"required></label>
-                    <label for = "id_number">รหัสบัตรประชาชน: <input id = "id_number" name = "id_number" type = "text" placeholder="รหัสบัตรประชาชน" pattern="[0-9]{13}" required></label>
-                    <label for = "email">อีเมล: <input id = "email" name = "email" type = "email" placeholder="อีเมล" required></label>
-                    <label for = "password">รหัสผ่าน: <input id = "password" name = "password" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
-                    <label for = "password_confirm">ยืนยันรหัสผ่าน: <input id = "password_confirm" name = "password_confirm" type = "text" placeholder="ยืนยันรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></label>
+                    <p>ชื่อ</p>
+                    <input class="input-field" id = "firstname" name = "firstname" type = "text" placeholder="ชื่อ" required>
+                    <p>นามสกุล</p>
+                    <input class="input-field" id = "lastname" name = "lastname" type = "text" placeholder="นามสกุล" required>
+                    <p>วัน/เดือน/ปีเกิด</p>
+                    <input class="input-field" id = "birthday" name = "birthday" type = "text" placeholder="วัน/เดือน/ปีเกิด"required>
+                    <p>เบอร์โทร</p>
+                    <input class="input-field" id = "tol" name = "tol" type = "text" pattern="[0-9]{10}" placeholder="เบอร์โทร" maxlength="10" required>
+                    <p>รหัสบัตรประชาชน</p>
+                    <input class="input-field" id = "id_number" name = "id_number" type = "text" placeholder="รหัสบัตรประชาชน" pattern="[0-9]{13}" maxlength="13" required>
+                    <p>อีเมล</p>
+                    <input class="input-field" id = "email" name = "email" type = "email" placeholder="อีเมล" required>
+                    <p>รหัสผ่าน</p>
+                    <input class="input-field password" id = "register-password" name = "password" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="15" required>
+                    <i class="bx bx-hide eye-icon "></i>
+                    <div id="password-strength-status"></div>
+                    <ul class="pswd_info" id="passwordCriterion">
+                        <li data-criterion="length" class="invalid">8-15 <strong>Characters</strong></li>
+                        <li data-criterion="capital" class="invalid">At least <strong>one capital letter</strong></li>
+                        <li data-criterion="small" class="invalid">At least <strong>one small letter</strong></li>
+                        <li data-criterion="number" class="invalid">At least <strong>one number</strong></li>
+                        <li data-criterion="special" class="invalid">At least <strong>one Specail Characters </strong></li>
+                    </ul>
+                    <p>ยืนยันรหัสผ่าน</p>
+                    <input class="input-field" id = "password_confirm" name = "password_confirm" type = "text" placeholder="ยืนยันรหัสผ่าน" required>
+                    <p id='message'></p>
                     <input class='submit' id = "register-button" type="submit" value="ยันยืน">
                 </div>
             </form>

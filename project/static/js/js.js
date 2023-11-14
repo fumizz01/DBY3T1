@@ -2,19 +2,34 @@ $(document).ready(function () {
     /* hide show password */
     $("body").on('click', '.eye-icon', function() {
         $(this).toggleClass("bx-show bx-hide");
-        var input = $("#login-password");
+        var input = $(".password");
         if (input.attr("type") === "password") {
           input.attr("type", "text");
         } else {
           input.attr("type", "password");
         }
       });
+
+    $('#password-strength-status').hide();
     $('.pswd_info').hide();
-    $('#login-password').keyup(function(event) {
-        var password = $('#login-password').val();
+    $('#register-password').keyup(function(event) {
+        var password = $('#register-password').val();
         checkPasswordStrength(password);
       });
         
+    $('#register-password, #password_confirm').on('keyup', function () {
+        if ($('#register-password').val() == $('#password_confirm').val()) {
+            $('#message').html('Matching').css('color', 'green');
+            document.getElementById('register-button').disabled = false;
+        } else {
+            $('#message').html('Not Matching').css('color', 'red');
+            document.getElementById('register-button').disabled = true;
+
+            
+
+        }
+    });
+    
 
 
 });
@@ -22,12 +37,13 @@ $(document).ready(function () {
 
 /* password */
 function checkPasswordStrength(password) {
+    $('#password-strength-status').show();
 	var number     = /([0-9])/;
 	var upperCase  = /([A-Z])/;
 	var lowerCase  = /([a-z])/;
 	var specialCharacters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
 
-	var characters     = (password.length >= 6 && password.length <= 15 );
+	var characters     = (password.length >= 8 && password.length <= 15 );
 	var capitalletters = password.match(upperCase) ? 1 : 0;
 	var loweletters    = password.match(lowerCase) ? 1 : 0;
 	var numbers        = password.match(number) ? 1 : 0;

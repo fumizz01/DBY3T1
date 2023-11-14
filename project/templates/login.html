@@ -12,26 +12,18 @@
 
         {% include 'general_use/header.html' %}
 
-        <div class = "box" id = "login-box">
-            <form action = "">
+        <div class = "box">
+            <form action = "" class="inline">
                 <div id="login-container" class = "login-container">
                     <h2>เข้าสู่ระบบ</h2>
-                    <label  for = "login-user">อีเมล/ชื่อผู้ใช้/id: 
-                        <input id = "login-user"  name = "login-user" type = "text" placeholder="กรุณาใส่ อีเมล/ชื่อผู้ใช้/id" required>
-                    </label>
-                    <label  for = "login-password">รหัสผ่าน:
-                        <input id = "login-password"  name = "login-password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
+                    <p>ชื่อผู้ใช้</p>
+                    <i class='bx bxs-user-circle icon'></i>
+                    <input class="input-field" = "login-user"  name = "login-user" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
+                    <p>รหัสผ่าน</p>
+                    <i class='bx bxs-lock icon'></i>
+                    <input class="input-field password" id = "login-password"  name = "login-password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
                         maxlength="15" required>
-                        <i class="bx bx-hide eye-icon"></i>
-                        <div id="password-strength-status"></div>
-                        <ul class="pswd_info" id="passwordCriterion">
-                            <li data-criterion="length" class="invalid">8-15 <strong>Characters</strong></li>
-                            <li data-criterion="capital" class="invalid">At least <strong>one capital letter</strong></li>
-                            <li data-criterion="small" class="invalid">At least <strong>one small letter</strong></li>
-                            <li data-criterion="number" class="invalid">At least <strong>one number</strong></li>
-                            <li data-criterion="special" class="invalid">At least <strong>one Specail Characters </strong></li>
-                        </ul>
-                    </label>
+                    <i class="bx bx-hide eye-icon "></i>
                     <input id = "login-button" class='submit' type="submit" value="ยันยืน">
                 </div>
             </form>
