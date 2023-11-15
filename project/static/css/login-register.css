@@ -3,10 +3,12 @@ body{
     margin: 0;
     padding: 0;
     background-color: #ECECEC;
-    & .login{
-        overflow: hidden;
-    }
 }
+
+body.login{
+    overflow: hidden;
+}
+
 form {
     align-items: center;
     display: flex;
@@ -24,7 +26,7 @@ form {
     height: 100%;
     font-family: Kanit;
     /* font-family: Arial, sans-serif; */
-    background-color: #ECECEC;
+   /*  background-color: #ECECEC; */
     margin: 0;
     padding: 0;
     height:100vh;
@@ -34,7 +36,7 @@ form {
     min-width: 400px;
     min-height: 300px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color:rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -56,16 +58,23 @@ form {
         color: white;
         width: 20%;
         box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #4FD2FC;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        border: 1px solid transparent;
+        border-radius: 7px;
+        background-color:#4FD2FC;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+        font-family: Kanit;
+        font-size: large;
+    }
+    & .submit:hover{
+        filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
+        font-size: larger;
     }
     &  i{
-        padding: 5px;
+        padding: 7.5px;
         position: absolute;
     }
     .input-field {
+        font-family: Kanit;
         text-align: center;
         padding: 5px;
         width: 100%;
@@ -75,7 +84,7 @@ form {
     }
 }
 .eye-icon{
-    margin-left: -25px;
+    margin-left: -30px;
     cursor: pointer;
     position: absolute;
     font-size: 18px;
@@ -113,6 +122,7 @@ form {
         border-radius: 4px;
         background-color: #4FD2FC;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
     }
     &  i{
         padding: 5px;
@@ -182,3 +192,55 @@ form {
 	background-color: #229954;
 }
 /* password */
+
+/* background */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) translateX(0vw);
+    }
+    100% {
+        transform: rotate(20deg) translateX(80vw);
+    }
+  }
+  @keyframes rotate2 {
+    0% {
+        transform: rotate(20deg) translateX(80vw);
+    }
+    100% {
+        transform: rotate(0deg) translateX(0vw);
+    }
+  }
+  
+.gradient-bg {
+    z-index: -1;
+    position: absolute;
+    --size: 500px;
+    --speed: 10s;
+    --easing: cubic-bezier(0.5, 0.2, 0.2, 0.5);
+    text-align: center;
+    width: var(--size);
+    height: var(--size);
+    filter: blur(50px);
+    -webkit-filter: blur(50px);
+    background: linear-gradient(#e66465, #9198e5);
+   /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
+    animation: rotate var(--speed) var(--easing) alternate infinite;
+    border-radius: 50% ;
+    opacity: 50%;
+  }
+.item2{
+    background: linear-gradient(#46f6ff, #91e597);
+    animation: rotate2 var(--speed) var(--easing) alternate infinite;
+}
+  
+  @media (min-width: 720px) {
+    .gradient-bg {
+      --size: 500px;
+    }
+  }
+  
+/* This is just to transition when you change the viewport size. */
+* {
+    transition: all 0.25s ease-in-out;
+  }
