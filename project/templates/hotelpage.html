@@ -14,13 +14,17 @@
         <div class = "hotelpage-box" id = "hotelpage">
             <form action = "">
                 <div class = "hotelpage-container" id = "hotelpage-container">
-                    <label class = "checkin" for = "checkin">เช็คอิน: 
-                        <input class = "checkin" id = "checkin" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
-                    </label>
-                    <label class = "checkout" for = "checkout">เช็คเอาท์: 
-                        <input class = "checkout" id = "checkout" name = "checout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
-                    </label>  
-                    <label class = "guest" for = "guests">ผู้เข้าพัก
+                    <div class = 'left-column' id = 'left-column'>
+                        <label class = "checkin" for = "checkin">เช็คอิน: 
+                            <input class = "checkin" id = "checkin" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
+                        </label>
+                    </div>
+                    <div class = 'right-column' id = 'right-column'>
+                        <label class = "checkout" for = "checkout">เช็คเอาท์: 
+                            <input class = "checkout" id = "checkout" name = "checout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
+                        </label>
+                    </div>  
+                    <label class = "guest" for = "guests">ผู้เข้าพัก:
                         <button class = "guest" id = "guests" name = "guests" type = "text" placeholder="กรุณาเลือกห้อง" required > </button>
                     </label>
                     <ul class = "dropdown">

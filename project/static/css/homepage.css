@@ -1,6 +1,6 @@
 /*hotel*/
 
-body{
+/*  body{
     background: black;
 }
 
@@ -105,4 +105,74 @@ input.serch_room{
 
 label.checkout {
     float: right;
+}*/
+
+.hotelpage-container
+{
+    /*font zone*/
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+
+    /*ขนาดของ hotelpage-container*/
+    width: 75%;
+    height: 40%;
+    border-radius: 25px;
+    background: #F6F6F6;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 50px auto;
+    padding: 20px;
 }
+
+input.checkin, input.checkout
+{
+
+    width: 300px;
+    height: 45px;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.19);
+    background: #FFF;   
+}
+label.checkin
+{
+    /*ทำให้ block ทั้งหมดชิดซ้าย*/
+    float: left;
+    font-weight: 200;
+    line-height: normal;
+}
+label.checkout
+{
+    /*ทำให้ block ทั้งหมดชิดขวา*/
+    float:right;
+}
+
+label.guest
+{
+    font-weight: 400;
+    line-height: normal;
+    display: block;
+    margin-top: 100px;
+}
+
+button.guest
+{
+    width: 100%;
+    height: 45px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.19);
+    background: #FFF;   
+}
+
+ul li
+{
+    list-style: none;
+    /*float: left;*/
+}
+label.down-menu
+{
+    
+}
+
