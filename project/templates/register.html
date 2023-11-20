@@ -10,6 +10,8 @@
     </head>
     <body>
         {% include 'general_use/header.html' %}
+        <div class="gradient-bg"></div>
+        <div class="gradient-bg item2"></div>
         <div class = "box" >
             <form id="register-form" action = "{% url 'register' %}" method="post">
                 {%csrf_token %} 
@@ -72,6 +74,7 @@
                 </div>
             </form>
         </div>
+        {% include 'general_use/footer.html' %}
     </body>
 </html>
     

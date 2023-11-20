@@ -67,7 +67,6 @@ H1.header-logo {
 
 div.container {
     min-height: calc(100vh - (100px + 182px));
-    /* padding-bottom: 182px; */
 }
 
 footer.footer{
