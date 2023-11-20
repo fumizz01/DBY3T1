@@ -1,108 +1,194 @@
-/*hotel*/
-
 body{
-    background: black;
+    margin: 0;
+    padding: 0;
+    background-color: #ECECEC;
 }
 
-.header-hotelpage{
-    width: 374px;
-    height: 77px;
-    color: #FFF;
-
-    text-align: center;
-    font-family: Inter;
-    font-size: 50px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    &.inline{
+        margin:auto;
+    }
 }
 
-.hotelpage-box {
-    width: 1151px;
-    height: fit-content;
-    border-radius: 25px;
-    background: #F6F6F6;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+.box {
+    width: 100%;
+    height: 100%;
+    font-family: Kanit;
+    /* font-family: Arial, sans-serif; */
+   /*  background-color: #ECECEC; */
+    margin: 0;
+    padding: 0;
+    height:100vh;
+}
+.hotelpage-container
+{
+    /*font zone*/
+    color: #000;
+    font-size: 18px;
+    font-family: Kanit;
+
+    /*ขนาดของ hotelpage-container*/
+    width: 75%;
+    height: 35%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 50px auto;
     padding: 20px;
+    background-color:rgba(255, 255, 255, 0.5);
 }
 
-
-label.checkin, label.checkout{
-    color: #000;
-    font-family: Jomhuria;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.header-hotelpage
+{
+    text-align: center;
+    font-size: 30px;
+    font-family: Kanit;
+    /* color: white; */
 }
 
-label.guest{
-    color: #000;
-    font-family: Jomhuria;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+input.checkin, input.checkout
+{
+    width: 500px;
+    height: 45px;
     display: block;
-    margin-top: 20px;
-}
-
-button.guest{
-    height: 62px;
-    display: block;
-    margin-top: 10px;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.19);
     background: #FFF;   
-    width: 100%;
+}
+label.checkin
+{
+    /*ทำให้ block ทั้งหมดชิดซ้าย*/
+    float: left;
+    font-weight: 200;
+    line-height: normal;
+}
+label.checkout
+{
+    /*ทำให้ block ทั้งหมดชิดขวา*/
+    float:right;
 }
 
-input.checkin, input.checkout{
-    width: 490px;
-    height: 62px;
+input.search_room
+{
+    width: 300px;
+    height: 60px;
+    color: white;
+    font-size: 25px;
+    background: #4FD2FC; 
+    border-radius: 10px;
+    border: 1px solid transparent;
+    display: block;
     margin: auto;
-    display: inline-block;
-    display: flex;
+    position: relative;
+    font-family: Kanit;
+    font-size: large;
+    top: 50;
+}
+
+label.guest
+{
+    font-weight: 400;
+    line-height: normal;
+    display: block;
+    margin-top: 100px;
+}
+
+button.guest
+{
+    width: 100%;
+    height: 45px;
+    display: block;
     margin-top: 10px;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.19);
     background: #FFF;   
 }
 
-.hotelpage-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.dropdown .container
+{
+    padding: 10px 15px;
 }
- 
-.hotelpage-container ul li {
+
+.dropdown .down-menu
+{
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 2px 2px 5px hsl(0, 0%, 0%, 0.8);
+}
+
+/* กล่องที่เก็บ input ของผู้ใหญ่ กับ เด็กเอาไว้ */
+.dropdown:hover .down-menu
+{
     display: block;
-    margin-right: 10px; 
-    border-radius: 10px;
 }
 
-input.serch_room{
-    margin-top: 165px;
-    border-radius: 10px;
-    background: #4FD2FC;
-    width: 456px;
-    height: 82px;
-
-    color: #FFF;
-    font-family: Inter;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+/* กล่องของ class container ที่ใช้สำหรับ hover */
+.dropdown .container:hover
+{
+    background-color: #F6F6F6;
 }
 
-.hotelpage-container{
-    display: block;
-    justify-content: space-between;
-    position: relative;
+button.decrement
+{
+    background-color: #ffff;
+    border: none;
 }
 
-label.checkout {
-    float: right;
+button.increment
+{
+    background-color: #ffff;
+    border: none;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) translateX(0vw);
+    }
+    100% {
+        transform: rotate(20deg) translateX(80vw);
+    }
+  }
+  @keyframes rotate2 {
+    0% {
+        transform: rotate(20deg) translateX(80vw);
+    }
+    100% {
+        transform: rotate(0deg) translateX(0vw);
+    }
+  }
+
+.gradient-bg 
+{
+    z-index: -1;
+    position: absolute;
+    --size: 500px;
+    --speed: 10s;
+    --easing: cubic-bezier(0.5, 0.2, 0.2, 0.5);
+    text-align: center;
+    width: var(--size);
+    height: var(--size);
+    filter: blur(50px);
+    -webkit-filter: blur(50px);
+    background: linear-gradient(#e66465, #9198e5);
+   /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
+    animation: rotate var(--speed) var(--easing) alternate infinite;
+    border-radius: 50% ;
+    opacity: 50%;
+}
+.item2
+{
+    background: linear-gradient(#46f6ff, #91e597);
+    animation: rotate2 var(--speed) var(--easing) alternate infinite;
+}
+  
+@media (min-width: 720px) 
+{
+    .gradient-bg 
+    {
+      --size: 500px;
+    }
 }
