@@ -114,6 +114,11 @@ p {
 
 .big-font {
     font-size: 28px;
+    margin-bottom: 16px;
+}
+
+div.hide {
+    display: none;
 }
 
 

@@ -65,7 +65,7 @@ H1.header-logo {
     justify-content: center;
 } */
 
-div.container {
+div.content-container {
     min-height: calc(100vh - (100px + 182px));
 }
 
