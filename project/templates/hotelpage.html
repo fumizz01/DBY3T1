@@ -5,16 +5,15 @@
 
         {% include 'general_use/general-script.html' %}
 
-        <script src="{% static 'js/js.js' %}"></script>
+        <script src="{% static 'js/homepage.js' %}"></script>
         <link rel='stylesheet' href="{% static 'css/homepage.css' %}">
     </head>
     <body class = "homepage">
         {% include 'general_use/header.html' %}
-
+        <div class="gradient-bg"></div>
+        <div class="gradient-bg item2"></div>
         <div class="content-container">
             <h2 class = "header-hotelpage" id="head">ค้นหาห้องพัก</h2>
-            <div class="gradient-bg"></div>
-            <div class="gradient-bg item2"></div>
             <div class = "box" id = "hotelpage">
                 <form action = "">
                     <div class = "hotelpage-container" id = "hotelpage-container">

@@ -6,7 +6,7 @@ body{
 }
 
 body.login{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 form {
@@ -215,22 +215,32 @@ form {
 
 @keyframes rotate {
     0% {
-        transform: rotate(0deg) translateX(0vw);
+        transform: translateX(0) rotate(0deg);
+        /* transform: rotate(0deg) translateX(0vw); */
     }
     100% {
-        transform: rotate(20deg) translateX(80vw);
+        transform: translateX(100%) rotate(20deg);
+        /* transform: rotate(20deg) translateX(80vw); */
     }
   }
   @keyframes rotate2 {
     0% {
-        transform: rotate(20deg) translateX(80vw);
+        transform: translateX(100%) rotate(20deg);
+        /* transform: rotate(20deg) translateX(80vw); */
     }
     100% {
-        transform: rotate(0deg) translateX(0vw);
+        transform: translateX(0) rotate(0deg);
+        /* transform: rotate(0deg) translateX(0vw); */
     }
   }
-  
+.bg{
+    
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
 .gradient-bg {
+    overflow-x: hidden;
     z-index: -1;
     position: absolute;
     --size: 500px;
@@ -248,6 +258,7 @@ form {
     opacity: 50%;
   }
 .item2{
+    overflow-x: hidden;
     background: linear-gradient(#46f6ff, #91e597);
     animation: rotate2 var(--speed) var(--easing) alternate infinite;
 }
