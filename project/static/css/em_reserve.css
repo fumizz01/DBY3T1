@@ -1,0 +1,133 @@
+body{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    align-items: center;
+    font-family: kanit;
+    background-color: #ECECEC;
+}
+
+.content{
+    margin: auto;
+    display: block;
+    width: 90vw;
+    height: fit-content;
+}
+
+div.head{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    & span{
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.status-box{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    height:62px;
+    width: 100%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 7px;
+    & span{
+        width: 100%;
+        /* width: 179.663px; */
+        text-align: center;
+    }
+    & .button{
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        right: 0;
+        & button{
+            cursor: pointer;
+            font-family: kanit;
+            font-size: medium;
+            width: 78px;
+            height: 42px;
+            color: #fff;
+            border: 0px;
+            border-radius: 10px;
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+            &.confirm{
+                background-color: #4FD2FC;
+            }
+            &.cancle{
+                background-color: #FF1A1A;
+            }
+            &:hover{
+                filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
+                font-size: large;
+            }
+        }
+    }
+}
+
+
+/* background */
+
+@keyframes rotate {
+    0% {
+        transform: translateX(0) rotate(0deg);
+        /* transform: rotate(0deg) translateX(0vw); */
+    }
+    100% {
+        transform: translateX(80vw) rotate(20deg);
+        /* transform: rotate(20deg) translateX(80vw); */
+    }
+  }
+  @keyframes rotate2 {
+    0% {
+        transform: translateX(80vw) rotate(20deg);
+        /* transform: rotate(20deg) translateX(80vw); */
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+        /* transform: rotate(0deg) translateX(0vw); */
+    }
+  }
+.BG{
+    top: 0;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+.gradient-bg {
+    --size: 500px;
+    --speed: 10s;
+    --easing: cubic-bezier(0.5, 0.2, 0.2, 0.5);
+    text-align: center;
+    width: var(--size);
+    height: var(--size);
+    filter: blur(50px);
+    -webkit-filter: blur(50px);
+    background: linear-gradient(#e66465, #9198e5);
+   /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
+    animation: rotate var(--speed) var(--easing) alternate infinite;
+    border-radius: 50% ;
+    opacity: 50%;
+  }
+.item2{
+    background: linear-gradient(#46f6ff, #91e597);
+    animation: rotate2 var(--speed) var(--easing) alternate infinite;
+}
+  
+  @media (min-width: 720px) {
+    .gradient-bg {
+      --size: 500px;
+    }
+  }
+  
+/* This is just to transition when you change the viewport size. */
+* {
+    transition: all 0.25s ease-in-out;
+  }

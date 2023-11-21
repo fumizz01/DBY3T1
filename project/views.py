@@ -32,3 +32,10 @@ def login(request):
 
 def reserve(request):
     return render(request, 'reserve.html')
+
+def em_login(request):
+    return render(request, 'em_login.html')
+
+def em_reserve(request):
+    return render(request, 'em_reserve.html')
+

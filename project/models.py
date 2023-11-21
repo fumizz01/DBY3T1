@@ -1,4 +1,4 @@
-from django.db import models
+""" from django.db import models
 
 # Create your models here.
 
@@ -70,4 +70,4 @@ class Employee(models.Model):
         unique_together = ("employee_id", "identification_number")
         managed = True 
     def __str__(self):
-        return '{"employee_id":"%s","identification_number":"%s"}' % (self.employee_id, self.identification_number)
+        return '{"employee_id":"%s","identification_number":"%s"}' % (self.employee_id, self.identification_number) """

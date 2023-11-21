@@ -8,8 +8,12 @@
         <script src="{% static 'js/js.js' %}"></script>
         <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
     </head>
-    <body>
+    <body class="register">
         {% include 'general_use/header.html' %}
+        <div class="BG">
+            <div class="gradient-bg"></div>
+            <div class="gradient-bg item2"></div>
+        </div>
         <div class = "box" >
             <form id="register-form" action = "{% url 'register' %}" method="post">
                 {%csrf_token %} 
@@ -74,4 +78,5 @@
         </div>
     </body>
 </html>
+
     

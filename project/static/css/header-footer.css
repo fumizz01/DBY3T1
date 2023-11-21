@@ -50,7 +50,13 @@ H1.header-logo {
         text-decoration: none;
     }
     & li{
+        display: flex;
+        align-items: center;
         margin: 10px;
+    }
+    & .icon{
+        margin: 5px;
+        font-size: 18px;
     }
 }
 /*
