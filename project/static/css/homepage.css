@@ -11,7 +11,7 @@ form {
     flex-direction: column;
     &.inline{
         margin:auto;
-    }
+    } 
 }
 
 .box {
