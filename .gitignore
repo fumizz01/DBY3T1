@@ -13,3 +13,5 @@ DatabaseProject/__pycache__/urls.cpython-311.pyc
 DatabaseProject/__pycache__/wsgi.cpython-311.pyc
 
 project/migrations/__pycache__/__init__.cpython-311.pyc
+
+DatabaseProject/settings.py
