@@ -34,6 +34,8 @@ def reserve(request):
     return render(request, 'reserve.html')
 
 def em_login(request):
+    if request.POST:
+        return HttpResponseRedirect(reverse('employee_reserve'))
     return render(request, 'em_login.html')
 
 def em_reserve(request):

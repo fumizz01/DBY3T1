@@ -17,7 +17,8 @@
             <div class="gradient-bg item2"></div>
         </div>
         <div class = "box">
-            <form action = "">
+            <form action = "{% url 'employee_login' %}" method="post">
+                {%csrf_token %} 
                 <div id="login-container" class = "login-container">
                     <h2>เข้าสู่ระบบ</h2>
                     <p>ชื่อผู้ใช้</p>

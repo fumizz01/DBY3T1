@@ -23,6 +23,6 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('reserve', views.reserve, name='reserve'),
-    path('employee',views.em_login, name='employee_login'),
+    path('em',views.em_login, name='employee_login'),
     path('em/reserve',views.em_reserve, name='employee_reserve'),
 ]
