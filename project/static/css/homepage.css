@@ -4,6 +4,9 @@ body{
     margin: 0;
     padding: 0;
     background-color: #ECECEC;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    
 }
 
 form {
@@ -52,33 +55,54 @@ form {
     /* color: white; */
 }
 
-input
+.text-flexline {
+    display: flex;
+}
+
+input.check
 {
-    /* width: 100%; */
+    width: 100%;
     height: 45px;
     display: block;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.19);
-    background: #FFF;   
+    background: #FFF;
+    text-align: center;
+    font-size: large;   
 }
+
+input.check[type="date"] {
+    position: relative;
+  }
+  
+input.check[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: transparent;
+    background: transparent;
+}
+
 label.checkin
 {
     /*ทำให้ block ทั้งหมดชิดซ้าย*/
     float: left;
     font-weight: 200;
     line-height: normal;
+    width: 50%;
+    margin-right: 20px;
 }
+
+
 label.checkout
 {
     /*ทำให้ block ทั้งหมดชิดขวา*/
     float:right;
 }
-.left-column{
-    width: 100%;
-}
-.right-column{
-    width: 100%;
-}
+
 input.search_room
 {
     width: 300px;
@@ -93,7 +117,16 @@ input.search_room
     position: relative;
     font-family: Kanit;
     font-size: large;
-    top: 50;
+    top: 50px;
+}
+
+input {
+    text-align: center;
+}
+
+input.guest {
+    border: none;
+    text-align: right; 
 }
 
 label.guest
@@ -101,18 +134,24 @@ label.guest
     font-weight: 400;
     line-height: normal;
     display: block;
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
-button.guest
+div.guest
 {
-    width: 100%;
-    height: 45px;
+    width: auto;
+    height: 1.5em;
     display: block;
     margin-top: 10px;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.19);
-    background: #FFF;   
+    background: #FFF;
+    padding: 10px;
+    text-align: center;
+}
+
+p.text-inline {
+    display: inline;
 }
 
 .dropdown .container
@@ -145,12 +184,20 @@ button.decrement
 {
     background-color: #ffff;
     border: none;
+    border-radius: 5px;
+    border: 1px solid #A8A8A8;
+    background: #FEFEFE;
+    cursor: pointer;
 }
 
 button.increment
 {
     background-color: #ffff;
     border: none;
+    border-radius: 5px;
+    border: 1px solid #A8A8A8;
+    background: #FEFEFE;
+    cursor: pointer;
 }
 
 

@@ -1,24 +1,25 @@
 $(document).ready(function () {
+    
     /* hide show password */
     $("body").on('click', '.eye-icon', function() {
         $(this).toggleClass("bx-show bx-hide");
         var input = $(".password");
         if (input.attr("type") === "password") {
-          input.attr("type", "text");
+            input.attr("type", "text");
         } else {
-          input.attr("type", "password");
+            input.attr("type", "password");
         }
-      });
-
+    });
+    
     /* show password strength */
     $('#password-strength-status').hide();
     $('.pswd_info').hide();
     $('#register-password').keyup(function(event) {
         var password = $('#register-password').val();
         checkPasswordStrength(password);
-      });
-        
-/*     $('#register-password, #password_confirm').on('keyup', function () {
+    });
+    
+    /*     $('#register-password, #password_confirm').on('keyup', function () {
         if ($('#register-password').val() == $('#password_confirm').val()) {
             $('#message').html('Matching').css('color', 'green');
             document.getElementById('register-button').disabled = false;
@@ -29,7 +30,7 @@ $(document).ready(function () {
             console.log($('#message').html())
             var para = document.createElement("p");
             if ($('#message').html() == 'Not Matching'){
-                    $("#register-button").click(function()
+                $("#register-button").click(function()
                 {
                     $('#register-button').css('border', '1px solid red');
                     para.innerHTML = "You need to correctly confirm password";
@@ -37,11 +38,11 @@ $(document).ready(function () {
                     document.getElementById('register-button').disabled = true;
                 });
             };
-    
+            
         };
         document.getElementById('message').appendChild(para);
     }); */
-
+    
     /* $('#register-form').submit(function(e) {
         e.preventDefault();
         validateInputs();
@@ -52,7 +53,7 @@ $(document).ready(function () {
         if (validateInputs()) {
             // If all validations pass, send a POST request
             const formData = $("#register-form").serialize(); // Serialize the form data
-    
+            
             $.ajax({
                 type: 'POST',
                 url: '', // Replace with your server endpoint URL
@@ -70,8 +71,8 @@ $(document).ready(function () {
                 }
             });
         }
-      });
-
+    });
+    
 });
 
 
@@ -83,19 +84,19 @@ function checkPasswordStrength(password) {
 	var upperCase  = /([A-Z])/;
 	var lowerCase  = /([a-z])/;
 	var specialCharacters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
-
+    
 	var characters     = (password.length >= 8 && password.length <= 15 );
 	var capitalletters = password.match(upperCase) ? 1 : 0;
 	var loweletters    = password.match(lowerCase) ? 1 : 0;
 	var numbers        = password.match(number) ? 1 : 0;
 	var special        = password.match(specialCharacters) ? 1 : 0;
-
+    
 	this.update_info('length', password.length >= 8 && password.length <= 15);
     this.update_info('capital', capitalletters);
     this.update_info('small', loweletters);
     this.update_info('number', numbers);
     this.update_info('special', special);
-
+    
 	var total = characters + capitalletters + loweletters + numbers + special;
 	this.password_meter(total);
 }
@@ -139,7 +140,7 @@ function password_meter(total) {
 function setError(element, message) {
     const inputControl = element.parent();
     const errorDisplay = inputControl.find('.error-message');
-
+    
     errorDisplay.text(message);
     inputControl.addClass('error').removeClass('pass');
 }
@@ -147,7 +148,7 @@ function setError(element, message) {
 function setSuccess(element) {
     const inputControl = element.parent();
     const errorDisplay = inputControl.find('.error-message');
-
+    
     errorDisplay.text('');
     inputControl.addClass('pass').removeClass('error');
 }
@@ -172,28 +173,28 @@ function validateInputs() {
     const emailValue = $('#email').val();
     const passwordValue = $('#register-password').val();
     const password2Value = $('#password_confirm').val();
-
+    
     if(firstValue === '') {
         setError($('#firstname'), 'กรุณาระบุชื่อ');
     } else {
         setSuccess($('#firstname'));
         total +=1;
     }
-
+    
     if(lastnameValue === '') {
         setError($('#lastname'), 'กรุณาระบุนามสกุล');
     } else {
         setSuccess($('#lastname'));
         total +=1;
     }
-
+    
     if(dateValue === '') {
         setError($('#birthday'), 'กรุณาระบุวันเกิด');
     } else {
         setSuccess($('#birthday'));
         total +=1;
     }
-
+    
     if(tel === '') {
         setError($('#tol'), 'กรุณาระบุเบอร์โทร');
     }  
@@ -207,7 +208,7 @@ function validateInputs() {
         setSuccess($('#tol'));
         total +=1;
     }
-
+    
     if(id_number === '') {
         setError($('#id_number'), 'กรุณาระบุรหัสบัตรประชาชน');
     }  
@@ -221,7 +222,7 @@ function validateInputs() {
         setSuccess($('#id_number'));
         total +=1;
     }
-
+    
     if(emailValue === '') {
         setError($('#email'), 'กรุณาระบุอีเมลล์');
     } else if (!isValidEmail(emailValue)) {
@@ -229,7 +230,7 @@ function validateInputs() {
     } else {
         setSuccess($('#email'));
     }
-
+    
     if(passwordValue === '') {
         setError($('#register-password'), 'Password is required');
     } else if (passwordValue.length < 8) {
@@ -238,7 +239,7 @@ function validateInputs() {
         setSuccess($('#register-password'));
         total +=1;
     }
-
+    
     if(password2Value === '') {
         setError($('#password_confirm'), 'Please confirm your password');
     } else if (password2Value !== passwordValue) {
@@ -247,10 +248,11 @@ function validateInputs() {
         setSuccess($('#password_confirm'));
         total +=1;
     }
-
+    
     if (total === 7){
         return true;
     }
 }
+
 /* validate Input */
 

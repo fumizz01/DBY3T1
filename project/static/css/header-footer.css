@@ -77,7 +77,6 @@ div.content-container {
 
 footer.footer{
     width: 100%;
-    position: absolute;
     font-family: Kanit;
     padding-top: 2em;
     display: flex;

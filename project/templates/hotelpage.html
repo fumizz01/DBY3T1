@@ -18,36 +18,56 @@
             <h2 class = "header-hotelpage" id="head">ค้นหาห้องพัก</h2>
             <div class = "box" id = "hotelpage">
                 <form action = "">
+
                     <div class = "hotelpage-container" id = "hotelpage-container">
-                        <div class = 'left-column' id = 'left-column'>
-                            <label class = "checkin" for = "checkin">เช็คอิน 
-                                <input class = "checkin" id = "checkin" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
+
+                        <div class="text-flexline">
+                            <label class = "checkin" for = "textCheckin">เช็คอิน 
+                                <input class = "check" id = "textCheckinDate" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
+                            </label>
+                            <label class = "checkout" for = "texCheckout">เช็คเอาท์ 
+                                <input class = "check" id = "textCheckoutDate" name = "checout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
                             </label>
                         </div>
-                        <div class = 'right-column' id = 'right-column'>
-                            <label class = "checkout" for = "checkout">เช็คเอาท์ 
-                                <input class = "checkout" id = "checkout" name = "checout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
-                            </label>
-                        </div>  
+
                         <div class = "dropdown">
-                            <label class = "guest" for = "guests">ผู้เข้าพัก
-                                <button class = "guest" id = "guests" name = "guests" type = "text" placeholder="กรุณาเลือกห้อง" required ></button>
+                            <label class = "guest">ผู้เข้าพัก
+                                <div class="guest">
+                                    <p class="text-inline">มีผู้ใหญ่เข้าพักจำนวน</p>
+                                    <button class = "decrement" id = "decrement adult" onclick="stepper(this)" type="button"> - </button>
+                                    <input class="guest" id="my-input-adult" name="adult" type = "number" min="1" max = "100" step="1" value="1" readonly required>
+                                    <button class = "increment" id = "increment adult" onclick="stepper(this)" type="button"> + </button>
+
+
+                                    <p class="text-inline">และ</p><p class="text-inline">มีเด็กเข้าพักจำนวน</p>
+                                    <button class = "decrement" id = "decrement child" onclick="stepper(this)" type="button"> - </button>
+                                    <input class="guest" id = "my-input-child" type = "number" min="0" max = "100" step="1" value="0" readonly>
+                                    <button class = "increment" id = "increment child" onclick="stepper(this)" type="button"> + </button>
+
+                                </div>
+                                <!--<input class = "guest" id = "guests" name = "guests" type = "text" placeholder="กรุณาเลือกห้อง" required>-->
                             </label>
-                            <div class = "down-menu">
+                            
+                            <!--<div class = "down-menu">
                                 <div class = "container">
-                                    <label for = "adult">ผู้ใหญ่</label>
-                                    <button class = "decrement" id = "decrement" onlick = "stepper(this)"> - </button>
-                                        <input id = "my-input" type = "number" min = "0" max = "100" step="1" value="1" readonly>
-                                    <button class = "increment" id = "increment" onlick = "stepper(this)"> + </button>
+                                    <label>ผู้ใหญ่
+                                        <button class = "decrement" id = "decrement adult" onclick="stepper(this)" type="button"> - </button>
+                                        <input id = "my-input-adult" type = "number" min="1" max = "100" step="1" value="1" readonly>
+                                        <button class = "increment" id = "increment adult" onclick="stepper(this)" type="button"> + </button>
+                                    </label>
                                 </div>
+
                                 <div class = "container">
-                                    <label for = "child">เด็ก</label>
-                                    <button class = "decrement" id = "decrement" onlick = "stepper(this)"> - </button>
-                                        <input id = "my-input" type = "number" min = "0" max = "100" step="1" value="1" readonly>
-                                    <button class = "increment" id = "increment" onlick = "stepper(this)"> + </button>
+                                    <label>เด็ก
+                                        <button class = "decrement" id = "decrement child" onclick="stepper(this)" type="button"> - </button>
+                                        <input id = "my-input-child" type = "number" min="0" max = "100" step="1" value="1" readonly>
+                                        <button class = "increment" id = "increment child" onclick="stepper(this)" type="button"> + </button>
+                                    </label>
                                 </div>
+
                             </div>
-                        </div>     
+                        </div>-->     
+
                         <input class = "search_room" id = "search_room" type="submit" value="ค้นหา">
                     </div>
                 </form>
