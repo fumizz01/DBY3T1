@@ -1,6 +1,4 @@
 body{
-    position: relative;
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
     background-color: #ECECEC;
@@ -15,12 +13,11 @@ form {
     flex-direction: column;
     &.inline{
         margin:auto;
-    } 
+    }
 }
 
 .box {
     width: 100%;
-    height: fit-content;
     font-family: Kanit;
     /* font-family: Arial, sans-serif; */
    /*  background-color: #ECECEC; */
@@ -28,9 +25,7 @@ form {
     padding: 0;
 }
 .hotelpage-container
-{    
-    overflow: hidden;
-    display: flex;
+{
     /*font zone*/
     color: #000;
     font-size: 18px;
@@ -44,11 +39,11 @@ form {
     margin: 20px auto;
     padding: 20px;
     background-color:rgba(255, 255, 255, 0.9);
+
 }
 
 .header-hotelpage
 {
-    margin-bottom: 0;
     text-align: center;
     font-size: 30px;
     font-family: Kanit;
@@ -101,6 +96,8 @@ label.checkout
 {
     /*ทำให้ block ทั้งหมดชิดขวา*/
     float:right;
+    width: 50%;
+    margin-left: 20px;
 }
 
 input.search_room
@@ -200,7 +197,6 @@ button.increment
     cursor: pointer;
 }
 
-
 /* background */
 
 @keyframes rotate {
@@ -220,10 +216,7 @@ button.increment
     }
   }
 .BG{
-    display: block;
-    position: absolute;
-    height: 30%;
-    width: 100%;
+
     z-index: -100;
     overflow: hidden;
 }
