@@ -223,6 +223,7 @@ button.increment
 }
 
 .gradient-bg {
+    z-index: -100;
     position: absolute;
     --size: 250px;
     --speed: 10s;
