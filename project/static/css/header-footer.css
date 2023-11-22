@@ -83,7 +83,7 @@ footer.footer{
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    background-color: #9F9F9F;
+    background-color:rgba(0,0,0,0.1);
     height: 150px;
 
     & a{

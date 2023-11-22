@@ -47,6 +47,8 @@ img.hotel-img {
     max-width: 381px;
     max-height: 253px;
     margin: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 div.detail-container {
@@ -56,8 +58,9 @@ div.detail-container {
     margin-bottom: 10px;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid #A8A8A8;
-    background: #FFF;
+    border: 1px solid #ffffff;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 fieldset.line-detail {
@@ -162,7 +165,7 @@ div.hide {
     overflow: hidden;
 }
 .gradient-bg {
-    --size: 200px;
+    --size: 250x;
     --speed: 10s;
     --easing: cubic-bezier(0.5, 0.2, 0.2, 0.5);
     text-align: center;
@@ -174,20 +177,20 @@ div.hide {
    /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
     animation: rotate var(--speed) var(--easing) alternate infinite;
     border-radius: 50% ;
-    opacity: 70%;
+    opacity: 50%;
   }
 .item2{
-    background: linear-gradient(#46f6ff, #df91e5);
-    animation: rotate2 15s var(--easing) alternate infinite;
+    background: linear-gradient(#46f6ff, #91e5b4);
+    animation: rotate2 10s cubic-bezier(0.8, 0.2, 0.2, 0.8) alternate infinite;
 }
 .item3{
-    background: linear-gradient(rgb(70, 255, 181), #e591c5);
-    animation: rotate2 8s var(--easing) alternate infinite;
+    background: linear-gradient(rgb(233, 70, 255), #e591c5);
+    animation: rotate2 20s cubic-bezier(0.5, 0.5, 0.2, 0.8) alternate infinite;
 }
   
   @media (min-width: 720px) {
     .gradient-bg {
-      --size: 200px;
+      --size: 250px;
     }
   }
   
