@@ -41,3 +41,6 @@ def em_login(request):
 def em_reserve(request):
     return render(request, 'em_reserve.html')
 
+def em_status(request):
+    return render(request, 'em_table.html')
+
