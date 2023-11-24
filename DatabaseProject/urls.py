@@ -25,5 +25,5 @@ urlpatterns = [
     path('reserve', views.reserve, name='reserve'),
     path('em',views.em_login, name='employee_login'),
     path('em/reserve',views.em_reserve, name='employee_reserve'),
-    path('em/status',views.em_status, name='employee_reserve_status'),
+    path('em/room-status',views.em_room_status, name='employee_room_status'),
 ]

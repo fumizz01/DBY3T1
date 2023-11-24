@@ -1,68 +1,78 @@
 {% load static %}
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Employee_table</title>
+        <title>Room Status</title>
         {% include 'general_use/general-script.html' %}
 
         <!-- <script src="{% static 'js/homepage.js' %}"></script> -->
-        <link rel='stylesheet' href="{% static 'css/em_table.css' %}">
+        <link rel='stylesheet' href="{% static 'css/em_room_status.css' %}">
+        
     </head>
-    <body class = "em-table">
+    <body>
         {% include 'general_use/em_header.html' %}
         <div class="BG">
             <div class="gradient-bg"></div>
             <div class="gradient-bg item2"></div>
         </div>
-        <div class="content-container">
-            <table class="table">
+        <div class="content">
+            <table class="table_main" id = "table_main">
                 <thead>
-                    <tr class="head">
-                        <th>เลขห้อง</th>
-                        <th>วันที่</th>
-                        <th>ราคา</th>
-                        <th>ลูกค้า</th>
-                        <th>สถานะ</th>
+                    <tr class = "d-flex">
+                        <th scope="row" >เลขห้อง</th>
+                        <th scope="row">วันที่</th>
+                        <th scope="row">ราคา</th>
+                        <th scope="row">ลูกค้า</th>
+                        <th scope="row">สถานะ</th>
+                    </tr>
+                    <!-- Hidden Table Row (tr) for Copy to Fill Data -->
+                    <tr class = "d-flex hide" hidden>
+                        <td scope="row"></td>
+                        <td scope="row"></td>
+                        <td scope="row"></td>
+                        <td scope="row"></td>
+                        <td scope="row"></td> 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="row">
+                    <!-- <tr>
                         <td>1/501</td>
                         <td>10/11/23 - 11/11/23</td>
                         <td>1,700.00</td>
                         <td>Kenan</td>
                         <td class="waiting">ยังไม่ได้โอนเงิน</td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td>1/502</td>
                         <td>10/11/23 - 11/11/23</td>
                         <td>1,700.00</td>
                         <td>Kenan</td>
                         <td class="waiting">ยังไม่ได้โอนเงิน</td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td>1/503</td>
                         <td>10/11/23 - 11/11/23</td>
                         <td>1,700.00</td>
                         <td>Kenan</td>
                         <td class="waiting">ยังไม่ได้โอนเงิน</td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td>1/504</td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td>1/505</td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                    </tr>
+                    </tr> -->
+                    <!-- Data will append by JQuery -->
                 </tbody>
             </table>
         </div>
-        {% include 'general_use/footer.html' %} 
     </body>
 </html>
