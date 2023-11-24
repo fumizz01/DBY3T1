@@ -229,6 +229,7 @@ function validateInputs() {
         setError($('#email'), 'กรุณากรอกรูปแบบ อีเมลล์ ให้ถูกต้อง');
     } else {
         setSuccess($('#email'));
+        total +=1;
     }
     
     if(passwordValue === '') {
@@ -249,7 +250,7 @@ function validateInputs() {
         total +=1;
     }
     
-    if (total === 7){
+    if (total === 8){
         return true;
     }
 }
