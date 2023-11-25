@@ -79,6 +79,7 @@ form {
         position: absolute;
     }
     .input-field {
+        outline: none;
         font-family: Kanit;
         text-align: center;
         padding: 5px;
@@ -86,6 +87,15 @@ form {
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+        &::placeholder {
+            transition: color 0.3s ease; 
+        }
+        &:focus::placeholder {
+            color: transparent;
+        }
+        &:focus {
+            border: 1px solid black;
+        }
     }
 }
 .eye-icon{
@@ -144,11 +154,21 @@ form {
         position: absolute;
     }
     .input-field {
+        outline: none;
         padding: 5px;
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+        &::placeholder {
+            transition: color 0.3s ease; 
+        }
+        &:focus::placeholder {
+            color: transparent;
+        }
+        &:focus {
+            border: 1px solid black;
+        }
     }
 }
 
