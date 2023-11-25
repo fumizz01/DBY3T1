@@ -19,11 +19,6 @@
             <form action="" method="post" id="login-form">
                 {% csrf_token %}
 
-                {% if messages %}
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                {% endif %}
                 <div id="login-container" class = "login-container">
                     <h2>เข้าสู่ระบบ</h2>
                     <p>ชื่อผู้ใช้</p>
@@ -37,6 +32,12 @@
                     <i class="bx bx-hide eye-icon password-validation"></i>
                     <button id = "login-button" class='submit' type="submit">ยืนยัน</button>
                 </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message-auth">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
             </form>
         </div>
     </body>

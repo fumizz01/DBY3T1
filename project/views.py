@@ -91,10 +91,10 @@ class CustomerAccountInformationList(View):
         for i, line_item in enumerate(data['user_info']):
             line_item['username'] = username_info[i]['username']
             
-        #print("OH YEAH")
+        print("OH YEAH")
         
         #print(data)
-        return JsonResponse(data)
+        return JsonResponse(data)   
     
 class ReservationInfo(View):
     
