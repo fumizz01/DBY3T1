@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     /* hide show password */
     $("body").on('click', '.eye-icon', function() {
         $(this).toggleClass("bx-show bx-hide");

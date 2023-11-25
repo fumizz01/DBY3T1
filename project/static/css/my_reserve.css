@@ -93,7 +93,8 @@ div.head{
 
 .sum_price
 {
-    border-top: 1px solid gray; 
+    background-color: rgba(255, 255, 255,0.4);  
+    border-top: 1px solid white; 
     width: 100%;
     display: flex;
     right: 0;

@@ -237,6 +237,7 @@ div.summary-container {
 
 .line-summary
 {   
+    margin-left: 3%;
     text-align: center;
     width: 20%;
     height: 20%;
