@@ -101,11 +101,12 @@ label.checkout
     margin-left: 20px;
 }
 
-input.search_room
+button.search_room
 {
     width: 300px;
     height: 60px;
     color: white;
+    width: 20%;
     font-size: 25px;
     background: #4FD2FC; 
     border-radius: 10px;
@@ -116,6 +117,11 @@ input.search_room
     font-family: Kanit;
     font-size: large;
     top: 50px;
+    &:hover{
+        background-color: #09c372;
+        filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
+        font-size: 120%;
+    }
 }
 
 input {
