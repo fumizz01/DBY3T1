@@ -16,7 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.forms.models import model_to_dict
-from django.db.models import Max
+from django.db.models import Max, Min, Sum, Count
 from django.db import transaction
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -64,6 +64,9 @@ def em_login(request):
         return HttpResponseRedirect(reverse('employee_reserve'))
     return render(request, 'em_login.html')
 
+def em_register(request):
+    return render(request, 'em_register.html')
+
 def em_reserve(request):
     return render(request, 'em_reserve.html')
 
@@ -75,6 +78,8 @@ def my_reserve(request):
 
 def change_password(request):
     return render(request, 'change_password.html')
+
+#-----------------------------GET-----------------------------------#
 class CustomerAccountInformationList(View):
     def get(self, request):
         user_info = list(Customer.objects.select_related('user_code').all().values(
@@ -100,28 +105,13 @@ class ReservationInfo(View):
     
     def get(self, request):
         
-        reservation_info = list(Room.objects.select_related('reservation_id').all().values())
-        print(reservation_info)
+        reservation_info = list(Room.objects.select_related('room_type').filter(status='available').values('room_type__room_price').annotate(room_type_count=Count("room_type")))
+        #print(reservation_info)
         
         data = dict()
         data['reservation_info'] = reservation_info
+        print(data['reservation_info'])
         return JsonResponse(data)
-    
-    
-""" def register_user(request):
-    if request.POST:
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username =  form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, ())
-            return redirect('Index')
-    else:
-        form = CustomUserCreationForm()
-    return render(request,'register_user.html', {'form': form}) """
 
 """class CustomerRegister(View):
     @transaction.atomic
@@ -188,7 +178,7 @@ class ReservationInfo(View):
         return JsonResponse(data)
         """
         
-
+#-----------------------------POST-----------------------------------#
 class CustomerRegister(View):
     @transaction.atomic
     def post(self, request):

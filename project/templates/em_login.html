@@ -5,12 +5,22 @@
 
         {% include 'general_use/general-script.html' %}
 
-        <script src="{% static 'js/js.js' %}"></script>
+        <script src="{% static 'js/em-login-register.js' %}"></script>
         <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
     </head>
     <body>
         <header class="header">  
-            <H1 class="header-logo">Hotel</H1>
+            <a href="#" class="header-logo">
+                <H1 class="header-logo">Hotel</H1>
+            </a>
+            <ul class="nav">
+                <!-- {% if user.is_authenticated %} -->
+                    <li><a href="#">ออกจากระบบ</a></li>
+                <!-- {% else %} -->
+                    <li><a href="{% url 'employee_login' %}">เข้าสู่ระบบ</a></li>
+                    <li><a class="register" href="{% url 'employee_register' %}">ลงทะเบียน</a></li>
+                <!-- {% endif %} -->
+            </ul>
         </header>
         <div class="BG">
             <div class="gradient-bg"></div>

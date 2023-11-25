@@ -27,13 +27,15 @@ urlpatterns = [
     path('logout', views.logout_user, name='logout'),
     path('reserve', views.reserve, name='reserve'),
     path('em',views.em_login, name='employee_login'),
+    path('em/register',views.em_register, name='employee_register'),
     path('em/reserve',views.em_reserve, name='employee_reserve'),
     path('my-reserve',views.my_reserve, name='my_reserve'),
     path('em/room-status',views.em_room_status, name='employee_room_status'),
     
     #get
     path('customer/list',views.CustomerAccountInformationList.as_view(), name='customer_info'),
-    path('reservation/list',views.ReservationInfo.as_view(), name='reservation_info'),
+    path('reservation/price',views.ReservationInfo.as_view(), name='reservation_price'),
+    
     
     #post
     #path('customer/register',views.register_user, name='register_user'),
