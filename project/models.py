@@ -59,21 +59,6 @@ class Room(models.Model):
     def __str__(self):
         return self.room_number
     
-    
-class Reservation(models.Model):
-    reservation_id = models.IntegerField(primary_key=True)
-    room_number = models.ForeignKey(Room, on_delete=models.CASCADE, db_column='room_number')
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, db_column='customer_id')
-    check_in = models.DateField(null=True, blank=True)
-    check_out = models.DateField(null=True, blank=True)
-    total_price = models.FloatField(null=True, blank=True)
-    status = models.CharField(max_length=50, null=True, blank=True)
-    class Meta:
-        db_table = "reservation"
-        managed = True
-    def __str__(self):
-        return self.reservation_id
-    
 class Employee(models.Model):
     employee_id = models.CharField(max_length=50, primary_key=True)
     user_code = models.ForeignKey(Profile, on_delete=models.CASCADE, db_column='user_code')
@@ -89,3 +74,27 @@ class Employee(models.Model):
         managed = True 
     def __str__(self):
         return self.employee_id
+
+class Reservation(models.Model):
+    reservation_id = models.CharField(max_length=10, primary_key=True)
+    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, db_column='customer_id')
+    total_price = models.FloatField(null=True, blank=True)
+    status = models.CharField(max_length=50, null=True, blank=True)
+    class Meta:
+        db_table = "reservation"
+        managed = True
+    def __str__(self):
+        return self.reservation_id
+
+class ReservationLine(models.Model):
+    reservation_id = models.ForeignKey(Reservation, on_delete=models.CASCADE, db_column='reservation_id')
+    item_no = models.IntegerField()
+    room_number = models.ForeignKey(Room, on_delete=models.CASCADE, db_column='room_number')
+    check_in = models.DateField(null=True, blank=True)
+    check_out = models.DateField(null=True, blank=True)
+    class Meta:
+        db_table = "reservation_line"
+        unique_together = ('reservation_id', 'item_no')
+        managed = True
+    def __str__(self):
+        return '{"reservation_id":"%s","item_no":"%s"}' % (self.reservation_id, self.item_no)
