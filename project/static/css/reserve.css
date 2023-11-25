@@ -129,6 +129,7 @@ div.line-detail-right {
 }
 
 div.summary-box {
+    padding: 10px;
     display: block;
     height: fit-content;
     margin: 10px;
@@ -206,14 +207,19 @@ div.hide {
 }
 
 div.summary-container {
-    display: flex;
-    height: 15%;
+    margin: 2.5%;
+    display: block;
+    height: fit-content;
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ffffff;
-    justify-content: space-around;
     background: rgba(255,255,255,0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.content-flex{
+    height: 15%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .summary-table td
@@ -230,9 +236,8 @@ div.summary-container {
 }
 
 .line-summary
-{
-    margin-top: -30;
-    margin-left: 170px;
+{   
+    text-align: center;
     width: 20%;
     height: 20%;
 }

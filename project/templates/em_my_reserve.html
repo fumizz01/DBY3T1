@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reserve</title>
+    {% include 'general_use/general-script.html' %}
+
+    <!-- <script src="{% static 'js/em_reserve.js' %}"></script> -->
+    <link rel='stylesheet' href="{% static 'css/em_my_reserve.css' %}">
+</head>
+<body>
+    {% include 'general_use/em_header.html' %}
+    <div class="BG">
+        <div class="gradient-bg"></div>
+        <div class="gradient-bg item2"></div>
+    </div>
+    <div class="content">
+        <h1>การจองของฉัน</h1>
+        <div class="head">
+            <span>รหัสการจอง</span>
+            <span>จำนวน</span>
+            <span>วันที่</span>
+            <span>ราคา</span>
+            <span>สถานะ</span>
+        </div>
+
+        <div class="status-box">
+            <span id="reservation_id">RS/001</span>
+            <span id="room_count">2 ห้อง</span>
+            <span id="during">10/11/23 - 11/11/23</span>
+            <span id="total_price">1,700.00</span>
+            <span id="status">รอดำเนินการ</span>
+        </div>
+    </div>
+
+    <div class = "sum_price">
+        <p class="text-sum">รวม</p>
+        <p class="text-price">
+            3,400.00<button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+        </p>
+    </div>
+
+</body>
+</html>

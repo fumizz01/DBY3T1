@@ -56,7 +56,16 @@ body{
   background-color: rgba(120, 239, 221, 0.5);
 }
 
+td{
+  &.waiting{
+    color: #FF1A1A; 
+  
+  }
+  &.complete{
+    color: #91e597;
 
+  }
+}
 
 /* background */
 

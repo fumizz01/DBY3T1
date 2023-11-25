@@ -45,3 +45,6 @@ def em_reserve(request):
 def em_room_status(request):
     return render(request, 'em_room_status.html')
 
+def em_my_reserve(request):
+    return render(request, 'em_my_reserve.html')
+
