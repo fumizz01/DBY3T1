@@ -86,14 +86,14 @@ class Reservation(models.Model):
     def __str__(self):
         return self.reservation_id
 
-class ReservationLine(models.Model):
+class ReservationLineItem(models.Model):
     reservation_id = models.ForeignKey(Reservation, on_delete=models.CASCADE, db_column='reservation_id')
     item_no = models.IntegerField()
     room_number = models.ForeignKey(Room, on_delete=models.CASCADE, db_column='room_number')
     check_in = models.DateField(null=True, blank=True)
     check_out = models.DateField(null=True, blank=True)
     class Meta:
-        db_table = "reservation_line"
+        db_table = "reservation_line_item"
         unique_together = ('reservation_id', 'item_no')
         managed = True
     def __str__(self):
