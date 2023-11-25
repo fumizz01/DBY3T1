@@ -39,7 +39,7 @@ class Customer(models.Model):
         return self.customer_id 
     
 class Room(models.Model):
-    room_number = models.IntegerField(primary_key=True)
+    room_number = models.CharField(max_length=10, primary_key=True)
     room_capacity = models.IntegerField()
     room_price = models.FloatField(null=True, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True)
