@@ -15,8 +15,8 @@
             <div class="gradient-bg item2"></div>
             <h2 class = "header-hotelpage" id="head">ค้นหาห้องพัก</h2>
             <div class = "box" id = "hotelpage">
-                <form action = "">
-
+                <form  id="homepage-form" action = "" method="post">
+                    {%csrf_token %} 
                     <div class = "hotelpage-container" id = "hotelpage-container">
 
                         <div class="text-flexline">
@@ -24,7 +24,7 @@
                                 <input class = "check" id = "textCheckinDate" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
                             </label>
                             <label class = "checkout" for = "texCheckout">เช็คเอาท์ 
-                                <input class = "check" id = "textCheckoutDate" name = "checout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
+                                <input class = "check" id = "textCheckoutDate" name = "checkout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
                             </label>
                         </div>
 

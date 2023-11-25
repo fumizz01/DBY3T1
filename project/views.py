@@ -5,6 +5,11 @@ from django.urls import reverse
 
 # Create your views here.
 def index(request):
+    if request.POST:
+        """ print (request.POST) """
+        checkindate = request.POST.get('checkin')
+        checkoutdate = request.POST.get('checkout')
+        print(checkindate,checkoutdate)
     return render(request, 'hotelpage.html')
 
 def register(request):
