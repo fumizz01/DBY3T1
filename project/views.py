@@ -64,6 +64,9 @@ def em_login(request):
         return HttpResponseRedirect(reverse('employee_reserve'))
     return render(request, 'em_login.html')
 
+def em_register(request):
+    return render(request, 'em_register.html')
+
 def em_reserve(request):
     return render(request, 'em_reserve.html')
 
