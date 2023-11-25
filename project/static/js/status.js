@@ -27,7 +27,7 @@ $(document).ready(function () {
     function loadData() {
         // ทำ AJAX request ไปยัง endpoint ของคุณ
         $.ajax({
-            url: '/api/your_data_endpoint',  // แก้ไขเป็น URL ของ API หรือ endpoint ที่คุณใช้
+            url: '',  // แก้ไขเป็น URL ของ API หรือ endpoint ที่คุณใช้
             type: 'GET',
             dataType: 'json',
             success: function (data) {
