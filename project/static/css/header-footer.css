@@ -117,3 +117,22 @@ footer.footer{
 
     }
 }
+
+.header .register
+{
+    width: 100%;
+    height: 70%;
+    padding: 10px;
+    border: 1px solid rgb(111, 108, 108);
+    border-radius: 5px;
+}
+
+.header .register:hover
+{   
+    scale: 1.07;
+    border: 1px solid #c8e2eb;
+    background-color: #c8e2eb;
+}
+.nav a:hover{
+    scale: 1.05;
+}
