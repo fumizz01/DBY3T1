@@ -1,5 +1,11 @@
 # dependencies
 .DS_store
+
+DatabaseProject/__pycache__/
+project/__pycache__/
+project/migrations/__pycache__/
+
+
 project/.DS_Store
 project/__pycache__/views.cpython-311.pyc
 project/__pycache__/admin.cpython-311.pyc
