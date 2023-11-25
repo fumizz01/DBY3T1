@@ -18,6 +18,9 @@ body.login{
 body.register{
     overflow-x: hidden;
 }
+body.change_password{
+    overflow-x: hidden;
+}
 
 form {
     align-items: center;
@@ -98,6 +101,59 @@ form {
 /* registerhtml */
 
 .register-container {
+    position: relative;
+    width: 574px;
+    /* height: fit-content; */
+    margin: 50px auto;
+    background-color:rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    background-color:rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    & .icon{
+        min-width: 40px;
+    }
+    & h2{
+        margin: 20px auto;
+        text-align: center;
+    }
+    & .submit {
+        margin: 35px auto 0 auto;
+        display: block;
+        min-width: 173px;
+        min-height: 39px;
+        color: white;
+        width: 20%;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        border-radius: 7px;
+        background-color:#4FD2FC;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+        font-family: Kanit;
+        font-size: large;
+
+        &:hover{
+            background-color: #09c372;
+            filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
+            font-size: 102%;
+        }
+
+    }
+    &  i{
+        padding: 5px;
+        position: absolute;
+    }
+    .input-field {
+        padding: 5px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+}
+
+/* change_password_html */
+.change-password-container {    
     position: relative;
     width: 574px;
     /* height: fit-content; */

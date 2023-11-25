@@ -1,25 +1,3 @@
-function lineitem_to_json () {
-    var rows = [];                                                  // create empty array 'rows'
-    var i = 0;
-    $("#table_main tbody tr").each(function(index) {                // loop each table data
-        /* if ($(this).find('.invoice_no_1').html() != '') { */  // check row have data                                         // create empty object in rows[index]
-            rows[i]["เลขห้อง"] = $(this).find('.room_number').html();                            // copy data from table row to variable 'rows'
-            rows[i]["วันที่เข้า"] = $(this).find('.check_in').html();
-            rows[i]["วันที่ออก"] = $(this).find('.check_out').html();
-            rows[i]["ราคา"] = $(this).find('.price').html();
-            rows[i]["ลูกค้่า"] = $(this).find('.customer').html();
-            rows[i]["สถานะ"] = $(this).find('.status').html();
-            i++;
-        /* } */
-    });
-    var obj = {};                                                   // create empty object
-    obj.lineitem = rows;                                            // assign 'rows' to object.lineitem
-    //console.log(JSON.stringify(obj));
-
-    return JSON.stringify(obj);                                     // return object in JSON format
-}
-
-  
 $(document).ready(function () {
     // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
     loadData();

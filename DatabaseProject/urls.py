@@ -40,4 +40,5 @@ urlpatterns = [
     path('customer/register',views.CustomerRegister.as_view(), name='customer_register'),
     #path('customer/login',views.login_customer, name='login_customer'),
     
+    path('change-password',views.change_password, name='change_password')
 ]
