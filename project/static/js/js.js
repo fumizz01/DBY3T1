@@ -256,3 +256,40 @@ function validateInputs() {
 
 /* validate Input */
 
+document.addEventListener('DOMContentLoaded', function () {
+    var birthdayInput = document.getElementById('birthday');
+    var currentDate = new Date().toISOString().split('T')[0];
+
+    birthdayInput.setAttribute('max', currentDate);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // ดึงค่าจาก URL parameters
+    var urlParams = new URLSearchParams(window.location.search);
+    var checkinDate = urlParams.get('checkin');
+    var checkoutDate = urlParams.get('checkout');
+
+    var [year_in, month_in, day_in] = checkinDate.split('-');
+    var [year_out, month_out, day_out] = checkoutDate.split('-');
+
+    // แสดงค่าใน element
+    document.getElementById('2bed-checkin-dateDD').innerText = day_in;
+    document.getElementById('2bed-checkin-dateMM').innerText = month_in;
+    document.getElementById('2bed-checkin-dateYYYY').innerText = year_in;
+
+    document.getElementById('2bed-checkout-dateDD').innerText = day_out;
+    document.getElementById('2bed-checkout-dateMM').innerText = month_out;
+    document.getElementById('2bed-checkout-dateYYYY').innerText = year_out;
+
+    document.getElementById('1bed-checkin-dateDD').innerText = day_in;
+    document.getElementById('1bed-checkin-dateMM').innerText = month_in;
+    document.getElementById('1bed-checkin-dateYYYY').innerText = year_in;
+
+    document.getElementById('1bed-checkout-dateDD').innerText = day_out;
+    document.getElementById('1bed-checkout-dateMM').innerText = month_out;
+    document.getElementById('1bed-checkout-dateYYYY').innerText = year_out;
+
+    // ทำอะไรกับค่าที่ได้ เช่น แสดงใน console
+    console.log('Check-in Date:', typeof checkinDate);
+    console.log('Check-out Date:', checkoutDate);
+});
