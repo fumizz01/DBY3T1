@@ -25,9 +25,10 @@ from .forms import *
 import json
 import re
 
+def home(request):
+    return HttpResponseRedirect(reverse('home'))
 # Create your views here.
 def index(request):
-    
     return render(request, 'hotelpage.html')
 
 def register(request):
