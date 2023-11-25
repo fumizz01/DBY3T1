@@ -73,6 +73,8 @@ def em_room_status(request):
 def my_reserve(request):
     return render(request, 'my_reserve.html')
 
+def change_password(request):
+    return render(request, 'change_password.html')
 class CustomerAccountInformationList(View):
     def get(self, request):
         user_info = list(Customer.objects.select_related('user_code').all().values(
