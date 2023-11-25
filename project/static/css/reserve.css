@@ -130,7 +130,7 @@ div.line-detail-right {
 
 div.summary-box {
     display: block;
-    /* display: flex; */
+    height: fit-content;
     margin: 10px;
     margin-right: 40px;
     border-radius: 5px;
@@ -211,6 +211,7 @@ div.summary-container {
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ffffff;
+    justify-content: space-around;
     background: rgba(255,255,255,0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -230,9 +231,15 @@ div.summary-container {
 
 .line-summary
 {
-    margin-left: 30px;
+    margin-top: -30;
+    margin-left: 170px;
     width: 20%;
     height: 20%;
+}
+
+.total
+{
+    text-align: center;
 }
 
 /* background */
