@@ -83,6 +83,12 @@ div.line-detail-right {
 .text-detail {
     display: inline-block;
     margin-top: 0;
+
+}
+
+.sumdate{
+    display: inline-block;
+    color: #000;
 }
 
 .text-sub-detail-1 {

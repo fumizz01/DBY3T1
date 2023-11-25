@@ -82,9 +82,9 @@
                                             <p class="text-detail">จำนวนห้อง:</p>
 
                                             <div class="step">
-                                                <span class="button" id="2bed-number-minus" onclick="updateValue('2bed-number-available', -1)">-</span>
-                                                <p class="guest" id="2bed-number-available" min="0" max="10" step="1" readonly>1</p>
-                                                <span class="button" id="2bed-number-plus" onclick="updateValue('2bed-number-available', 1)">+</span>
+                                                <span class="button" id="2bed-number-minus" onclick="TwoUpdateValue('2bed-number-available', -1)">-</span>
+                                                <p class="guest" id="2bed-number-available" min="0" max="10" step="1" readonly>0</p>
+                                                <span class="button" id="2bed-number-plus" onclick="TwoUpdateValue('2bed-number-available', 1)">+</span>
                                             </div>     
                                                 
                                         </div>
@@ -97,9 +97,6 @@
                                             <p class="text-detail">เหลือห้อง:</p>
                                             <p class="text-detail" id="number-available-room">0</p>
                                             <p class="text-detail">ห้อง</p>
-                                        </div>
-                                        <div class="line-detail-right">
-                                            <button class="text-detail reserve-room-button" id="reserve-room-button">เพิ่มห้อง</button>
                                         </div>
                                     </fieldset>
 
@@ -173,9 +170,9 @@
                                             <p class="text-detail">จำนวนห้อง:</p>
 
                                             <div class="step">
-                                                <span class="button" id="2bed-number-minus" onclick="updateValue('1bed-number-available', -1)">-</span>
-                                                <p class="guest" id="1bed-number-available" min="0" max="10" step="1" readonly>1</p>
-                                                <span class="button" id="2bed-number-plus" onclick="updateValue('1bed-number-available', 1)">+</span>
+                                                <span class="button" id="1bed-number-minus" onclick="OneUpdateValue('1bed-number-available', -1)">-</span>
+                                                <p class="guest" id="1bed-number-available" min="0" max="10" step="1" readonly>0</p>
+                                                <span class="button" id="1bed-number-plus" onclick="OneUpdateValue('1bed-number-available', 1)">+</span>
                                             </div> 
 
                                         </div>
@@ -188,9 +185,6 @@
                                             <p class="text-detail">เหลือห้อง:</p>
                                             <p class="text-detail" id="number-available-room">0</p>
                                             <p class="text-detail">ห้อง</p>
-                                        </div>
-                                        <div class="line-detail-right">
-                                            <button class="text-detail reserve-room-button" id="reserve-room-button">เพิ่มห้อง</button>
                                         </div>
                                     </fieldset>
 
@@ -213,18 +207,58 @@
                                             <tbody>
                                                 <tr>
                                                     <td>ห้องเตียงคู่</td>
-                                                    <td>1 ห้อง</td>
-                                                    <td>10/11/23 - 11/11/23</td>
-                                                    <td>1,700.00 บาท</td>
+                                                    <td>
+                                                        <p class="sumdate" id="2number-room">0</p>
+                                                        <p class="sumdate">ห้อง</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate" id="2bed-checkin-dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed-checkin-dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed-checkin-dateY">YYYY</p>
+
+                                                        <p class="sumdate">-</p>
+
+                                                        <p class="sumdate" id="2bed-checkout-dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed-checkout-dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed-checkout-dateY">YYYY</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate">0000.00</p>
+                                                        <p class="sumdate">บาท</p>
+                                                    </td>
                                                     <td align="center">
                                                         <span class="table-remove glyphicon glyphicon-remove"></span>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>ห้องเตียงคู่</td>
-                                                    <td>1 ห้อง</td>
-                                                    <td>10/11/23 - 11/11/23</td>
-                                                    <td>1,700.00 บาท</td>
+                                                    <td>ห้องเตียงเดี่ยว</td>
+                                                    <td>
+                                                        <p class="sumdate" id="1number-room">0</p>
+                                                        <p class="sumdate">ห้อง</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate" id="1bed-checkin-dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed-checkin-dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed-checkin-dateY">YYYY</p>
+
+                                                        <p class="sumdate">-</p>
+
+                                                        <p class="sumdate" id="1bed-checkout-dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed-checkout-dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed-checkout-dateY">YYYY</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate">0000.00</p>
+                                                        <p class="sumdate">บาท</p>
+                                                    </td>
                                                     <td align="center">
                                                         <span class="table-remove glyphicon glyphicon-remove"></span>
                                                     </td>
@@ -233,8 +267,10 @@
                                         </table>
     
                                         <div class ='total'>
-                                            <p class="text-detail">รวม 3,400.00 บาท</p>
-                                            <button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+                                            <p class="text-detail">รวม</p>
+                                            <p class="text-detail">0000.00</p>
+                                            <p class="text-detail">บาท</p>
+                                            <button class="text-detail reserve-room-button" id="reserve-room-button" type="button">จองห้อง</button>
                                         </div>
                                     </div>
 

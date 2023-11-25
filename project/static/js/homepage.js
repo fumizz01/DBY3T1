@@ -65,8 +65,7 @@ function stepper(btn) {
     console.log(id,min,max,step,val);
 }
 
-
-
+//กำหน้าค่าให้วันเข้าเเละออก
 document.addEventListener('DOMContentLoaded', function () {
     var currentDate = new Date().toISOString().split('T')[0];
     var currentDate_checkout = new Date();
