@@ -11,6 +11,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AlterField(
+            model_name='room',
+            name='room_number',
+            field=models.CharField(max_length=10, primary_key=True, serialize=False),
+        ),
         migrations.RemoveField(
             model_name='room',
             name='reservation_id',
@@ -20,10 +25,5 @@ class Migration(migrations.Migration):
             name='room_number',
             field=models.ForeignKey(db_column='room_number', default='000RM', on_delete=django.db.models.deletion.CASCADE, to='project.room'),
             preserve_default=False,
-        ),
-        migrations.AlterField(
-            model_name='room',
-            name='room_number',
-            field=models.CharField(max_length=10, primary_key=True, serialize=False),
         ),
     ]
