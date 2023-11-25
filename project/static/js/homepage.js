@@ -15,25 +15,6 @@ $(document).ready( function () {
     
         // ให้ไปยังหน้าการจอง
         window.location.href = reservationURL;
-
-        const formData = $("#homepage-form").serialize(); // Serialize the form data
-        $.ajax({
-            type: 'POST',
-            url: '', // Replace with your server endpoint URL
-            data: formData,
-
-            success: function (response) {
-                // Handle the success response from the server
-                console.log(response);
-                /* alert('Form submitted successfully! Redirecting...'); */
-                /* window.location.href = '/login'; */ // Replace with the URL you want to redirect to
-            },
-            error: function (error) {
-                // Handle errors
-                console.error('Error submitting form:', error);
-                alert('Error submitting form. Please try again.');
-            }
-        });
     });
 });
 

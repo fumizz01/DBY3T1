@@ -269,6 +269,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var urlParams = new URLSearchParams(window.location.search);
     var checkinDate = urlParams.get('checkin');
     var checkoutDate = urlParams.get('checkout');
+    var adult = urlParams.get('adult');
+    var child = urlParams.get('child');
 
     var [year_in, month_in, day_in] = checkinDate.split('-');
     var [year_out, month_out, day_out] = checkoutDate.split('-');
@@ -290,7 +292,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('1bed-checkout-dateMM').innerText = month_out;
     document.getElementById('1bed-checkout-dateYYYY').innerText = year_out;
 
-    // ทำอะไรกับค่าที่ได้ เช่น แสดงใน console
+    document.getElementById('reserve-value-adult').innerText  = adult;
+    document.getElementById('reserve-value-child').innerText  = child;
+
     console.log('Check-in Date:', typeof checkinDate);
     console.log('Check-out Date:', checkoutDate);
+    console.log('Adult:', adult);
+    console.log('Child:', child);
 });
