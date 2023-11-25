@@ -105,12 +105,22 @@ class ReservationInfo(View):
     
     def get(self, request):
         
-        reservation_info = list(Room.objects.select_related('room_type').filter(status='available').values('room_type__room_price').annotate(room_type_count=Count("room_type")))
+        reservation_info = list(Room.objects.select_related('room_type').filter(status='available').values('room_type','room_type__room_price').annotate(room_type_count=Count("room_type")))
         #print(reservation_info)
         
         data = dict()
         data['reservation_info'] = reservation_info
         print(data['reservation_info'])
+        return JsonResponse(data)
+    
+class RoomStatusInfo(View):
+    def get(self, request):
+        room_status_info = list(Room.objects.select_related('').filter(status='available').values('room_type','room_type__room_price').annotate(room_type_count=Count("room_type")))
+        #print(room_status_info)
+        
+        data = dict()
+        data['room_status_info'] = room_status_info
+        print(data['room_status_info'])
         return JsonResponse(data)
 
 """class CustomerRegister(View):
