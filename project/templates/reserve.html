@@ -27,8 +27,15 @@
                             <div class="reserve-box">
                                 <div class="img-container">
                                     <img src="{% static 'picture/double-bed.png' %}" class="hotel-img">
+                                    <div class="sub-detail-1">
+                                        <img src="{% static 'picture/th 1.png' %}" class = "bed-img">
+                                        <p class="text-sub-detail-1">2 single bed</p>
+                                    </div>
+                                    <div class="sub-detail-2">
+                                        <img src="{% static 'picture/2763541 1.png' %}" class = "area-img">
+                                        <p class="text-sub-detail-2">ขนาดห้อง: 30 ตารางเมตร</p>
+                                    </div>
                                 </div>
-                                
                                 <div class="detail-container">
 
                                     <h3 id="room-type" class="room-type big-font">เตียงคู่</h3>
@@ -90,7 +97,7 @@
                                             <p class="text-detail">ห้อง</p>
                                         </div>
                                         <div class="line-detail-right">
-                                            <button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+                                            <button class="text-detail reserve-room-button" id="reserve-room-button">เพิ่มห้อง</button>
                                         </div>
                                     </fieldset>
 
@@ -106,6 +113,14 @@
                             <div class="reserve-box">
                                 <div class="img-container">
                                     <img src="{% static 'picture/single-bed.png' %}" class="hotel-img">
+                                    <div class="sub-detail-1">
+                                        <img src="{% static 'picture/th 1.png' %}" class = "bed-img">
+                                        <p class="text-sub-detail-1">1 king size bed</p>
+                                    </div>
+                                    <div class="sub-detail-2">
+                                        <img src="{% static 'picture/2763541 1.png' %}" class = "area-img">
+                                        <p class="text-sub-detail-2">ขนาดห้อง: 30 ตารางเมตร</p>
+                                    </div>
                                 </div>
                                 
                                 <div class="detail-container">
@@ -169,7 +184,7 @@
                                             <p class="text-detail">ห้อง</p>
                                         </div>
                                         <div class="line-detail-right">
-                                            <button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+                                            <button class="text-detail reserve-room-button" id="reserve-room-button">เพิ่มห้อง</button>
                                         </div>
                                     </fieldset>
 
@@ -179,6 +194,55 @@
                     </div>
                 </li>
 
+                <li>
+                    <div class="item-box">
+                        <form>
+                            <div class="summary-box">
+                                <div class="head-container">
+                                    <h1>สรุปการจอง</h1>
+                                </div>
+                                <div class="summary-container">
+                                    <table class = summary-table>
+                                        <tbody>
+                                            <tr>
+                                                <td>ห้องเตียงคู่</td>
+                                                <td>1 ห้อง</td>
+                                                <td>10/11/23 - 11/11/23</td>
+                                                <td>1,700.00 บาท</td>
+                                                <td align="center">
+                                                    <span class="table-remove glyphicon glyphicon-remove"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ห้องเตียงคู่</td>
+                                                <td>1 ห้อง</td>
+                                                <td>10/11/23 - 11/11/23</td>
+                                                <td>1,700.00 บาท</td>
+                                                <td align="center">
+                                                    <span class="table-remove glyphicon glyphicon-remove"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div>
+                                        <p class="text-detail">รวม 3,400.00 บาท</p>
+                                        <button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+                                    </div>
+
+                                    <div class="line-summary">
+                                        <p id="room-capacity-value-adult" class="text-detail">2</p>
+                                        <p class="text-detail">ผู้ใหญ่</p>
+                                        <p class="text-detail">,</p>
+                                        <p id="room-capacity-value-child" class="text-detail">0</p>
+                                        <p class="text-detail">เด็ก</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
             </ul>
         </div>
 

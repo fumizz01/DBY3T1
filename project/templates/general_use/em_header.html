@@ -1,11 +1,12 @@
+{% load static %}
 <header class="header">  
     <H1 class="header-logo">Hotel</H1>
     <ul class="nav">
         <li>
-            <a href="#">สถานะการจอง</a>
+            <a href="{% url 'employee_reserve_status' %}">สถานะการจอง</a>
         </li>
         <li>
-            <a href="#">การจอง</a>
+            <a href="{% url 'employee_reserve' %}">การจอง</a>
         </li>
         <li>
             <i class='bx bxs-user icon'></i>
