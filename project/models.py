@@ -28,9 +28,21 @@ class Customer(models.Model):
     def __str__(self):
         return self.customer_id 
     
+class Room(models.Model):
+    room_number = models.IntegerField(primary_key=True)
+    room_capacity = models.IntegerField()
+    room_price = models.FloatField(null=True, blank=True)
+    status = models.CharField(max_length=20, null=True, blank=True)
+    room_type = models.CharField(max_length=20, null=True, blank=True)
+    class Meta:
+        db_table = "room"
+        managed = True 
+    def __str__(self):
+        return self.room_number
     
 class Reservation(models.Model):
     reservation_id = models.IntegerField(primary_key=True)
+    room_number = models.ForeignKey(Room, on_delete=models.CASCADE, db_column='room_number')
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, db_column='customer_id')
     check_in = models.DateField(null=True, blank=True)
     check_out = models.DateField(null=True, blank=True)
@@ -41,19 +53,6 @@ class Reservation(models.Model):
         managed = True
     def __str__(self):
         return self.reservation_id
-
-class Room(models.Model):
-    room_number = models.IntegerField(primary_key=True)
-    reservation_id = models.ForeignKey(Reservation, on_delete=models.CASCADE, db_column='reservation_id')
-    room_capacity = models.IntegerField()
-    room_price = models.FloatField(null=True, blank=True)
-    status = models.CharField(max_length=20, null=True, blank=True)
-    room_type = models.CharField(max_length=20, null=True, blank=True)
-    class Meta:
-        db_table = "room"
-        managed = True 
-    def __str__(self):
-        return self.room_number
     
 class Employee(models.Model):
     employee_id = models.CharField(max_length=50, primary_key=True)
