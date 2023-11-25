@@ -34,7 +34,8 @@ urlpatterns = [
     
     #get
     path('customer/list',views.CustomerAccountInformationList.as_view(), name='customer_info'),
-    path('reservation/list',views.ReservationInfo.as_view(), name='reservation_info'),
+    path('reservation/price',views.ReservationInfo.as_view(), name='reservation_price'),
+    
     
     #post
     #path('customer/register',views.register_user, name='register_user'),
