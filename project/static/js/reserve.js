@@ -8,13 +8,6 @@ $(document).ready(function () {
 /* validate Input */
 
 document.addEventListener('DOMContentLoaded', function () {
-    var birthdayInput = document.getElementById('birthday');
-    var currentDate = new Date().toISOString().split('T')[0];
-
-    birthdayInput.setAttribute('max', currentDate);
-});
-
-document.addEventListener('DOMContentLoaded', function () {
     // ดึงค่าจาก URL parameters
     var urlParams = new URLSearchParams(window.location.search);
     var checkinDate = urlParams.get('checkin');

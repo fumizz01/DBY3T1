@@ -394,3 +394,10 @@ function calculateAge(date)
   const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
   return age
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    var birthdayInput = document.getElementById('birthday');
+    var currentDate = new Date().toISOString().split('T')[0];
+
+    birthdayInput.setAttribute('max', currentDate);
+});
