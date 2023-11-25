@@ -3,10 +3,15 @@
         <H1 class="header-logo">Hotel</H1>
     </a>
     <ul class="nav">
-        <li><a href="/">หน้าหลัก</a></li>
+        <li><a href="home">หน้าหลัก</a></li>
         <li><a href="my-reserve">การจองของฉัน</a></li>
-        <li><a href="login">เข้าสู่ระบบ</a></li>
-        <li><a class ="register" href="register">ลงทะเบียน</a></li>
+        {% if user.is_authenticated %}
+        <!--<li><a href="change_password">เปลี่ยนรหัสผ่าน</a></li>-->
+            <li><a href="logout">ออกจากระบบ</a></li>
+        {% else %}
+            <li><a href="login">เข้าสู่ระบบ</a></li>
+            <li><a class="register" href="register">ลงทะเบียน</a></li>
+        {% endif %}
     </ul>
 </header>
 

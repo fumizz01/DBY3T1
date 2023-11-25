@@ -5,7 +5,7 @@
 
         {% include 'general_use/general-script.html' %}
 
-        <script src="{% static 'js/js.js' %}"></script>
+        <script src="{% static 'js/login-register.js' %}"></script>
         <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
     </head>
     <body class='login'>
@@ -16,18 +16,25 @@
             <div class="gradient-bg item2"></div>
         </div>
         <div class = "box">
-            <form action = "">
+            <form action="" method="post" id="login-form">
+                {% csrf_token %}
                 <div id="login-container" class = "login-container">
                     <h2>เข้าสู่ระบบ</h2>
                     <p>ชื่อผู้ใช้</p>
                     <i class='bx bxs-user-circle icon'></i>
-                    <input class="input-field" id = "login-user"  name = "login-user" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
+                    <input class="input-field" id = "login-user"  name = "username" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
                     <p>รหัสผ่าน</p>
                     <i class='bx bxs-lock icon'></i>
-                    <input class="input-field password" id = "login-password"  name = "login-password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
-                        maxlength="15" required>
-                    <i class="bx bx-hide eye-icon "></i>
-                    <input id = "login-button" class='submit' type="submit" value="ยันยืน">
+                    <!-- <input class="input-field password" id = "login-password"  name = "login-password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
+                        maxlength="15" required> -->
+                    <input class="input-field password" id = "login-password"  name = "password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" maxlength="15" required>
+                    <i class="bx bx-hide eye-icon password-validation"></i>
+                    <button id = "login-button" class='submit' type="submit">ยืนยัน</button>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </form>
         </div>
