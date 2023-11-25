@@ -78,6 +78,8 @@ class Employee(models.Model):
 class Reservation(models.Model):
     reservation_id = models.CharField(max_length=10, primary_key=True)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, db_column='customer_id')
+    check_in = models.DateField(null=True, blank=True)
+    check_out = models.DateField(null=True, blank=True)
     total_price = models.FloatField(null=True, blank=True)
     status = models.CharField(max_length=50, null=True, blank=True)
     class Meta:
@@ -90,8 +92,6 @@ class ReservationLineItem(models.Model):
     reservation_id = models.ForeignKey(Reservation, on_delete=models.CASCADE, db_column='reservation_id')
     item_no = models.IntegerField()
     room_number = models.ForeignKey(Room, on_delete=models.CASCADE, db_column='room_number')
-    check_in = models.DateField(null=True, blank=True)
-    check_out = models.DateField(null=True, blank=True)
     class Meta:
         db_table = "reservation_line_item"
         unique_together = ('reservation_id', 'item_no')
