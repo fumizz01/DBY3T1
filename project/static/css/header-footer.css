@@ -6,6 +6,8 @@ body{
     padding: 0;
 }
 
+
+
 header.header{ 
     background-color: white;
     padding: 5px;
@@ -54,6 +56,10 @@ H1.header-logo {
         align-items: center;
         margin: 10px;
     }
+    & .active{
+        font-size: larger;
+    }
+
     & .icon{
         margin: 5px;
         font-size: 18px;

@@ -1,12 +1,22 @@
+let result = true;
+
 $(document).ready(function () {
-    $("#reserve-room-button").click(function() {
-        checkRoomNumber();
-      });
     
     /* hide show password */
-    $("body").on('click', '.eye-icon', function() {
+    $("body").on('click', '.password-validation', function() {
         $(this).toggleClass("bx-show bx-hide");
         var input = $(".password");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+
+    /* hide show confirmation password */
+    $("body").on('click', '.password-confirmation-icon', function() {
+        $(this).toggleClass("bx-show bx-hide");
+        var input = $(".password-confirmation");
         if (input.attr("type") === "password") {
             input.attr("type", "text");
         } else {
@@ -51,30 +61,52 @@ $(document).ready(function () {
         validateInputs();
         return true
     }); */
+
     $( "#register-form" ).on( "submit", function(event) {
         event.preventDefault();
-        if (validateInputs()) {
-            // If all validations pass, send a POST request
-            const formData = $("#register-form").serialize(); // Serialize the form data
-            
-            $.ajax({
-                type: 'POST',
-                url: '', // Replace with your server endpoint URL
-                data: formData,
-                success: function (response) {
-                    // Handle the success response from the server
-                    console.log(response);
-                    alert('Form submitted successfully! Redirecting...');
-                    window.location.href = '/login'; // Replace with the URL you want to redirect to
-                },
-                error: function (error) {
-                    // Handle errors
-                    console.error('Error submitting form:', error);
-                    alert('Error submitting form. Please try again.');
-                }
-            });
-        }
+
+        const firstValue = $('#firstname').val();
+        const lastnameValue = $('#lastname').val();
+        const dateValue = $('#birthday').val();
+        const tel = $('#tel').val();
+        const id_number = $('#id_number').val();
+        
+        const emailValue = $('#email').val();
+        const user_name = $('#user_name').val();
+        const passwordValue = $('#register-password').val();
+        const password2Value = $('#password_confirm').val();
+
+        if (!validateInputs(firstValue, lastnameValue, dateValue, tel, id_number, emailValue, user_name, passwordValue, password2Value)) {
+            return
+        } 
+        validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name)
     });
+
+/*     $( "#login-form" ).on( "submit", function(event) {
+        event.preventDefault();
+
+        const loginUserName = $('#login-user').val();
+        const loginPassword = $('#login-password').val();
+
+        $.ajax({                                        // call backend /customer/list
+            url:  '/customer/detail' + loginUserName + '/' + loginPassword,
+            type:  'GET',
+            dataType:  'json',
+            success: function  (all_data) {
+                    
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)         // if something error, reset text box
+                    },
+                });
+            
+    }); */
+    
+    $("#birthday").change(function() {
+        var date = new Date($('#birthday').val());
+        var age = calculateAge(date);
+        $('#age').val(age);
+     });
     
 });
 
@@ -165,17 +197,8 @@ function isNumber(value) {
     return !isNaN(value) && typeof value === 'number';
 }
 
-function validateInputs() {
+function validateInputs(firstValue, lastnameValue, dateValue, tel, id_number, emailValue, user_name, passwordValue, password2Value) {
     var total = 0
-    const firstValue = $('#firstname').val();
-    const lastnameValue = $('#lastname').val();
-    const dateValue = $('#birthday').val();
-    const tel = $('#tol').val();
-    const id_number = $('#id_number').val();
-    
-    const emailValue = $('#email').val();
-    const passwordValue = $('#register-password').val();
-    const password2Value = $('#password_confirm').val();
     
     if(firstValue === '') {
         setError($('#firstname'), 'กรุณาระบุชื่อ');
@@ -199,16 +222,16 @@ function validateInputs() {
     }
     
     if(tel === '') {
-        setError($('#tol'), 'กรุณาระบุเบอร์โทร');
+        setError($('#tel'), 'กรุณาระบุเบอร์โทร');
     }  
     else if (!isNumber(Number(tel))){
-        setError($('#tol'), 'กรุณากรอกเฉพาะตัวเลข');
+        setError($('#tel'), 'กรุณากรอกเฉพาะตัวเลข');
     } 
     else if (tel.length < 8) {
-        setError($('#tol'), 'must be at least 10 characters');
+        setError($('#tel'), 'must be at least 10 characters');
     }
     else {
-        setSuccess($('#tol'));
+        setSuccess($('#tel'));
         total +=1;
     }
     
@@ -234,6 +257,13 @@ function validateInputs() {
         setSuccess($('#email'));
         total +=1;
     }
+
+    if(user_name === '') {
+        setError($('#user_name'), 'กรุณาระบุชื่อผู้ใช้');
+    } else {
+        setSuccess($('#user_name'));
+        total +=1;
+    }
     
     if(passwordValue === '') {
         setError($('#register-password'), 'Password is required');
@@ -253,129 +283,114 @@ function validateInputs() {
         total +=1;
     }
     
-    if (total === 8){
+    if (total == 9){
         return true;
     }
-}
+};
 
 /* validate Input */
+function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
 
-document.addEventListener('DOMContentLoaded', function () {
-    var birthdayInput = document.getElementById('birthday');
-    var currentDate = new Date().toISOString().split('T')[0];
-
-    birthdayInput.setAttribute('max', currentDate);
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    // ดึงค่าจาก URL parameters
-    var urlParams = new URLSearchParams(window.location.search);
-    var checkinDate = urlParams.get('checkin');
-    var checkoutDate = urlParams.get('checkout');
-    var adult = urlParams.get('adult');
-    var child = urlParams.get('child');
-
-    var [year_in, month_in, day_in] = checkinDate.split('-');
-    var [year_out, month_out, day_out] = checkoutDate.split('-');
-
-    // แสดงค่าใน element
-    document.getElementById('2bed-checkin-dateDD').innerText = day_in;
-    document.getElementById('2bed-checkin-dateMM').innerText = month_in;
-    document.getElementById('2bed-checkin-dateYYYY').innerText = year_in;
-
-    document.getElementById('2bed-checkout-dateDD').innerText = day_out;
-    document.getElementById('2bed-checkout-dateMM').innerText = month_out;
-    document.getElementById('2bed-checkout-dateYYYY').innerText = year_out;
-
-    document.getElementById('1bed-checkin-dateDD').innerText = day_in;
-    document.getElementById('1bed-checkin-dateMM').innerText = month_in;
-    document.getElementById('1bed-checkin-dateYYYY').innerText = year_in;
-
-    document.getElementById('1bed-checkout-dateDD').innerText = day_out;
-    document.getElementById('1bed-checkout-dateMM').innerText = month_out;
-    document.getElementById('1bed-checkout-dateYYYY').innerText = year_out;
-
-    document.getElementById('2bed-checkin-dateD').innerText = day_in;
-    document.getElementById('2bed-checkin-dateM').innerText = month_in;
-    document.getElementById('2bed-checkin-dateY').innerText = year_in;
-
-    document.getElementById('2bed-checkout-dateD').innerText = day_out;
-    document.getElementById('2bed-checkout-dateM').innerText = month_out;
-    document.getElementById('2bed-checkout-dateY').innerText = year_out;
-
-    document.getElementById('1bed-checkin-dateD').innerText = day_in;
-    document.getElementById('1bed-checkin-dateM').innerText = month_in;
-    document.getElementById('1bed-checkin-dateY').innerText = year_in;
-
-    document.getElementById('1bed-checkout-dateD').innerText = day_out;
-    document.getElementById('1bed-checkout-dateM').innerText = month_out;
-    document.getElementById('1bed-checkout-dateY').innerText = year_out;
-
-    document.getElementById('reserve-value-adult').innerText  = adult;
-    document.getElementById('reserve-value-child').innerText  = child;
-
-    console.log('Check-in Date:', typeof checkinDate);
-    console.log('Check-out Date:', checkoutDate);
-    console.log('Adult:', adult);
-    console.log('Child:', child);
-});
-
-
-function TwoUpdateValue(elementId, increment) {
-    let MyElement = document.getElementById(elementId);
-    let min = parseInt(MyElement.getAttribute("min"));
-    let max = parseInt(MyElement.getAttribute("max"));
-    let val = parseInt(MyElement.innerHTML);
-    let newValue = 0;
-    newValue = val + increment;
-
-    if (newValue >= min && newValue <= max) {
-        MyElement.innerHTML = newValue;
-        document.getElementById("2number-room").innerHTML = Number(newValue);
-    }
-    console.log(Number(MyElement.innerHTML))
-}
-
-function OneUpdateValue(elementId, increment) {
-    let MyElement = document.getElementById(elementId);
-    let min = parseInt(MyElement.getAttribute("min"));
-    let max = parseInt(MyElement.getAttribute("max"));
-    let val = parseInt(MyElement.innerHTML);
-    let newValue = 0;
-    newValue = val + increment;
-
-    if (newValue >= min && newValue <= max) {
-        MyElement.innerHTML = newValue;
-        document.getElementById("1number-room").innerHTML = Number(newValue);
-    }
-    console.log(Number(newValue))
-}
-
-function checkRoomNumber() {
     
-    var urlParams = new URLSearchParams(window.location.search);
-    var adult = urlParams.get('adult');
+    $.ajax({                                        // call backend /customer/list
+        url:  '/customer/list',
+        type:  'get',
+        dataType:  'json',
+        success: function  (all_data) {
+            var flag = 1;
+            console.log(all_data);
+            //console.log(all_data.user_info.length);
+            for(let i = 0; i < all_data.user_info.length; i++) {
+                let data = all_data.user_info[i];
+                
+                //console.log(data);
 
-    var number_room_2 = parseInt(document.getElementById("2bed-number-available").innerText);
+                console.log("check1");
+                /* console.log(!(document.getElementById("id_number").parentElement.classList.contains('error'))); */
+                if (data.identification_number == id_number && !(document.getElementById("id_number").parentElement.classList.contains('error'))) {        // check if important data is duplicate with the existing data in database
+                    setError($('#id_number'), 'รหัสบัตรประชาชนซ้ำกับข้อมูลในระบบ');
+                    console.log('error1');
+                    flag = 0;
+                } 
+                /* else {
+                    setSuccess($('#id_number'));
+                } */
+                
+                console.log('check2');
+                /* console.log(!(document.getElementById("email").parentElement.classList.contains('error'))); */
+                if (data.email == emailValue && !(document.getElementById("email").parentElement.classList.contains('error'))){
+                    setError($('#email'), 'อีเมลซ้ำกับข้อมูลในระบบ');
+                    console.log('error2');
+                    flag = 0;
+                }
+                /* else {
+                    setSuccess($('#email'));
+                } */
+                
+                console.log('check3');
+                /* console.log(!(document.getElementById("user_name").parentElement.classList.contains('error'))); */
+                if (data.username == user_name && !(document.getElementById("user_name").parentElement.classList.contains('error'))) {
+                    setError($('#user_name'), 'ชื่อผู้ใช้ซ้ำกับข้อมูลในระบบ');
+                    console.log('error3');
+                    flag = 0;
+                }
+                /* else {
+                    setSuccess($('#user_name'));
+                } */
 
-    var number_room_1 = parseInt(document.getElementById("1bed-number-available").innerText);
+            };
 
-    var number_adult = Number(adult);
-  
-    // คำนวณจำนวนห้องทั้งหมด
-    var total_room = number_room_2 + number_room_1;
-    var total_number_adult = number_adult / total_room;
-    console.log(total_room)
-  
-    // ตรวจสอบว่าจำนวนห้องทั้งหมดมากกว่าเท่ากับ 1 หรือน้อยกว่าเท่ากับ 2
-    if (total_number_adult >= 1 && total_number_adult <= 2) {
-      // แสดงข้อความว่า "จำนวนห้องเพียงพอ"
-      alert("จำนวนห้องเพียงพอ");
-    } else if (total_number_adult < 1) {
-      // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
-      alert("จำนวนห้องมากกว่าจำนวนคน");
+            if (flag === 0) { //guard clause: if the error happen, don't run the code below
+                return false;
+            }
+            // If all validations pass, send a POST request
+            const formData = $("#register-form").serialize(); // Serialize the form data
+            
+            $.ajax({
+                type: 'POST',
+                url: 'customer/register', // Replace with your server endpoint URL
+                data: formData,
+                success: function (response) {
+                    if (response.error) {                               // if backend return error message, log it
+                        console.log(response.error);
+                        alert('การสมัครใช้งานล้มเหลว');
+                    } else {
+                        console.log(response);
+                        alert('Register successfully! Redirecting...');
+                        window.location.href = '/home'; // Replace with the URL you want to redirect to
+                    }                    
+                },
+            });
+        },
+        error: function (xhr, status, error) {
+            console.log(error)         // if something error, reset text box
+        }
+
+    });
+    if (result) {
+        console.log('YAY');
+        console.log(result);
+        return true;
     }
     else {
-        alert("จำนวนห้องไม่เพียงพอ");
+        console.log('NOO');
+        console.log(result);
+        return false;
     }
-  };
+};
+
+function updateFlagTrue() {
+    result = true
+}
+
+function updateFlagFalse() {
+    result = false
+}
+
+function calculateAge(date) 
+{
+  const now = new Date();
+  const diff = Math.abs(now - date);
+  const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+  return age
+};

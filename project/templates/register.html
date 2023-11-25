@@ -5,7 +5,7 @@
 
         {% include 'general_use/general-script.html' %}
 
-        <script src="{% static 'js/js.js' %}"></script>
+        <script src="{% static 'js/login-register.js' %}"></script>
         <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
     </head>
     <body class="register">
@@ -15,33 +15,34 @@
             <div class="gradient-bg item2"></div>
         </div>
         <div class = "box" >
-            <form id="register-form" action = "{% url 'register' %}" method="post">
+            <form id="register-form">
                 {%csrf_token %} 
                 <div class = "register-container">
                     <h2 class="head">สมัครสมาชิก</h2>
                     <div>
                         <label for="firstname">ชื่อ</label>
-                        <input class="input-field" id = "firstname" name = "firstname" type = "text" placeholder="ชื่อ" >
+                        <input class="input-field" id = "firstname" name = "first_name" type = "text" placeholder="ชื่อ" >
                         <div class="error-message"></div>
                     </div>
                     <div>
                         <label for="lastname">นามสกุล</label>
-                        <input class="input-field" id = "lastname" name = "lastname" type = "text" placeholder="นามสกุล" >
+                        <input class="input-field" id = "lastname" name = "last_name" type = "text" placeholder="นามสกุล" >
                         <div class="error-message"></div>
                     </div>
                     <div>
                         <label for="birthday">วัน/เดือน/ปีเกิด</label>
                         <input class="input-field" id = "birthday" name = "birthday" type = "date" placeholder="วัน/เดือน/ปีเกิด">
+                        <input type="hidden" id="age" name="age">
                         <div class="error-message"></div>
                     </div>
                     <div>
-                        <label for="tol">เบอร์โทร</label>
-                        <input class="input-field" id = "tol" name = "tol" type = "text"  placeholder="เบอร์โทร" maxlength="10" >
+                        <label for="tel">เบอร์โทร</label>
+                        <input class="input-field" id = "tel" name = "phone_number" type = "text"  placeholder="เบอร์โทร" maxlength="10" >
                         <div class="error-message"></div>
                     </div>
                     <div>
                         <label for="id_number">รหัสบัตรประชาชน</label>
-                        <input class="input-field" id = "id_number" name = "id_number" type = "text" placeholder="รหัสบัตรประชาชน"  maxlength="13" >
+                        <input class="input-field" id = "id_number" name = "identification_number" type = "text" placeholder="รหัสบัตรประชาชน"  maxlength="13" >
                         <div class="error-message"></div>
                     </div>
                     <div>
@@ -50,9 +51,14 @@
                         <div class="error-message"></div>
                     </div>
                     <div>
+                        <label for="user_name">ชื่อผู้ใช้</label>
+                        <input class="input-field" id = "user_name" name = "username" type = "text" placeholder="ชื่อผู้ใช้"  maxlength="50" >
+                        <div class="error-message"></div>
+                    </div>
+                    <div>
                         <label for="register-password">รหัสผ่าน</label>
-                        <input class="input-field password" id = "register-password" name = "password" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="15" >
-                        <i class="bx bx-hide eye-icon "></i>
+                        <input class="input-field password" id = "register-password" name = "password1" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="15" >
+                        <i class="bx bx-hide eye-icon password-validation"></i>
                         <div class="error-message"></div>
                     </div>
                     <div id="password-strength-status"></div>
@@ -67,8 +73,9 @@
                     </div>
                     <div>
                         <label for="password_confirm">ยืนยันรหัสผ่าน</label>
-                        <input class="input-field" id = "password_confirm" name = "password_confirm" type = "text" placeholder="ยืนยันรหัสผ่าน" >
+                        <input class="input-field password-confirmation" id = "password_confirm" name = "password2" type = "password" placeholder="ยืนยันรหัสผ่าน" >
                         <!-- <p id='message'></p> -->
+                        <i class="bx bx-hide eye-icon password-confirmation-icon"></i>
                         <div class="error-message"></div>
                     </div>
                     <input class='submit' id = "register-button" type="submit" value="ยันยืน">

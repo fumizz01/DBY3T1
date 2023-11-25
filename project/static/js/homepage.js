@@ -1,5 +1,5 @@
 $(document).ready( function () {
-
+    setNavigation();
     setDefaultDate();
 
     document.getElementById('search_room').addEventListener('click', function () {
@@ -107,4 +107,18 @@ function updateValue(inputId, increment) {
     if (newValue >= min && newValue <= max) {
         MyInput.setAttribute("value", newValue);
     }
+}
+
+
+function setNavigation() {
+    var path = window.location.pathname;
+    path = path.replace(/\/$/, "");
+    path = decodeURIComponent(path);
+
+    $(".nav a").each(function () {
+        var href = $(this).attr('href');
+        if (path.substring(1, href.length+1) === href) {
+            $(this).closest('li').addClass('active');
+        }
+    });
 }

@@ -1,9 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
-class Account(models.Model):
-    user_id = models.CharField(max_length=10, primary_key=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_code = models.CharField(max_length=10, primary_key=True)
+    role = models.CharField(max_length=50, null=True, blank=True)
+
+"""class Account(models.Model):
+    #user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_code = models.CharField(max_length=10, primary_key=True)
     user_name = models.CharField(max_length=50, unique=True)
     role = models.CharField(max_length=50, null=True, blank=True)
     password = models.CharField(max_length=20, null=True, blank=True)
@@ -11,12 +19,14 @@ class Account(models.Model):
         db_table = "account" 
         managed = True 
     def __str__(self):
-        return self.user_id
+        return self.user_code"""
+    
+
 
 class Customer(models.Model):
     customer_id = models.CharField(max_length=10, primary_key=True)
-    user_id = models.ForeignKey(Account, on_delete=models.CASCADE, db_column='user_id')
-    identification_number = models.IntegerField()
+    user_code = models.ForeignKey(Profile, on_delete=models.CASCADE, db_column='user_code')
+    identification_number = models.CharField(max_length=13, unique=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     age = models.IntegerField()
@@ -56,8 +66,8 @@ class Reservation(models.Model):
     
 class Employee(models.Model):
     employee_id = models.CharField(max_length=50, primary_key=True)
-    user_id = models.ForeignKey(Account, on_delete=models.CASCADE, db_column='user_id')
-    identification_number = models.IntegerField()
+    user_code = models.ForeignKey(Profile, on_delete=models.CASCADE, db_column='user_code')
+    identification_number = models.CharField(max_length=13, unique=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     sex = models.CharField(max_length=30, null=True, blank=True)
