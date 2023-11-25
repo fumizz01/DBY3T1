@@ -300,3 +300,17 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Adult:', adult);
     console.log('Child:', child);
 });
+
+
+function updateValue(elementId, increment) {
+    let MyElement = document.getElementById(elementId);
+    let min = parseInt(MyElement.getAttribute("min"));
+    let max = parseInt(MyElement.getAttribute("max"));
+    let val = parseInt(MyElement.innerHTML);
+
+    let newValue = val + increment;
+
+    if (newValue >= min && newValue <= max) {
+        MyElement.innerHTML = newValue;
+    }
+}

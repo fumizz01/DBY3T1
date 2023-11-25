@@ -16,6 +16,7 @@ $(document).ready( function () {
         // ให้ไปยังหน้าการจอง
         window.location.href = reservationURL;
     });
+
 });
 
 function setDefaultDate() {
@@ -29,19 +30,26 @@ function setDefaultDate() {
 
 }
 
+
+
 /* when click dropdown on adult and child */
 function stepper(btn) {
     let id = btn.getAttribute("id");
     if (id.includes("adult")) {
         var MyInput = document.getElementById('my-input-adult');
     }
-    else {
+    else if (id.includes("child")) {
         var MyInput = document.getElementById('my-input-child');
     }
+    else {
+        pass
+    }
+
     let min = MyInput.getAttribute("min");
     let max = MyInput.getAttribute("max");
     let step = MyInput.getAttribute("step");
     let val = MyInput.getAttribute("value");
+
     if (id.includes("increment")) {
         var newValue = parseInt(val) + 1;
     }
@@ -56,6 +64,8 @@ function stepper(btn) {
     }
     console.log(id,min,max,step,val);
 }
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     var currentDate = new Date().toISOString().split('T')[0];
@@ -84,3 +94,18 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('textCheckoutDate').setAttribute('min', minCheckoutDate.toISOString().split('T')[0]);
     });
 });
+
+
+function updateValue(inputId, increment) {
+    let MyInput = document.getElementById(inputId);
+    let min = parseInt(MyInput.getAttribute("min"));
+    let max = parseInt(MyInput.getAttribute("max"));
+    let step = parseInt(MyInput.getAttribute("step"));
+    let val = parseInt(MyInput.getAttribute("value"));
+
+    let newValue = val + increment * step;
+
+    if (newValue >= min && newValue <= max) {
+        MyInput.setAttribute("value", newValue);
+    }
+}

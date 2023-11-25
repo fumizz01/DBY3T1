@@ -80,9 +80,13 @@
                                     <fieldset class="line-detail">
                                         <div class="line-detail-left">
                                             <p class="text-detail">จำนวนห้อง:</p>
-                                            <button class="text-detail room-number-button" id="2bed-number-minus">-</button>
-                                            <p class="text-detail val" id="2bed-number-available">0</p>
-                                            <button class="text-detail room-number-button" id="2bed-number-plus">+</button>
+
+                                            <div class="step">
+                                                <span class="button" id="2bed-number-minus" onclick="updateValue('2bed-number-available', -1)">-</span>
+                                                <p class="guest" id="2bed-number-available" min="0" max="10" step="1" readonly>1</p>
+                                                <span class="button" id="2bed-number-plus" onclick="updateValue('2bed-number-available', 1)">+</span>
+                                            </div>     
+                                                
                                         </div>
                                     </fieldset>
 
@@ -167,9 +171,13 @@
                                     <fieldset class="line-detail">
                                         <div class="line-detail-left">
                                             <p class="text-detail">จำนวนห้อง:</p>
-                                            <button class="text-detail room-number-button" id="room-number-minus">-</button>
-                                            <p class="text-detail val">0</p>
-                                            <button class="text-detail room-number-button" id="room-number-plus">+</button>
+
+                                            <div class="step">
+                                                <span class="button" id="2bed-number-minus" onclick="updateValue('1bed-number-available', -1)">-</span>
+                                                <p class="guest" id="1bed-number-available" min="0" max="10" step="1" readonly>1</p>
+                                                <span class="button" id="2bed-number-plus" onclick="updateValue('1bed-number-available', 1)">+</span>
+                                            </div> 
+
                                         </div>
                                     </fieldset>
 
