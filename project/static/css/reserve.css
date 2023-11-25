@@ -217,6 +217,7 @@ div.summary-container {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .content-flex{
+    align-items: center;
     height: 15%;
     display: flex;
     justify-content: space-around;

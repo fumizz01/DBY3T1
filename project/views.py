@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View
+from django.db import transaction
+from django.http import JsonResponse
 
 
 from django.views.generic import View
@@ -49,6 +54,8 @@ def register(request):
     return render(request, 'login.html') """
 
 def reserve(request):
+    if request.POST:
+        print(request.POST)
     return render(request, 'reserve.html')
 
 def em_login(request):
