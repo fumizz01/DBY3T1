@@ -38,17 +38,27 @@ class Customer(models.Model):
     def __str__(self):
         return self.customer_id 
     
+class RoomDetail(models.Model):
+    room_type = models.CharField(max_length=20, primary_key=True)
+    room_capacity_adult = models.IntegerField()
+    room_capacity_child = models.IntegerField()
+    room_price = models.FloatField(null=True, blank=True)
+    class Meta:
+        db_table = "room_detail"
+        managed = True 
+    def __str__(self):
+        return self.room_type
+    
 class Room(models.Model):
     room_number = models.CharField(max_length=10, primary_key=True)
-    room_capacity = models.IntegerField()
-    room_price = models.FloatField(null=True, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True)
-    room_type = models.CharField(max_length=20, null=True, blank=True)
+    room_type = models.ForeignKey(RoomDetail, on_delete=models.CASCADE, db_column='room_type')
     class Meta:
         db_table = "room"
         managed = True 
     def __str__(self):
         return self.room_number
+    
     
 class Reservation(models.Model):
     reservation_id = models.IntegerField(primary_key=True)
