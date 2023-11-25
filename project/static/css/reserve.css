@@ -5,7 +5,7 @@ body{
 }
 div.head {
     height: 132px;
-    padding: 1px;
+    padding: 0px;
     text-align: center;
     align-content: center;
     display: grid;
