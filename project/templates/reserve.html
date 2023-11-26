@@ -277,7 +277,11 @@
                                                 <p class="text-detail" id="bed-total">0000.00</p>
                                                 <input id="input-total_price" type="hidden" name="total_price" value="">
                                                 <p class="text-detail">บาท</p>
-                                                <button class="text-detail reserve-room-button" id="reserve-room-button" type="submit">จองห้อง</button>
+                                                {% if user.is_authenticated %}
+                                                    <button class="text-detail reserve-room-button" id="reserve-room-button" type="submit">จองห้อง</button>
+                                                {% else %}
+                                                    <button class="text-detail reserve-room-button" id="disable-reserve-room-button" type="button">จองห้อง</button>
+                                                {% endif %}
                                             </div>
                                         </div>
     

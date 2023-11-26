@@ -66,6 +66,12 @@ $(document).ready(function () {
             }
         }); */
     }); 
+
+    /* hide show password */
+    $("body").on('click', '#disable-reserve-room-button', function() {
+        alert('กรุณาเข้าสู่ระบบก่อนจองห้อง');
+    });
+
     get_room_detail();
     date_cal();
     var urlParams = new URLSearchParams(window.location.search);

@@ -305,7 +305,7 @@ function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
                 
                 //console.log(data);
 
-                console.log("check1");
+                console.log("check1" + data.identification_number + id_number);
                 /* console.log(!(document.getElementById("id_number").parentElement.classList.contains('error'))); */
                 if (data.identification_number == id_number && !(document.getElementById("id_number").parentElement.classList.contains('error'))) {        // check if important data is duplicate with the existing data in database
                     setError($('#id_number'), 'รหัสบัตรประชาชนซ้ำกับข้อมูลในระบบ');
@@ -316,7 +316,7 @@ function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
                     setSuccess($('#id_number'));
                 } */
                 
-                console.log('check2');
+                console.log('check2' + data.email + emailValue);
                 /* console.log(!(document.getElementById("email").parentElement.classList.contains('error'))); */
                 if (data.email == emailValue && !(document.getElementById("email").parentElement.classList.contains('error'))){
                     setError($('#email'), 'อีเมลซ้ำกับข้อมูลในระบบ');
@@ -327,19 +327,30 @@ function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
                     setSuccess($('#email'));
                 } */
                 
-                console.log('check3');
+                /* console.log('check3' + data.username + user_name); */
                 /* console.log(!(document.getElementById("user_name").parentElement.classList.contains('error'))); */
-                if (data.username == user_name && !(document.getElementById("user_name").parentElement.classList.contains('error'))) {
+                /* if (data.username == user_name && !(document.getElementById("user_name").parentElement.classList.contains('error'))) {
                     setError($('#user_name'), 'ชื่อผู้ใช้ซ้ำกับข้อมูลในระบบ');
                     console.log('error3');
                     flag = 0;
-                }
+                } */
                 /* else {
                     setSuccess($('#user_name'));
                 } */
 
             };
 
+            for(let i = 0; i < all_data.username_list.length; i++) {
+                let data = all_data.username_list[i];
+                console.log('check3' + data.username + user_name);
+                if (data.username == user_name && !(document.getElementById("user_name").parentElement.classList.contains('error'))) {
+                    setError($('#user_name'), 'ชื่อผู้ใช้ซ้ำกับข้อมูลในระบบ');
+                    console.log('error3');
+                    flag = 0;
+                }
+            };
+
+            
             if (flag === 0) { //guard clause: if the error happen, don't run the code below
                 return false;
             }

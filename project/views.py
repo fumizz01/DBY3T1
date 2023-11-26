@@ -62,17 +62,23 @@ def reserve(request):
 def em_login(request):
     print(request.POST)
     if request.POST:
+        
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            print("Login successful")
-            return redirect('employee_room_status')
-        else:
-            messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
-            print("Login failed")
-            return redirect('em_login')
+        
+        u = User.objects.get(username=username)
+        print(u.profile.role)
+        if u.profile.role == 'employee':
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print("Login successful")
+                return redirect('employee_room_status')
+            
+        
+        messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
+        print("Login failed")
+        return redirect('em_login')
     else:
         return render(request, 'em_login.html', {})
 
@@ -151,23 +157,25 @@ def change_password(request):
 #-----------------------------GET-----------------------------------#
 class CustomerAccountInformationList(View):
     def get(self, request):
+        print("Get Customer Info")
         user_info = list(Customer.objects.select_related('user_code').all().values(
             'customer_id', 'user_code', 'identification_number', 'first_name', 'last_name', 'age', 'email'
             ,'phone_number', 'user_code__role'))
         
         #print(user_info)
         
-        username_info = list(User.objects.all().values())
+        username_info = list(User.objects.all().values('username'))
         
         data = dict()
         data['user_info'] = user_info
         
-        for i, line_item in enumerate(data['user_info']):
-            line_item['username'] = username_info[i]['username']
-            
-        print("OH YEAH")
+        """ for i, line_item in enumerate(data['user_info']):
+            line_item['username'] = username_info[i]['username'] """
         
-        #print(data)
+        data['username_list'] = username_info
+            
+        
+        print(data)
         return JsonResponse(data)   
     
 class UsernameList(View):
@@ -410,11 +418,11 @@ class CustomerRegister(View):
     @transaction.atomic
     def post(self, request):
         if (not request.POST):
-            print("Da fuk?!?!? No request.POST")
+            print("Go to register page")
             form = UserCreationForm()
             return render(request, 'register_user.html', {'form': form})
         
-        print("Running Register")
+        print("Registering.....")
         if Customer.objects.count() != 0:        
             customer_id_max = Customer.objects.aggregate(Max('customer_id'))['customer_id__max']   
             print(customer_id_max)
@@ -526,19 +534,28 @@ class CustomerRegister(View):
 
 
 def login_user(request):
-    print(request.POST)
+    #print(request.POST)
+    print("Enter login page")
     if request.POST:
+        print("Loging in....")
+
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            print("Login successful")
-            return redirect('home')
-        else:
-            messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
-            print("Login failed")
-            return redirect('login')
+        
+        u = User.objects.get(username=username)
+        print(u.profile.role)
+        if u.profile.role == 'customer':
+        
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print("Login successful")
+                return redirect('home')
+        
+        messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
+        print("Login failed")
+        return redirect('login')
+    
     else:
         return render(request, 'login.html', {})
     
