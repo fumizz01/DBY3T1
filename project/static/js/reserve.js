@@ -1,7 +1,58 @@
 $(document).ready(function () {
-    $("#reserve-room-button").click(function() {
+    /* $("#reserve-room-button").click(function() {
         checkRoomNumber();
-      });
+      }); */
+
+    document.getElementById('create_reserve').addEventListener('submit', function(event) { 
+        var urlParams = new URLSearchParams(window.location.search);
+        var adult = urlParams.get('adult');
+
+        var number_room_2 = parseInt(document.getElementById("2bed-number-available").innerText);
+
+        var number_room_1 = parseInt(document.getElementById("1bed-number-available").innerText);
+
+        var number_adult = Number(adult);
+    
+        // คำนวณจำนวนห้องทั้งหมด
+        var total_room = number_room_2 + number_room_1;
+        var total_number_adult = number_adult / total_room;
+        console.log(total_room)
+    
+        // ตรวจสอบว่าจำนวนห้องทั้งหมดมากกว่าเท่ากับ 1 หรือน้อยกว่าเท่ากับ 2
+        if (total_number_adult >= 1 && total_number_adult <= 2) {
+            // แสดงข้อความว่า "จำนวนห้องเพียงพอ"
+            alert("จำนวนห้องเพียงพอ");
+        } else if (total_number_adult < 1) {
+        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
+            alert("จำนวนห้องมากกว่าจำนวนคน");
+            event.preventDefault();
+        }
+        else {
+            alert("จำนวนห้องไม่เพียงพอ");
+            event.preventDefault();
+        }
+        /* event.preventDefault();
+        var data = new FormData(this);
+        $.ajax({
+            type: "POST",
+            url: "/reserve/create",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                if (data.status == 200) {
+                    alert(data.message);
+                    window.location.href = "/my-reserve";
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function(data) {
+                console.log('Error:', data);
+            }
+        }); */
+    }); 
     get_room_detail();
     date_cal();
     var urlParams = new URLSearchParams(window.location.search);
@@ -59,6 +110,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('reserve-value-adult').innerText  = adult;
     document.getElementById('reserve-value-child').innerText  = child;
 
+    document.getElementById('reserve-value-child').innerText  = child;
+
+    document.getElementById('input-checkin').value = month_in + '/' + day_in + '/' + year_in;
+    document.getElementById('input-checkout').value = month_out + '/' + day_out + '/' + year_out;
+
     console.log('Check-in Date:', typeof checkinDate);
     console.log('Check-out Date:', checkoutDate);
     console.log('Adult:', adult);
@@ -79,6 +135,7 @@ function TwoUpdateValue(elementId, increment) {
         // Update the number_room_2 variable
         MyElement.innerHTML = newValue;
         document.getElementById("2number-room").innerHTML = Number(newValue);
+        document.getElementById("input-2number-room").value = newValue;
         return newValue;
     }
     console.log(Number(MyElement.innerHTML))
@@ -98,13 +155,14 @@ function OneUpdateValue(elementId, increment) {
         // Update the number_room_1 variable
         re_room_count();
         document.getElementById("1number-room").innerHTML = Number(newValue);
+        document.getElementById("input-1number-room").value = newValue;
         return newValue;
     }
     console.log(Number(newValue))
 
 }
 
-function checkRoomNumber() {
+/* function checkRoomNumber() {
     var urlParams = new URLSearchParams(window.location.search);
     var adult = urlParams.get('adult');
 
@@ -130,7 +188,7 @@ function checkRoomNumber() {
     else {
         alert("จำนวนห้องไม่เพียงพอ");
     }
-  };
+  }; */
 function date_cal(){
     var urlParams = new URLSearchParams(window.location.search);
     var startDateString = urlParams.get('checkin');
@@ -159,8 +217,10 @@ function get_room_detail(){
         type:  'get',
         dataType:  'json',
         success: function (data) {
+            console.log(data.reservation_info);
             var single = data.reservation_info[1];
             var double = data.reservation_info[0];
+            console.log(single, double);
             console.log(single.room_type, single.room_type__room_price , single.room_type_count ,single.room_type__room_capacity_adult, single.room_type__room_capacity_child);
             console.log(double.room_type, double.room_type__room_price , double.room_type_count ,double.room_type__room_capacity_adult, single.room_type__room_capacity_child);
             var date = date_cal();
@@ -191,7 +251,9 @@ function get_room_detail(){
            
             $('#2-bed-total').html(double_total_price);
             $('#1-bed-total').html(single_total_price);
-            $('#bed-total').html(single_total_price+double_total_price);
+            var total_price = single_total_price+double_total_price;
+            $('#bed-total').html(total_price);
+            $('#input-total_price').val(total_price);
         },
     });
 }

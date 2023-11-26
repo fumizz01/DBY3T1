@@ -184,11 +184,13 @@ class ReservationInfo(View):
     
     def get(self, request):
         
-        reservation_info = list(Room.objects.select_related('room_type').filter(status='available').values('room_type' ,'room_type__room_price', 'room_type__room_capacity_adult', 'room_type__room_capacity_child').annotate(room_type_count=Count("room_type")))
+        reservation_info = list(Room.objects.select_related('room_type').values('room_type' ,'room_type__room_price', 'room_type__room_capacity_adult', 'room_type__room_capacity_child').distinct())
         #print(reservation_info)
-        
         data = dict()
         data['reservation_info'] = reservation_info
+        for res in data['reservation_info']:
+            res['room_type_count'] = Room.objects.filter(status='available', room_type=res['room_type']).count()
+            
         print(data['reservation_info'])
         return JsonResponse(data)
     
@@ -317,6 +319,93 @@ class RoomStatusInfo(View):
         """
         
 #-----------------------------POST-----------------------------------#
+class CreateReserve(View):
+    @transaction.atomic
+    def post(self, request):
+        
+        if Reservation.objects.count() != 0:        
+            reservation_id_max = Reservation.objects.aggregate(Max('reservation_id'))['reservation_id__max']   
+            print(reservation_id_max)
+            reservation_id_temp = [re.findall(r'\d+', reservation_id_max)[0]][0]   
+            next_reservation_id = str(int(reservation_id_temp)+1) + "CS"
+            next_reservation_id = next_reservation_id.rjust(8, '0')
+            #print(reservation_id_temp)
+        else:
+            next_reservation_id = "000000RS"
+        
+        field_name = 'customer_id'
+        field_object = Customer._meta.get_field(field_name)
+        customer_id = Customer.objects.get(user_code=request.user.profile.user_code)
+        customer_id = getattr(customer_id, field_object.attname)
+        
+        
+        # reservation #
+        request.POST = request.POST.copy()
+        request.POST['reservation_id'] = next_reservation_id
+        request.POST['customer_id'] = customer_id
+        request.POST['status'] = 'not paid'
+        
+        data = dict()
+        
+        form_reservation = ReservationForm(request.POST)
+        if form_reservation.is_valid():
+            reservation = form_reservation.save()
+            
+            total_rooms = int(request.POST['num_single_room']) + int(request.POST['num_double_room'])
+            available_rooms = list()
+            
+            available_single_room = Room.objects.filter(status='available', room_type='single bed').order_by('room_number')
+            print(available_single_room)
+            with transaction.atomic():
+                for _ in range(int(request.POST['num_single_room'])):
+                    print(available_single_room[0].room_number)
+                    available_rooms.append(available_single_room[0].room_number)
+                    Room.objects.filter(room_number=available_single_room[0].room_number).update(status='unavailable')
+                    #available_single_room[i].status = "unavailable"
+                    #available_single_room[i].save()
+                    #Room.objects.bulk_update(available_single_room, ["status"])
+            
+            available_double_room = Room.objects.filter(status='available', room_type='double bed').order_by('room_number')
+            print(available_double_room)
+            with transaction.atomic():   
+                for _ in range(int(request.POST['num_double_room'])):
+                    print(available_double_room[0].room_number)
+                    available_rooms.append(available_double_room[0].room_number)
+                    Room.objects.filter(room_number=available_double_room[0].room_number).update(status='unavailable')
+                    
+                    #available_double_room[i].status = "unavailable"
+                    #available_double_room[i].save()
+                    #Room.objects.bulk_update(available_double_room, ["status"])
+                
+            # reservation line item #
+            for i in range(total_rooms):
+                lineitem = dict()
+                lineitem['reservation_id'] = next_reservation_id
+                lineitem['item_no'] = i + 1
+                lineitem['room_number'] = available_rooms[i]
+                
+                formlineitem = ReservationLineItemForm(lineitem)
+                
+                try:
+                    formlineitem.save()
+                    pass
+                except :
+                    # Check something error to show and rollback transaction both invoice and invoice_line_item table
+                    data['error'] = formlineitem.errors
+                    print (formlineitem.errors)
+                    transaction.set_rollback(True)
+                    return JsonResponse(data)
+            
+        else:
+            data['error'] = form_reservation.errors
+            print (form_reservation.errors)
+            return JsonResponse(data)
+        
+        print(request.POST)
+        return redirect('my_reserve')
+        
+        
+
 class CustomerRegister(View):
     @transaction.atomic
     def post(self, request):
@@ -385,7 +474,7 @@ class CustomerRegister(View):
             
             user = authenticate(username=username, password=password)
             login(request, user)
-            print('yay'*50)
+            print("User Created Success")
             
         else:
             # if invoice from is not valid return error message
@@ -402,6 +491,7 @@ class CustomerRegister(View):
             profile.user = user
             
             profile.save()
+            print("Profile Created Success")
         else :
             # Check something error to show and rollback transaction both invoice and invoice_line_item table
             data['error'] = form_profile.errors
@@ -414,7 +504,7 @@ class CustomerRegister(View):
         if form.is_valid():
             print("Customer successfully")
             customer = form.save()
-        
+            
         else:
             data['error'] = form.errors
             print (form.errors)
@@ -429,6 +519,7 @@ class CustomerRegister(View):
         #data['account'] = model_to_dict(customer)
         #data['profile'] = model_to_dict(profile)
         
+        print("User Created Successfully without problems")
         
         return JsonResponse(data)
         

@@ -23,12 +23,7 @@ urlpatterns = [
     path('', views.home,name='to_home'),
     path('home', views.index, name='home'),
     path('register', views.register, name='register'),
-    path('login', views.login_user, name='login'),
-    path('logout', views.logout_user, name='logout'),
     path('reserve', views.reserve, name='reserve'),
-    path('em/login',views.em_login, name='em_login'),
-    path('em/logout',views.em_logout, name='em_logout'),
-    path('em/register',views.em_register, name='employee_register'),
     path('em/reserve',views.em_reserve, name='employee_reserve'),
     path('my-reserve',views.my_reserve, name='my_reserve'),
     path('em/room-status',views.em_room_status, name='employee_room_status'),
@@ -44,6 +39,12 @@ urlpatterns = [
     #post
     #path('customer/register',views.register_user, name='register_user'),
     path('customer/register',views.CustomerRegister.as_view(), name='customer_register'),
+    path('login', views.login_user, name='login'),
+    path('logout', views.logout_user, name='logout'),
+    path('em/register',views.em_register, name='employee_register'),
+    path('em/login',views.em_login, name='em_login'),
+    path('em/logout',views.em_logout, name='em_logout'),
+    path('create/reserve',views.CreateReserve.as_view(), name='create_reserve'),
     #path('customer/login',views.login_customer, name='login_customer'),
     
     path('change-password',views.change_password, name='change_password')
