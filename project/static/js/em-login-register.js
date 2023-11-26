@@ -65,21 +65,14 @@ $(document).ready(function () {
     $( "#register-form" ).on( "submit", function(event) {
         event.preventDefault();
 
-        const firstValue = $('#firstname').val();
-        const lastnameValue = $('#lastname').val();
-        const dateValue = $('#birthday').val();
-        const tel = $('#tel').val();
-        const id_number = $('#id_number').val();
-        
-        const emailValue = $('#email').val();
         const user_name = $('#user_name').val();
         const passwordValue = $('#register-password').val();
         const password2Value = $('#password_confirm').val();
 
-        if (!validateInputs(firstValue, lastnameValue, dateValue, tel, id_number, emailValue, user_name, passwordValue, password2Value)) {
+        if (!validateInputs(user_name, passwordValue, password2Value)) {
             return
         } 
-        validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name)
+        validateDuplicateDataAndSubmitForm(user_name)
     });
 
 /*     $( "#login-form" ).on( "submit", function(event) {
@@ -188,76 +181,13 @@ function setSuccess(element) {
     inputControl.addClass('pass').removeClass('error');
 }
 
-function isValidEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
 function isNumber(value) {
     return !isNaN(value) && typeof value === 'number';
 }
 
-function validateInputs(firstValue, lastnameValue, dateValue, tel, id_number, emailValue, user_name, passwordValue, password2Value) {
+function validateInputs(user_name, passwordValue, password2Value) {
     var total = 0
     
-    if(firstValue === '') {
-        setError($('#firstname'), 'กรุณาระบุชื่อ');
-    } else {
-        setSuccess($('#firstname'));
-        total +=1;
-    }
-    
-    if(lastnameValue === '') {
-        setError($('#lastname'), 'กรุณาระบุนามสกุล');
-    } else {
-        setSuccess($('#lastname'));
-        total +=1;
-    }
-    
-    if(dateValue === '') {
-        setError($('#birthday'), 'กรุณาระบุวันเกิด');
-    } else {
-        setSuccess($('#birthday'));
-        total +=1;
-    }
-    
-    if(tel === '') {
-        setError($('#tel'), 'กรุณาระบุเบอร์โทร');
-    }  
-    else if (!isNumber(Number(tel))){
-        setError($('#tel'), 'กรุณากรอกเฉพาะตัวเลข');
-    } 
-    else if (tel.length < 8) {
-        setError($('#tel'), 'must be at least 10 characters');
-    }
-    else {
-        setSuccess($('#tel'));
-        total +=1;
-    }
-    
-    if(id_number === '') {
-        setError($('#id_number'), 'กรุณาระบุรหัสบัตรประชาชน');
-    }  
-    else if (!isNumber(Number(id_number))){
-        setError($('#id_number'), 'กรุณากรอกเฉพาะตัวเลข');
-    }
-    else if (id_number.length < 8) {
-        setError($('#id_number'), 'must be at least 13 characters');
-    }
-    else {
-        setSuccess($('#id_number'));
-        total +=1;
-    }
-    
-    if(emailValue === '') {
-        setError($('#email'), 'กรุณาระบุอีเมลล์');
-    } else if (!isValidEmail(emailValue)) {
-        setError($('#email'), 'กรุณากรอกรูปแบบ อีเมลล์ ให้ถูกต้อง');
-    } else {
-        setSuccess($('#email'));
-        total +=1;
-    }
-
     if(user_name === '') {
         setError($('#user_name'), 'กรุณาระบุชื่อผู้ใช้');
     } else {
@@ -283,7 +213,7 @@ function validateInputs(firstValue, lastnameValue, dateValue, tel, id_number, em
         total +=1;
     }
     
-    if (total == 9){
+    if (total == 3){
         return true;
     }
 };
