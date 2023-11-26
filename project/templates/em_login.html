@@ -9,36 +9,24 @@
         <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
     </head>
     <body>
-        <header class="header">  
-            <a href="#" class="header-logo">
-                <H1 class="header-logo">Hotel</H1>
-            </a>
-            <ul class="nav">
-                <!-- {% if user.is_authenticated %} -->
-                    <li><a href="#">ออกจากระบบ</a></li>
-                <!-- {% else %} -->
-                    <li><a href="{% url 'employee_login' %}">เข้าสู่ระบบ</a></li>
-                    <li><a class="register" href="{% url 'employee_register' %}">ลงทะเบียน</a></li>
-                <!-- {% endif %} -->
-            </ul>
-        </header>
+        {% include 'general_use/em_header.html' %}
         <div class="BG">
             <div class="gradient-bg"></div>
             <div class="gradient-bg item2"></div>
         </div>
         <div class = "box">
-            <form action = "{% url 'employee_login' %}" method="post">
+            <form action = "{% url 'em_login' %}" method="post">
                 {%csrf_token %} 
                 <div id="login-container" class = "login-container">
-                    <h2>เข้าสู่ระบบ</h2>
+                    <h2>เข้าสู่ระบบ พนักงาน</h2>
                     <p>ชื่อผู้ใช้</p>
                     <i class='bx bxs-user-circle icon'></i>
-                    <input class="input-field" id = "login-user"  name = "login-user" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
+                    <input class="input-field" id = "login-user"  name = "username" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
                     <p>รหัสผ่าน</p>
                     <i class='bx bxs-lock icon'></i>
-                    <input class="input-field password" id = "login-password"  name = "login-password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
+                    <input class="input-field password" id = "login-password"  name = "password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
                         maxlength="15" required>
-                    <i class="bx bx-hide eye-icon "></i>
+                        <i class="bx bx-hide eye-icon password-validation"></i>
                     <input id = "login-button" class='submit' type="submit" value="ยันยืน">
                 </div>
             </form>

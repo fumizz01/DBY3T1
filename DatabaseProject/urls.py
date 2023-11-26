@@ -26,7 +26,8 @@ urlpatterns = [
     path('login', views.login_user, name='login'),
     path('logout', views.logout_user, name='logout'),
     path('reserve', views.reserve, name='reserve'),
-    path('em',views.em_login, name='employee_login'),
+    path('em/login',views.em_login, name='em_login'),
+    path('em/logout',views.em_logout, name='em_logout'),
     path('em/register',views.em_register, name='employee_register'),
     path('em/reserve',views.em_reserve, name='employee_reserve'),
     path('my-reserve',views.my_reserve, name='my_reserve'),
@@ -36,6 +37,7 @@ urlpatterns = [
     path('customer/list',views.CustomerAccountInformationList.as_view(), name='customer_info'),
     path('reservation/price',views.ReservationInfo.as_view(), name='reservation_price'),
     path('room/status',views.RoomStatusInfo.as_view(), name='room_status'),
+    path('username/list',views.UsernameList.as_view(), name='username_list'),
     #path('reservation/list',views.ReservationList.as_view(), name='reservation_list'),
     
     

@@ -2,16 +2,25 @@
 <header class="header">  
     <H1 class="header-logo">Hotel</H1>
     <ul class="nav">
-        <li>
+
+         {% if user.is_authenticated %}
+         <li>
             <a href="{% url 'employee_room_status' %}">สถานะการจอง</a>
         </li>
         <li>
             <a href="{% url 'employee_reserve' %}">การจอง</a>
         </li>
-        <li>
+         <li><a href="{% url 'em_logout' %}">ออกจากระบบ</a></li>
+
+         {% else %}
+             <li><a href="{% url 'em_login' %}">เข้าสู่ระบบ</a></li>
+             <li><a class="register" href="{% url 'employee_register' %}">ลงทะเบียน</a></li>
+         {% endif %}
+
+       <!--  <li>
             <i class='bx bxs-user icon'></i>
             <a href="#">User</a>
-        </li>
+        </li> -->
     </ul>
 </header>
 

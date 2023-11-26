@@ -9,20 +9,7 @@
         <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
     </head>
     <body>
-        <header class="header">  
-            <a href="#" class="header-logo">
-                <H1 class="header-logo">Hotel</H1>
-            </a>
-            <ul class="nav">
-                <!-- {% if user.is_authenticated %} -->
-                <!--<li><a href="change_password">เปลี่ยนรหัสผ่าน</a></li>-->
-                    <li><a href="#">ออกจากระบบ</a></li>
-                <!-- {% else %} -->
-                    <li><a href="{% url 'employee_login' %}">เข้าสู่ระบบ</a></li>
-                    <li><a class="register" href="{% url 'employee_register' %}">ลงทะเบียน</a></li>
-                <!-- {% endif %} -->
-            </ul>
-        </header>
+        {% include 'general_use/em_header.html' %}
         <div class="BG">
             <div class="gradient-bg"></div>
             <div class="gradient-bg item2"></div>
@@ -31,7 +18,7 @@
             <form id="register-form">
                 {%csrf_token %} 
                 <div class = "register-container">
-                    <h2 class="head">สมัครสมาชิก</h2>
+                    <h2 class="head">สมัครสมาชิก พนักงาน</h2>
                     <div>
                         <label for="user_name">ชื่อผู้ใช้</label>
                         <input class="input-field" id = "user_name" name = "username" type = "text" placeholder="ชื่อผู้ใช้"  maxlength="50" >

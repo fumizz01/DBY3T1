@@ -60,12 +60,81 @@ def reserve(request):
     return render(request, 'reserve.html')
 
 def em_login(request):
+    print(request.POST)
     if request.POST:
-        return HttpResponseRedirect(reverse('employee_reserve'))
-    return render(request, 'em_login.html')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print("Login successful")
+            return redirect('employee_room_status')
+        else:
+            messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
+            print("Login failed")
+            return redirect('em_login')
+    else:
+        return render(request, 'em_login.html', {})
+
+def em_logout(request):
+    logout(request)
+    return redirect('em_login')
 
 def em_register(request):
-    return render(request, 'em_register.html')
+    if not request.POST:
+        return render(request, 'em_register.html')
+    
+    if Profile.objects.count() != 0:        
+            user_code_max = Profile.objects.aggregate(Max('user_code'))['user_code__max']   
+            user_code_temp = [re.findall(r'\d+', user_code_max)[0]][0]   
+            next_user_code = str(int(user_code_temp)+1) + "UA"
+            next_user_code = next_user_code.rjust(8, '0')
+            #print(user_code_temp)
+    else:
+        next_user_code = "000000UA"
+    
+    print(request.POST)
+    
+    request.POST = request.POST.copy()
+    request.POST['user_code'] = next_user_code
+    request.POST['role'] = 'employee'
+    data = dict()
+    
+    form_user = UserCreationForm(request.POST)
+    form_profile = ProfileForm(request.POST)
+    
+    if form_user.is_valid() and form_profile.is_valid():
+        user = form_user.save()
+        username = form_user.cleaned_data['username']
+        password = form_user.cleaned_data['password1']
+        
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        
+        user = form_user.save()
+        username = form_user.cleaned_data['username']
+        password = form_user.cleaned_data['password1']
+        
+        user = authenticate(username=username, password=password)
+        login(request, user)
+    
+        profile = form_profile.save(commit=False)
+        profile.user = user
+        profile.save()
+    else:
+        
+        if form_profile.errors:
+            print('profile')
+            data['error'] = form_user.errors
+        else:
+            print('user')
+            data['error'] = form_profile.errors
+        
+        print("Empoyee register failed")
+        return JsonResponse(data)
+    
+    print("Empoyee register successful")
+    return redirect('employee_room_status')
 
 def em_reserve(request):
     return render(request, 'em_reserve.html')
@@ -100,6 +169,16 @@ class CustomerAccountInformationList(View):
         
         #print(data)
         return JsonResponse(data)   
+    
+class UsernameList(View):
+    def get(self, request):
+        username_list = list(User.objects.select_related('profile').all().values('username', 'profile__user_code'))
+        
+        print(username_list)
+        
+        data = dict()
+        data['username_list'] = username_list
+        return JsonResponse(data)  
     
 class ReservationInfo(View):
     

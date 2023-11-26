@@ -95,12 +95,6 @@ $(document).ready(function () {
             
     }); */
     
-    $("#birthday").change(function() {
-        var date = new Date($('#birthday').val());
-        var age = calculateAge(date);
-        $('#age').val(age);
-     });
-    
 });
 
 
@@ -219,49 +213,25 @@ function validateInputs(user_name, passwordValue, password2Value) {
 };
 
 /* validate Input */
-function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
+function validateDuplicateDataAndSubmitForm(user_name) {
 
     
     $.ajax({                                        // call backend /customer/list
-        url:  '/customer/list',
+        url:  '/username/list',
         type:  'get',
         dataType:  'json',
         success: function  (all_data) {
             var flag = 1;
             console.log(all_data);
-            //console.log(all_data.user_info.length);
-            for(let i = 0; i < all_data.user_info.length; i++) {
-                let data = all_data.user_info[i];
+            //console.log(all_data.username_list.length);
+            for(let i = 0; i < all_data.username_list.length; i++) {
+                let data = all_data.username_list[i];
                 
-                //console.log(data);
-
-                console.log("check1");
-                /* console.log(!(document.getElementById("id_number").parentElement.classList.contains('error'))); */
-                if (data.identification_number == id_number && !(document.getElementById("id_number").parentElement.classList.contains('error'))) {        // check if important data is duplicate with the existing data in database
-                    setError($('#id_number'), 'รหัสบัตรประชาชนซ้ำกับข้อมูลในระบบ');
-                    console.log('error1');
-                    flag = 0;
-                } 
-                /* else {
-                    setSuccess($('#id_number'));
-                } */
-                
-                console.log('check2');
-                /* console.log(!(document.getElementById("email").parentElement.classList.contains('error'))); */
-                if (data.email == emailValue && !(document.getElementById("email").parentElement.classList.contains('error'))){
-                    setError($('#email'), 'อีเมลซ้ำกับข้อมูลในระบบ');
-                    console.log('error2');
-                    flag = 0;
-                }
-                /* else {
-                    setSuccess($('#email'));
-                } */
-                
-                console.log('check3');
+                console.log('check employee username');
                 /* console.log(!(document.getElementById("user_name").parentElement.classList.contains('error'))); */
                 if (data.username == user_name && !(document.getElementById("user_name").parentElement.classList.contains('error'))) {
                     setError($('#user_name'), 'ชื่อผู้ใช้ซ้ำกับข้อมูลในระบบ');
-                    console.log('error3');
+                    console.log('error');
                     flag = 0;
                 }
                 /* else {
@@ -278,7 +248,7 @@ function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
             
             $.ajax({
                 type: 'POST',
-                url: 'customer/register', // Replace with your server endpoint URL
+                url: '/em/register', // Replace with your server endpoint URL
                 data: formData,
                 success: function (response) {
                     if (response.error) {                               // if backend return error message, log it
@@ -287,7 +257,7 @@ function validateDuplicateDataAndSubmitForm(id_number, emailValue, user_name) {
                     } else {
                         console.log(response);
                         alert('Register successfully! Redirecting...');
-                        window.location.href = '/home'; // Replace with the URL you want to redirect to
+                        window.location.href = '/em/room-status'; // Replace with the URL you want to redirect to
                     }                    
                 },
             });
@@ -316,18 +286,3 @@ function updateFlagTrue() {
 function updateFlagFalse() {
     result = false
 }
-
-function calculateAge(date) 
-{
-  const now = new Date();
-  const diff = Math.abs(now - date);
-  const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
-  return age
-};
-
-document.addEventListener('DOMContentLoaded', function () {
-    var birthdayInput = document.getElementById('birthday');
-    var currentDate = new Date().toISOString().split('T')[0];
-
-    birthdayInput.setAttribute('max', currentDate);
-});
