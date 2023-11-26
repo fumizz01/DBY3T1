@@ -113,14 +113,63 @@ class ReservationInfo(View):
         print(data['reservation_info'])
         return JsonResponse(data)
     
+""" 
 class RoomStatusInfo(View):
     def get(self, request):
-        room_status_info = list(Room.objects.select_related('').filter(status='available').values('room_type','room_type__room_price').annotate(room_type_count=Count("room_type")))
+        room_status_info = list(Room.objects.select_related(
+            'room_type', 'room_number')
+                                .all()
+                                .values('room_number', 'room_number__room_number'))
         #print(room_status_info)
         
         data = dict()
         data['room_status_info'] = room_status_info
         print(data['room_status_info'])
+        return JsonResponse(data)
+ """
+    
+    
+class RoomStatusInfo(View):
+    def get(self, request):
+        room_status_info = list(ReservationLineItem.objects.select_related(
+            'reservation_id', 'reservation_id__customer_id', 
+            'room_number', 'room_number__room_type').all()
+                                .values('room_number', 'reservation_id__check_in', 'reservation_id__check_out', 
+                                        'room_number__room_type__room_price', 'reservation_id__customer_id', 
+                                        'reservation_id__status').order_by('room_number'))
+        
+        room_no_info = list(Room.objects.all().values('room_number').order_by('room_number'))
+        #print(room_status_info)
+        
+        data = dict()
+        data['room_status'] = room_no_info
+        
+        if not room_status_info:
+            for item in (data['room_status']):
+                item['check_in'] = ''
+                item['check_out'] = ''
+                item['room_price'] = ''
+                item['customer_id'] = ''
+                item['status'] = '' 
+            return JsonResponse(data)
+        
+        i = 0
+        for item in (data['room_status']):
+            if item['room_number'] == room_status_info[i]['room_numer']:
+                item['check_in'] = room_status_info[i]['reservation_id__check_in']
+                item['check_out'] = room_status_info[i]['reservation_id__check_out']
+                item['room_price'] = room_status_info[i]['room_number__room_type__room_price']
+                item['customer_id'] = room_status_info[i]['reservation_id__customer_id']
+                item['status'] = room_status_info[i]['reservation_id__status']
+            else:
+                item['check_in'] = ''
+                item['check_out'] = ''
+                item['room_price'] = ''
+                item['customer_id'] = ''
+                item['status'] = ''     
+            i += 1
+            
+        print(data['room_status'])
         return JsonResponse(data)
 
 """class CustomerRegister(View):
