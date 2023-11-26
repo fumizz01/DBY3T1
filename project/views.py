@@ -105,7 +105,7 @@ class ReservationInfo(View):
     
     def get(self, request):
         
-        reservation_info = list(Room.objects.select_related('room_type').filter(status='available').values('room_type','room_type__room_price').annotate(room_type_count=Count("room_type")))
+        reservation_info = list(Room.objects.select_related('room_type').filter(status='available').values('room_type' ,'room_type__room_price', 'room_type__room_capacity_adult', 'room_type__room_capacity_child').annotate(room_type_count=Count("room_type")))
         #print(reservation_info)
         
         data = dict()
