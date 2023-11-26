@@ -6,28 +6,41 @@ $(document).ready(function () {
     document.getElementById('create_reserve').addEventListener('submit', function(event) { 
         var urlParams = new URLSearchParams(window.location.search);
         var adult = urlParams.get('adult');
+        var child = urlParams.get('child');
 
-        var number_room_2 = parseInt(document.getElementById("2bed-number-available").innerText);
-
-        var number_room_1 = parseInt(document.getElementById("1bed-number-available").innerText);
+        var number_room_2 = parseInt(document.getElementById("2selected-Room-Count").innerText);
+        var number_room_1 = parseInt(document.getElementById("1selected-Room-Count").innerText);
 
         var number_adult = Number(adult);
+        var number_child = Number(child);
     
         // คำนวณจำนวนห้องทั้งหมด
         var total_room = number_room_2 + number_room_1;
         var total_number_adult = number_adult / total_room;
-        console.log(total_room)
+        var total_number_child = number_child / total_room;
+        console.log(total_number_adult, total_number_child)
     
         // ตรวจสอบว่าจำนวนห้องทั้งหมดมากกว่าเท่ากับ 1 หรือน้อยกว่าเท่ากับ 2
-        if (total_number_adult >= 1 && total_number_adult <= 2) {
+        if ((total_number_adult >= 1 && total_number_adult <= 2) && total_number_child <= 2) {
             // แสดงข้อความว่า "จำนวนห้องเพียงพอ"
             alert("จำนวนห้องเพียงพอ");
-        } else if (total_number_adult < 1) {
+        } else if (total_number_adult < 1 && (total_number_child >= 1 && total_number_child <= 2)) {
         // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
-            alert("จำนวนห้องมากกว่าจำนวนคน");
+            alert("จำนวนห้องมากกว่าจำนวนคน(ผู้ใหญ่)");
             event.preventDefault();
-        }
-        else {
+        } else if (total_number_adult < 1 && total_number_child < 2) {
+        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
+            alert("จำนวนห้องมากกว่าจำนวนคน(ผู้ใหญ่)");
+            event.preventDefault();
+        } else if (total_number_adult < 1 && total_number_child > 2) {
+        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
+            alert("เด็กอายุต่ำกว่า 18 ปี จำเป็นต้องมีผู้ใหญ่อยู่ด้วยอย่างน้อย 1 คน");
+            event.preventDefault();
+        } else if ((total_number_adult >= 1 && total_number_adult <= 2) && total_number_child > 1) {
+        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
+            alert("จำนวนเด็กเกินกว่าความจุของห้อง");
+            event.preventDefault();
+        } else {
             alert("จำนวนห้องไม่เพียงพอ");
             event.preventDefault();
         }
@@ -123,13 +136,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function TwoUpdateValue(elementId, increment) {
+    get_room_detail();
+    var availableRooms = parseInt($("#2-number-available-room").text());
     let MyElement = document.getElementById(elementId);
     let min = parseInt(MyElement.getAttribute("min"));
-    let max = parseInt(MyElement.getAttribute("max"));
+    let max = Number(availableRooms);
     let val = parseInt(MyElement.innerHTML);
     let newValue = 0;
     newValue = val + increment;
-    get_room_detail();
 
     if (newValue >= min && newValue <= max) {
         // Update the number_room_2 variable
@@ -138,37 +152,37 @@ function TwoUpdateValue(elementId, increment) {
         document.getElementById("input-2number-room").value = newValue;
         return newValue;
     }
-    console.log(Number(MyElement.innerHTML))
+    console.log(min,max)
 }
 
 function OneUpdateValue(elementId, increment) {
+    get_room_detail();
+    var availableRooms = parseInt($("#1-number-available-room").text());
     let MyElement = document.getElementById(elementId);
     let min = parseInt(MyElement.getAttribute("min"));
-    let max = parseInt(MyElement.getAttribute("max"));
+    let max = Number(availableRooms)
     let val = parseInt(MyElement.innerHTML);
     let newValue = 0;
     newValue = val + increment;
-    get_room_detail();
 
     if (newValue >= min && newValue <= max) {
         MyElement.innerHTML = newValue;
         // Update the number_room_1 variable
-        re_room_count();
         document.getElementById("1number-room").innerHTML = Number(newValue);
         document.getElementById("input-1number-room").value = newValue;
+        re_room_count();
         return newValue;
     }
-    console.log(Number(newValue))
-
+    console.log(min,max)
 }
 
 /* function checkRoomNumber() {
     var urlParams = new URLSearchParams(window.location.search);
     var adult = urlParams.get('adult');
 
-    var number_room_2 = parseInt(document.getElementById("2bed-number-available").innerText);
+    var number_room_2 = parseInt(document.getElementById("2selected-Room-Count").innerText);
 
-    var number_room_1 = parseInt(document.getElementById("1bed-number-available").innerText);
+    var number_room_1 = parseInt(document.getElementById("1selected-Room-Count").innerText);
 
     var number_adult = Number(adult);
   
@@ -238,8 +252,8 @@ function get_room_detail(){
             $('#2-number-available-room').html(double.room_type_count);
 
             //room_count 
-            var single_room_count = parseInt(document.getElementById("1bed-number-available").innerText);
-            var double_room_count = parseInt(document.getElementById("2bed-number-available").innerText);
+            var single_room_count = parseInt(document.getElementById("1selected-Room-Count").innerText);
+            var double_room_count = parseInt(document.getElementById("2selected-Room-Count").innerText);
             console.log('sr',single_room_count);
             console.log('dr',double_room_count);
             var single_total_price = single.room_type__room_price * date *single_room_count;
@@ -259,8 +273,8 @@ function get_room_detail(){
 }
 
 function re_room_count(){
-    var single_room_count = parseInt(document.getElementById("1bed-number-available").innerText);
-    var double_room_count = parseInt(document.getElementById("2bed-number-available").innerText);
+    var single_room_count = parseInt(document.getElementById("1selected-Room-Count").innerText);
+    var double_room_count = parseInt(document.getElementById("2selected-Room-Count").innerText);
     console.log('sr',single_room_count);
 };
 
