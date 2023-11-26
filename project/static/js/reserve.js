@@ -1,18 +1,14 @@
 $(document).ready(function () {
     $("#reserve-room-button").click(function() {
         checkRoomNumber();
-      });
-
-    $( "#reserve-room-button" ).on( "submit", function() {
         var urlParams = new URLSearchParams(window.location.search);
-    
-        const checkinDate = urlParams.get('checkin').val;
-        const checkoutDate = $('#firstname').val();
-        const numberRoom2 = $('#firstname').val();
-        const numberRoom1 = $('#firstname').val();
-        console.log(checkinDate)
-    });
-    
+        var checkinDate = urlParams.get('checkin');
+        var checkoutDate = urlParams.get('checkout');
+        var number_room_2 = parseInt(document.getElementById("2bed-number-available").innerText);
+        var number_room_1 = parseInt(document.getElementById("1bed-number-available").innerText);
+        console.log(checkinDate, checkoutDate, number_room_2 , number_room_1);
+        SubmitForm()
+      });
 });
 
 /* validate Input */
@@ -130,30 +126,11 @@ function checkRoomNumber() {
     }
   };
 
-var checkinDate = urlParams.get('checkin');
-var checkoutDate = urlParams.get('checkout');
-var numberRoom2 = parseInt(document.getElementById("2bed-number-available").innerText);
-var numberRoom1 = parseInt(document.getElementById("1bed-number-available").innerText);
+  function SubmitForm() {
 
-// สร้างข้อมูลที่จะส่งไปยังเซิร์ฟเวอร์
-var data = {
-  checkin: checkinDate,
-  checkout: checkoutDate,
-  numberRoom2: numberRoom2,
-  numberRoom1: numberRoom1
-};
-
-fetch('/your-api-endpoint', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
-.then(response => response.json())
-.then(data => {
-  console.log('Success:', data);
-})
-.catch((error) => {
-  console.error('Error:', error);
-});
+    $.ajax({                                        // call backend /customer/list
+        url:  '/customer/list',
+        type:  'get',
+        dataType:  'json',
+    });
+  }
