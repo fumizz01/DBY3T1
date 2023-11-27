@@ -14,6 +14,7 @@
             <div class="gradient-bg"></div>
             <div class="gradient-bg item2"></div>
         </div>
+
         <div class="content">
             <table class="table_main" id = "table_main">
                 <thead>
@@ -23,7 +24,14 @@
                         <th scope="row">วันที่ออก</th>
                         <th scope="row">ราคา</th>
                         <th scope="row">ลูกค้า</th>
-                        <th scope="row">สถานะ</th>
+                        <th scope="row">สถานะ
+                            <!-- Add a dropdown filter -->
+                            <select id="statusFilter" onchange="filter()">
+                                <option value="">All</option>
+                                <option value="unpaid">Unpaid</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </th>
                     </tr>
                     <!-- Hidden Table Row (tr) for Copy to Fill Data -->
                     {% for item in room_status %}

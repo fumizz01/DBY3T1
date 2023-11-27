@@ -14,10 +14,11 @@ body{
 
 .table_main
 {
+  width: 100%;
   border-spacing: 0;
   border-collapse: separate;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
  
   /* set center */ 
@@ -41,10 +42,7 @@ body{
   padding: 20px 40px;
 }
 
-.table_main tr:nth-child(even)
-{
-  background-color: rgba(234, 222, 222, 0.5);
-}
+
 
 .table_main tr:nth-child(even):hover
 {
@@ -127,4 +125,17 @@ td{
 /* This is just to transition when you change the viewport size. */
 * {
   transition: all 0.25s ease-in-out;
+}
+
+#statusFilter{
+  border-radius: 20px;
+  vertical-align: middle;
+  background-color: rgba(255,255,255,0.7);
+}
+
+.unpaid{
+  color: red;
+}
+.paid{
+  color: #09c372;
 }

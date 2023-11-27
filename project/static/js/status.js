@@ -1,6 +1,21 @@
 $(document).ready(function () {
+    $('.d-flex').each(function () {
+        var statusElement = $(this).find('.status');
+        if (statusElement.text().trim().toLowerCase() === 'unpaid') {
+          $(this).find('.status').addClass('unpaid');
+        }else if (statusElement.text().trim().toLowerCase() === 'paid'){
+            $(this).find('.status').addClass('paid');
+        }else{
+            $(this).addClass('cencel');
+        }
+      });
+    
+    hideRowsWithEmptyContent();
+
+
     // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
     loadData();
+
 
     function loadData() {
         // ทำ AJAX request ไปยัง endpoint ของคุณ
@@ -44,3 +59,38 @@ $(document).ready(function () {
     }
 });
 
+
+function filter() {
+    var table = document.getElementById("table_main");
+    var statusFilter = document.getElementById("statusFilter");
+    var selectedStatus = statusFilter.value.toUpperCase();
+    var tr = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < tr.length; i++) {
+        var stat = tr[i].getElementsByTagName("td")[5];
+        if (stat) {
+            var txtValue = stat.innerText;
+            if(selectedStatus === "" || txtValue.toUpperCase() === selectedStatus.toUpperCase()){
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }       
+    }
+}
+
+function hideRowsWithEmptyContent() {
+    var table = document.getElementById("table_main");
+    var tr = table.getElementsByTagName("tr");
+
+    console.log("Number of rows:", tr.length);
+
+    for (var i = 1; i < tr.length; i++) {
+        var customer = tr[i].getElementsByTagName("td")[4];
+        var text = customer.innerText.trim();
+        if (text === "") {
+            tr[i].style.display = "none";
+            console.log("Hiding row:", i);
+        }   
+    }
+}
