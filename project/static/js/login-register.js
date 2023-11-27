@@ -283,7 +283,7 @@ function validateInputs(firstValue, lastnameValue, dateValue, tel, id_number, em
         total +=1;
     }
     
-    if (total == 9){
+    if (total == (8,9)){
         return true;
     }
 };

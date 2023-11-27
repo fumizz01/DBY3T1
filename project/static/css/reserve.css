@@ -358,3 +358,8 @@ div.summary-container {
         outline: none;
     }
 }
+
+.fonttotal{
+    font-size: 30px;
+    margin-bottom: 0;
+}
