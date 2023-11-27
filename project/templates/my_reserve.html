@@ -5,7 +5,7 @@
     <title>Reserve</title>
     {% include 'general_use/general-script.html' %}
 
-    <!-- <script src="{% static 'js/em_reserve.js' %}"></script> -->
+
     <link rel='stylesheet' href="{% static 'css/my_reserve.css' %}">
 </head>
 <body>
@@ -55,4 +55,20 @@
     </div>
 
 </body>
+<script>
+    $(document).ready(function () {
+        $(".status-box").each(function () {
+            var statusElement = $(this).find("#status");
+            var statusText = statusElement.text();
+            if (statusText === "unpaid") {
+                statusElement.addClass('unpaid');
+            }else if(statusText === "paid"){
+                statusElement.addClass('paid');
+            }else {
+                (".status-box").addClass('cancle');
+            }
+        });
+    });
+</script>
+
 </html>

@@ -376,7 +376,7 @@ class CreateReserve(View):
         request.POST = request.POST.copy()
         request.POST['reservation_id'] = next_reservation_id
         request.POST['customer_id'] = customer_id
-        request.POST['status'] = 'not paid'
+        request.POST['status'] = 'unpaid'
         
         data = dict()
         

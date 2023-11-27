@@ -2,6 +2,14 @@ $(document).ready(function () {
     // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
     loadData();
 
+    $(".status-box").each(function () {
+        var statusElement = $(this).find("#status");
+        var statusText = statusElement.text();
+        if (statusText === "unpaid") {
+            statusElement.addClass('unpaid');
+        }
+    });
+
     function loadData() {
         // ทำ AJAX request ไปยัง endpoint ของคุณ
         $.ajax({
@@ -52,5 +60,7 @@ $(document).ready(function () {
         // ทำสิ่งที่คุณต้องการเมื่อคลิกปุ่ม สามารถเปิดหน้าจอจองห้องได้
         // หรือทำการ redirect ไปยังหน้าจอจองห้องของคุณ
     });
+
+
 });
 
