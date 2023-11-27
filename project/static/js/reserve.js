@@ -237,6 +237,9 @@ function get_room_detail(){
         type:  'get',
         dataType:  'json',
         success: function (data) {
+            if(data.reservation_info.length === (0,1) ){
+                console.log("กรุณา ใส่ข้อมูล room detail")
+            }
             console.log(data.reservation_info);
             var single = data.reservation_info[1];
             var double = data.reservation_info[0];
