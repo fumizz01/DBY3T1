@@ -66,19 +66,20 @@ def em_login(request):
         username = request.POST['username']
         password = request.POST['password']
         
-        u = User.objects.get(username=username)
-        print(u.profile.role)
-        if u.profile.role == 'employee':
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            u = User.objects.get(username=username)
+            print(u.profile.role)
+            if u.profile.role == 'employee':
                 login(request, user)
                 print("Login successful")
                 return redirect('employee_room_status')
             
-        
         messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
         print("Login failed")
         return redirect('em_login')
+        
     else:
         return render(request, 'em_login.html', {})
 
@@ -245,7 +246,7 @@ class RoomStatusInfo(View):
                 item['room_price'] = ''
                 item['customer_id'] = ''
                 item['status'] = '' 
-            return JsonResponse(data)
+            return render(request, 'em_room_status.html', data)
         #print(max_room_number)
         i = 0
         #print(room_status_info)
@@ -567,20 +568,20 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         
-        u = User.objects.get(username=username)
-        print(u.profile.role)
-        if u.profile.role == 'customer':
-        
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            u = User.objects.get(username=username)
+            print(u.profile.role)
+            if u.profile.role == 'customer':
                 login(request, user)
                 print("Login successful")
                 return redirect('home')
-        
+            
         messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
         print("Login failed")
         return redirect('login')
-    
+        
     else:
         return render(request, 'login.html', {})
     
