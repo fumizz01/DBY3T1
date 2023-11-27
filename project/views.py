@@ -192,7 +192,7 @@ class ReservationInfo(View):
     
     def get(self, request):
         
-        reservation_info = list(Room.objects.select_related('room_type').values('room_type' ,'room_type__room_price', 'room_type__room_capacity_adult', 'room_type__room_capacity_child').distinct())
+        reservation_info = list(RoomDetail.objects.all().values('room_type' ,'room_price', 'room_capacity_adult', 'room_capacity_child').distinct())
         #print(reservation_info)
         data = dict()
         data['reservation_info'] = reservation_info
