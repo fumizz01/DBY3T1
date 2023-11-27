@@ -28,6 +28,11 @@
                         <i class="bx bx-hide eye-icon password-validation"></i>
                     <input id = "login-button" class='submit' type="submit" value="ยันยืน">
                 </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message-auth">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
             </form>
         </div>
     </body>
