@@ -241,18 +241,18 @@ function get_room_detail(){
             var single = data.reservation_info[1];
             var double = data.reservation_info[0];
             console.log(single, double);
-            console.log(single.room_type, single.room_type__room_price , single.room_type_count ,single.room_type__room_capacity_adult, single.room_type__room_capacity_child);
-            console.log(double.room_type, double.room_type__room_price , double.room_type_count ,double.room_type__room_capacity_adult, single.room_type__room_capacity_child);
+            console.log(single.room_type, single.room_price , single.room_type_count ,single.room_capacity_adult, single.room_capacity_child);
+            console.log(double.room_type, double.room_price , double.room_type_count ,double.room_capacity_adult, single.room_capacity_child);
             var date = date_cal();
             console.log("date",date);
-            $('#2bed-price').html(parseFloat(double.room_type__room_price).toFixed(2));
-            $('#1bed-price').html(parseFloat(single.room_type__room_price).toFixed(2));
+            $('#2bed-price').html(parseFloat(double.room_price).toFixed(2));
+            $('#1bed-price').html(parseFloat(single.room_price).toFixed(2));
 
-            $('#2bed-room-capacity-adult').html(double.room_type__room_capacity_adult);
-            $('#2bed-room-capacity-child').html(double.room_type__room_capacity_child);
+            $('#2bed-room-capacity-adult').html(double.room_capacity_adult);
+            $('#2bed-room-capacity-child').html(double.room_capacity_child);
            
-            $('#room-capacity-adult').html(single.room_type__room_capacity_adult);
-            $('#room-capacity-child').html(single.room_type__room_capacity_child);
+            $('#room-capacity-adult').html(single.room_capacity_adult);
+            $('#room-capacity-child').html(single.room_capacity_child);
 
             $('#1-number-available-room').html(single.room_type_count);
             $('#2-number-available-room').html(double.room_type_count);
@@ -262,8 +262,8 @@ function get_room_detail(){
             var double_room_count = parseInt(document.getElementById("2selected-Room-Count").innerText);
             console.log('sr',single_room_count);
             console.log('dr',double_room_count);
-            var single_total_price = single.room_type__room_price * date *single_room_count;
-            var double_total_price = double.room_type__room_price * date *double_room_count;
+            var single_total_price = single.room_price * date *single_room_count;
+            var double_total_price = double.room_price * date *double_room_count;
             console.log("single",single_total_price);
             console.log("double",double_total_price);
 
