@@ -14,29 +14,43 @@
         <div class="gradient-bg"></div>
         <div class="gradient-bg item2"></div>
     </div>
+    {% if my_reserve_info %}
     <div class="content">
         <h1>การจองของฉัน</h1>
         <div class="head">
             <span>รหัสการจอง</span>
-            <span>จำนวน</span>
-            <span>วันที่</span>
+            <span>จำนวนห้อง</span>
+            <span>วันที่เข้า</span>
+            <span>วันที่ออก</span>
             <span>ราคา</span>
             <span>สถานะ</span>
         </div>
-
-        <div class="status-box">
-            <span id="reservation_id">RS/001</span>
-            <span id="room_count">2 ห้อง</span>
-            <span id="during">10/11/23 - 11/11/23</span>
-            <span id="total_price">1,700.00</span>
-            <span id="status">รอดำเนินการ</span>
-        </div>
+    
+        {% for item in my_reserve_info %}
+            <div class="status-box">
+                <span id="reservation_id">{{ item.reservation_id }}</span>
+                <span id="room_count">{{ item.room_count }}</span>
+                <span id="checkin">{{ item.reservation_id__check_in }}</span>
+                <span id="checkout">{{ item.reservation_id__check_out }}</span>
+                <span id="total_price">{{ item.reservation_id__total_price }}</span>
+                <span id="status">{{ item.reservation_id__status }}</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1 class = 'no_curreserve'>คุณไม่มีการจอง ณ ขณะนี้</h1>
+    {% endif %}
     </div>
 
     <div class = "sum_price">
         <p class="text-sum">รวม</p>
         <p class="text-price">
-            3,400.00<button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+            {% if sum_total_price %}
+            {{ sum_total_price }}
+            {% else %}
+            0.00
+            {% endif %}
+            <button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+            
         </p>
     </div>
 

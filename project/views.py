@@ -230,8 +230,13 @@ class RoomStatusInfo(View):
         room_no_info = list(Room.objects.all().values('room_number').order_by('room_number'))
         #print(room_status_info)
         
+        max_room_number = ReservationLineItem.objects.aggregate(Max('room_number'))['room_number__max']
+        
         data = dict()
         data['room_status'] = room_no_info
+        #print(room_no_info)
+        #print('ayyayayayay')
+        #print(room_status_info)
         
         if not room_status_info:
             for item in (data['room_status']):
@@ -241,25 +246,49 @@ class RoomStatusInfo(View):
                 item['customer_id'] = ''
                 item['status'] = '' 
             return JsonResponse(data)
-        
+        #print(max_room_number)
         i = 0
+        #print(room_status_info)
         for item in (data['room_status']):
-            if item['room_number'] == room_status_info[i]['room_numer']:
+            #print(room_status_info[i])
+            
+            #print(item['room_number'] <= max_room_number)
+            #print(i, item['room_number'], room_status_info[i]['room_number'])
+            if (item['room_number'] <= max_room_number) and item['room_number'] == room_status_info[i]['room_number']:
                 item['check_in'] = room_status_info[i]['reservation_id__check_in']
                 item['check_out'] = room_status_info[i]['reservation_id__check_out']
                 item['room_price'] = room_status_info[i]['room_number__room_type__room_price']
                 item['customer_id'] = room_status_info[i]['reservation_id__customer_id']
                 item['status'] = room_status_info[i]['reservation_id__status']
+                i += 1
             else:
                 item['check_in'] = ''
                 item['check_out'] = ''
                 item['room_price'] = ''
                 item['customer_id'] = ''
                 item['status'] = ''     
-            i += 1
             
         print(data['room_status'])
-        return JsonResponse(data)
+        return render(request, 'em_room_status.html', data)
+    
+class MyReservationInfo(View):
+    def get(self ,request):
+        
+        my_id = getCustomerId(request)
+        
+        my_reserve_info = list(ReservationLineItem.objects.select_related('reservation_id').values(
+            'reservation_id', 'reservation_id__check_in', 'reservation_id__check_out', 
+            'reservation_id__total_price', 'reservation_id__status').filter(reservation_id__customer_id=my_id).annotate(room_count=Count('room_number')))
+        
+        
+        data={}
+        data['my_reserve_info'] = my_reserve_info
+        
+        sum_total_price = Reservation.objects.filter(customer_id=my_id).aggregate(Sum('total_price'))['total_price__sum']
+        data['sum_total_price'] = sum_total_price
+        
+        print(data)
+        return render(request, 'my_reserve.html', data)
 
 """class CustomerRegister(View):
     @transaction.atomic
@@ -335,17 +364,13 @@ class CreateReserve(View):
             reservation_id_max = Reservation.objects.aggregate(Max('reservation_id'))['reservation_id__max']   
             print(reservation_id_max)
             reservation_id_temp = [re.findall(r'\d+', reservation_id_max)[0]][0]   
-            next_reservation_id = str(int(reservation_id_temp)+1) + "CS"
+            next_reservation_id = str(int(reservation_id_temp)+1) + "RS"
             next_reservation_id = next_reservation_id.rjust(8, '0')
             #print(reservation_id_temp)
         else:
             next_reservation_id = "000000RS"
         
-        field_name = 'customer_id'
-        field_object = Customer._meta.get_field(field_name)
-        customer_id = Customer.objects.get(user_code=request.user.profile.user_code)
-        customer_id = getattr(customer_id, field_object.attname)
-        
+        customer_id = getCustomerId(request)
         
         # reservation #
         request.POST = request.POST.copy()
@@ -564,5 +589,10 @@ def logout_user(request):
     return redirect('login')
 
 
-
+def getCustomerId(request):
+    field_name = 'customer_id'
+    field_object = Customer._meta.get_field(field_name)
+    customer_id = Customer.objects.get(user_code=request.user.profile.user_code)
+    customer_id = getattr(customer_id, field_object.attname)
+    return customer_id
     

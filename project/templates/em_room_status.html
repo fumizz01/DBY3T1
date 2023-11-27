@@ -26,14 +26,16 @@
                         <th scope="row">สถานะ</th>
                     </tr>
                     <!-- Hidden Table Row (tr) for Copy to Fill Data -->
-                    <tr class = "d-flex hide" hidden>
-                        <td class ="room_number" scope="row"></td>
-                        <td class ="check_in" scope="row"></td>
-                        <td class ="check_out" scope="row"></td>
-                        <td class ="price" scope="row"></td>
-                        <td class ="customer" scope="row"></td>
-                        <td class ="status" scope="row"></td> 
+                    {% for item in room_status %}
+                    <tr class = "d-flex">
+                        <td class ="room_number" scope="row">{{item.room_number}}</td>
+                        <td class ="check_in" scope="row">{{item.check_in}}</td>
+                        <td class ="check_out" scope="row">{{item.check_out}}</td>
+                        <td class ="price" scope="row">{{item.room_price}}</td>
+                        <td class ="customer" scope="row">{{item.customer_id}}</td>
+                        <td class ="status" scope="row">{{item.status}}</td> 
                     </tr>
+                    {% endfor %}
                 </thead>
                 <tbody>
                     <!-- <tr>
