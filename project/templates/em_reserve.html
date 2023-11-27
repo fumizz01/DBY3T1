@@ -15,16 +15,48 @@
         <div class="gradient-bg item2"></div>
     </div>
     <div class="content">
-        <h1>ตารางการจอง</h1>
-        <div class="head">
-            <span>ลูกค้า</span>
-            <span>ห้อง</span>
-            <span>จำนวน</span>
-            <span>วันที่</span>
-            <span>ราคา</span>
-            <span></span>
-        </div>
+        {% if reserve_info %}
+            <h1>ตารางการจอง</h1>
+            <div class="head">
+                <span>รหัสการจอง</span>
+                <span>ห้อง</span>
+                <span>จำนวน</span>
+                <span>วันที่เข้า</span>
+                <span>วันที่ออก</span>
+                <span>ราคา</span>
+                <span></span>
+            </div>
 
+            {% for item in reserve_info %}
+            <div class="status-box">
+                <span id="reservation_id">{{ item.reservation_id }}</span>
+                    <span id="customer_id">{{ item.reservation_id__customer_id }}</span>
+                    <span id="room_count">{{ item.room_count }}</span>
+                    <span id="check_in">{{ item.reservation_id__check_in }}</span>
+                    <span id="check_out">{{ item.reservation_id__check_out }}</span>
+                    <span id="total_price">{{ item.reservation_id__total_price }}</span>
+                    <span class="button">
+                        <form action="{% url 'employee_reserve' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="submit-as" value="confirm">
+                            <input type="hidden" name="reservation_id" value='{{ item.reservation_id }}'>
+                            <button class="confirm" type="submit">ยืนยัน</button>
+                        </form>
+                        <form action="{% url 'employee_reserve' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="submit-as" value="cancel">
+                            <input type="hidden" name="reservation_id" value='{{ item.reservation_id }}'>
+                            <button class="cancel" type="submit">ยกเลิก</button>
+                        </form>
+                    </span>
+            </div>
+            {% endfor %}
+
+        {% else %}
+            <h1 class = 'no_curreserve'>ไม่มีการจอง ณ ขณะนี้</h1>
+        {% endif %}
+
+<!-- 
         <div class="status-box">
             <span id="customer_id">Kenan Garid</span>
             <span id="room_id">ห้องเตียงคู่</span>
@@ -59,19 +91,7 @@
                 <button class="confirm" type="submit">ยืนยัน</button>
                 <button class="cancle" type="submit">ยกเลิก</button>
             </span>
-        </div>
-
-        <div class="status-box">
-            <span id="customer_id">Kenan Garid</span>
-            <span id="room_id">ห้องเตียงคู่</span>
-            <span id="room_count">1 ห้อง</span>
-            <span id="during">10/11/23 - 11/11/23</span>
-            <span id="total_price">1,700.00</span>
-            <span class="button">
-                <button class="confirm" type="submit">ยืนยัน</button>
-                <button class="cancle" type="submit">ยกเลิก</button>
-            </span>
-        </div>
+        </div> -->
     </div>
 </body>
 </html>

@@ -58,7 +58,7 @@ div.head{
             &.confirm{
                 background-color: #4FD2FC;
             }
-            &.cancle{
+            &.cancel{
                 background-color: #FF1A1A;
             }
             &:hover{
@@ -131,3 +131,10 @@ div.head{
 * {
     transition: all 0.25s ease-in-out;
   }
+  .no_curreserve {
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.8);
+    animation: space 3s infinite alternate;
+    text-align: center;
+    }

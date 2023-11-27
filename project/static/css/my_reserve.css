@@ -141,10 +141,6 @@ div.head{
     }
   } */
 
-.no_curreserve {
-    text-align: center;
-}
-
 
 /* background */
 
@@ -220,6 +216,7 @@ div.head{
     font-size: 60px;
     color: rgba(255, 255, 255, 0.8);
     animation: space 3s infinite alternate;
+    text-align: center;
     }
 
 @keyframes space {

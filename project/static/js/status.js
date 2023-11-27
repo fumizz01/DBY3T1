@@ -1,10 +1,10 @@
 $(document).ready(function () {
     $('.d-flex').each(function () {
         var statusElement = $(this).find('.status');
-        if (statusElement.text().trim().toLowerCase() === 'unpaid') {
-          $(this).find('.status').addClass('unpaid');
-        }else if (statusElement.text().trim().toLowerCase() === 'paid'){
-            $(this).find('.status').addClass('paid');
+        if (statusElement.text().trim().toLowerCase() === 'unavailable') {
+          $(this).find('.status').addClass('unavailable');
+        }else if (statusElement.text().trim().toLowerCase() === 'available'){
+            $(this).find('.status').addClass('available');
         }else{
             $(this).addClass('cencel');
         }
@@ -70,6 +70,7 @@ function filter() {
         var stat = tr[i].getElementsByTagName("td")[5];
         if (stat) {
             var txtValue = stat.innerText;
+            console.log(selectedStatus, txtValue);
             if(selectedStatus === "" || txtValue.toUpperCase() === selectedStatus.toUpperCase()){
                 tr[i].style.display = "";
             } else {

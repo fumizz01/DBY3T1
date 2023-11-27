@@ -16,7 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.forms.models import model_to_dict
-from django.db.models import Max, Min, Sum, Count
+from django.db.models import Max, Min, Sum, Count, F
 from django.db import transaction
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -25,38 +25,56 @@ from .forms import *
 import json
 import re
 
+from itertools import chain
+from operator import attrgetter
+
 def home(request):
     return HttpResponseRedirect(reverse('home'))
 # Create your views here.
 def index(request):
+    if request.user.is_authenticated and request.user.profile.role == 'employee':
+        logout(request)
+        return redirect('login')
+    
     return render(request, 'hotelpage.html')
 
 def register(request):
-    if request.POST:
-        print (request.POST)
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
-        birthday = request.POST.get('birthday')
-        tol = request.POST.get('tol')
-        id_number = request.POST.get('id_number')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        print(firstname)
-        print(lastname)
-        print(birthday)
-        print(tol)
-        print(id_number)
-        print(email)
-        print(password)
-        return HttpResponseRedirect(reverse('login'))
-    return render(request, 'register.html')
+    """if request.POST and not request.user.is_authenticated:
+    print (request.POST)
+    firstname = request.POST.get('firstname')
+    lastname = request.POST.get('lastname')
+    birthday = request.POST.get('birthday')
+    tol = request.POST.get('tol')
+    id_number = request.POST.get('id_number')
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    print(firstname)
+    print(lastname)
+    print(birthday)
+    print(tol)
+    print(id_number)
+    print(email)
+    print(password)
+    return HttpResponseRedirect(reverse('login')) """
+
+    if  request.user.is_authenticated:
+        logout(request)
+        return redirect('register')
+        
+    else:
+        return render(request, 'register.html')
+    
 
 """ def login_page(request):
     return render(request, 'login.html') """
 
 def reserve(request):
-    if request.POST:
-        print(request.POST)
+    #if request.POST:
+    #    print(request.POST)
+    if request.user.is_authenticated and request.user.profile.role == 'employee':
+        logout(request)
+        return redirect('login')
+    
     return render(request, 'reserve.html')
 
 def em_login(request):
@@ -79,7 +97,11 @@ def em_login(request):
         messages.success(request, ("ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."))
         print("Login failed")
         return redirect('em_login')
-        
+    
+    elif request.user.is_authenticated:
+        logout(request)
+        return redirect('em_login')
+    
     else:
         return render(request, 'em_login.html', {})
 
@@ -90,6 +112,10 @@ def em_logout(request):
 def em_register(request):
     if not request.POST:
         return render(request, 'em_register.html')
+    
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('em_login')
     
     if Profile.objects.count() != 0:        
             user_code_max = Profile.objects.aggregate(Max('user_code'))['user_code__max']   
@@ -144,13 +170,53 @@ def em_register(request):
     return redirect('employee_room_status')
 
 def em_reserve(request):
-    return render(request, 'em_reserve.html')
+    
+    if not request.user.is_authenticated:
+        return redirect('em_login')
+    
+    elif request.user.profile.role == 'customer':
+        logout(request)
+        return redirect('em_login')
+    
+    if request.POST:
+        with transaction.atomic():   
+            
+            room_number_update = ReservationLineItem.objects.filter(reservation_id=request.POST['reservation_id']).values()
+                
+            if request.POST['submit-as'] == 'cancel':
+                Reservation.objects.filter(reservation_id=request.POST['reservation_id']).update(status='cancelled')
+                for item in room_number_update:
+                    Room.objects.filter(room_number=item['room_number_id']).update(status='available')
+                    
+            elif request.POST['submit-as'] == 'confirm':
+                Reservation.objects.filter(reservation_id=request.POST['reservation_id']).update(status='confirmed')
+                
+            return redirect('employee_reserve')
+                
+    reserve_info = list(ReservationLineItem.objects.select_related('reservation_id').filter(reservation_id__status='unpaid').values(
+        'reservation_id', 'reservation_id__customer_id', 'reservation_id__check_in', 'reservation_id__check_out',
+        'reservation_id__total_price').order_by('reservation_id').annotate(room_count = Count('room_number')))
+    
+    data = dict()
+    data['reserve_info'] = reserve_info
+    
+    print(data['reserve_info'])
+    
+    return render(request, 'em_reserve.html', data)
 
-def em_room_status(request):
-    return render(request, 'em_room_status.html')
+""" def em_room_status(request):
+    
+    if not request.user.is_authenticated:
+        return redirect('em_login')
+    
+    elif request.user.profile.role == 'customer':
+        logout(request)
+        return redirect('em_login')
+    
+    return render(request, 'em_room_status.html') """
 
-def my_reserve(request):
-    return render(request, 'my_reserve.html')
+""" def my_reserve(request):
+    return render(request, 'my_reserve.html') """
 
 def change_password(request):
     return render(request, 'change_password.html')
@@ -203,22 +269,59 @@ class ReservationInfo(View):
         print(data['reservation_info'])
         return JsonResponse(data)
     
-""" 
+
 class RoomStatusInfo(View):
     def get(self, request):
-        room_status_info = list(Room.objects.select_related(
-            'room_type', 'room_number')
-                                .all()
-                                .values('room_number', 'room_number__room_number'))
-        #print(room_status_info)
         
+        if not request.user.is_authenticated:
+            return redirect('em_login')
+        
+        elif request.user.profile.role == 'customer':
+            logout(request)
+            return redirect('em_login')
+        
+        room_status_info = list(Room.objects.select_related(
+            'room_type').filter(status='available').values('room_number', 'room_type__room_price', 'status'))
+        #print(room_status_info)
+
+
+        reserve_info = list(ReservationLineItem.objects.select_related(
+            'reservation_id', 'room_number', 'room_number__room_type').all()
+                                .values('room_number', 'reservation_id__check_in', 'reservation_id__check_out', 
+                                        'reservation_id__customer_id', 'room_number__room_type__room_price',
+                                        'room_number__status').order_by('room_number'))
+
+        #print(data['room_status_info'])
+        
+
+        """for item in data['room_status_info']:
+            if item['status'] == 'unavailable': """
+        
+        temp_data = dict()
+        
+        temp_data['rs'] = room_status_info
+        
+        for rs_item in temp_data['rs']:
+            rs_item['reservation_id__check_in'] = '-'
+            rs_item['reservation_id__check_out'] = '-'
+            rs_item['reservation_id__customer_id'] = '-'
+            rs_item['room_number__room_type__room_price'] = rs_item['room_type__room_price']
+            rs_item['room_number__status'] = rs_item['status']
+            
         data = dict()
-        data['room_status_info'] = room_status_info
-        print(data['room_status_info'])
-        return JsonResponse(data)
- """
+            
+        result_list = list(chain(room_status_info, reserve_info))
+        
+        
+        data['room_status'] = result_list
+        
+        data['room_status'] = sorted(data['room_status'], key=lambda x: x['room_number'])
+        print(data['room_status'])
+        
+        return render(request, 'em_room_status.html', data)
+
     
-    
+""" 
 class RoomStatusInfo(View):
     def get(self, request):
         room_status_info = list(ReservationLineItem.objects.select_related(
@@ -270,10 +373,19 @@ class RoomStatusInfo(View):
                 item['status'] = ''     
             
         print(data['room_status'])
-        return render(request, 'em_room_status.html', data)
+        return render(request, 'em_room_status.html', data) """
+        
+        
     
 class MyReservationInfo(View):
     def get(self ,request):
+        
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        elif request.user.profile.role == 'employee':
+            logout(request)
+            return redirect('login')
         
         my_id = getCustomerId(request)
         
@@ -582,7 +694,12 @@ def login_user(request):
         print("Login failed")
         return redirect('login')
         
+    elif request.user.is_authenticated:
+        logout(request)
+        return redirect('login')
+    
     else:
+        
         return render(request, 'login.html', {})
     
 def logout_user(request):

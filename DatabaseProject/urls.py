@@ -18,38 +18,40 @@ from django.urls import path, include
 
 from project import views
 urlpatterns = [
+    # redirect
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', views.home,name='to_home'),
     path('home', views.index, name='home'),
+    path('login', views.login_user, name='login'),
+    path('logout', views.logout_user, name='logout'),
     path('register', views.register, name='register'),
     path('reserve', views.reserve, name='reserve'),
+    path('my-reserve',views.MyReservationInfo.as_view(), name='my_reserve'),
+    
     path('em/reserve',views.em_reserve, name='employee_reserve'),
-    #path('my-reserve',views.my_reserve, name='my_reserve'),
+    path('em/room-status',views.RoomStatusInfo.as_view(), name='employee_room_status'),
+    path('em/register',views.em_register, name='employee_register'),
+    path('em/login',views.em_login, name='em_login'),
+    path('em/logout',views.em_logout, name='em_logout'),
+    
     
     #get
     path('customer/list',views.CustomerAccountInformationList.as_view(), name='customer_info'),
     path('reservation/price',views.ReservationInfo.as_view(), name='reservation_price'),
-    path('room/status',views.RoomStatusInfo.as_view(), name='room_status'),
     path('username/list',views.UsernameList.as_view(), name='username_list'),
-    #path('reservation/list',views.ReservationList.as_view(), name='reservation_list'),
     
     
     #post
-    #path('customer/register',views.register_user, name='register_user'),
     path('customer/register',views.CustomerRegister.as_view(), name='customer_register'),
-    path('login', views.login_user, name='login'),
-    path('logout', views.logout_user, name='logout'),
     path('create/reserve',views.CreateReserve.as_view(), name='create_reserve'),
-    path('my-reserve',views.MyReservationInfo.as_view(), name='my_reserve'),
-    
-    path('em/register',views.em_register, name='employee_register'),
-    path('em/login',views.em_login, name='em_login'),
-    path('em/logout',views.em_logout, name='em_logout'),
-    path('em/room-status',views.RoomStatusInfo.as_view(), name='employee_room_status'),
-    #path('em/reserve',views.RoomStatusInfo.as_view(), name='employee_reserve'),
     
     #path('customer/login',views.login_customer, name='login_customer'),
+    #path('room/status',views.RoomStatusInfo.as_view(), name='room_status'),
+    #path('reservation/list',views.ReservationList.as_view(), name='reservation_list'),
+    #path('my-reserve',views.my_reserve, name='my_reserve'),
+    #path('customer/register',views.register_user, name='register_user'),
+    #path('em/reserve',views.RoomStatusInfo.as_view(), name='employee_reserve'),
     
     path('change-password',views.change_password, name='change_password')
 ]

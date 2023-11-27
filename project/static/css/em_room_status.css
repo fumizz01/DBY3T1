@@ -10,6 +10,7 @@ body{
   display: block;
   width: 90vw;
   height: fit-content;
+  padding-bottom: 20px;
 }
 
 .table_main
@@ -25,6 +26,7 @@ body{
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
+  margin-bottom: 20px;
 
   /* font */
   color: #000;
@@ -133,9 +135,9 @@ td{
   background-color: rgba(255,255,255,0.7);
 }
 
-.unpaid{
+.unavailable{
   color: red;
 }
-.paid{
+.available{
   color: #09c372;
 }
