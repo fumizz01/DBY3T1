@@ -109,13 +109,26 @@ def em_logout(request):
     logout(request)
     return redirect('em_login')
 
+@transaction.atomic
 def em_register(request):
-    if not request.POST:
-        return render(request, 'em_register.html')
-    
     if request.user.is_authenticated:
         logout(request)
         return redirect('em_login')
+    
+    if not request.POST:
+        return render(request, 'em_register.html')
+    
+    
+    if Employee.objects.count() != 0:        
+            employee_id_max = Employee.objects.aggregate(Max('employee_id'))['employee_id__max']   
+            print(employee_id_max)
+            employee_id_temp = [re.findall(r'\d+', employee_id_max)[0]][0]   
+            next_employee_id = str(int(employee_id_temp)+1) + "EM"
+            next_employee_id = next_employee_id.rjust(8, '0')
+            #print(employee_id_temp)
+    else:
+        next_employee_id = "000000EM"
+        
     
     if Profile.objects.count() != 0:        
             user_code_max = Profile.objects.aggregate(Max('user_code'))['user_code__max']   
@@ -129,11 +142,12 @@ def em_register(request):
     print(request.POST)
     
     request.POST = request.POST.copy()
+    request.POST['employee_id'] = next_employee_id
     request.POST['user_code'] = next_user_code
     request.POST['role'] = 'employee'
     data = dict()
     
-    form_user = UserCreationForm(request.POST)
+    """ form_user = UserCreationForm(request.POST)
     form_profile = ProfileForm(request.POST)
     
     if form_user.is_valid() and form_profile.is_valid():
@@ -164,7 +178,65 @@ def em_register(request):
             data['error'] = form_profile.errors
         
         print("Empoyee register failed")
+        return JsonResponse(data)"""
+    
+    form_user = UserCreationForm(request.POST)
+    if form_user.is_valid():
+        user = form_user.save()
+        username = form_user.cleaned_data['username']
+        password = form_user.cleaned_data['password1']
+        
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        print("User Created Success")
+        
+    else:
+        # if invoice from is not valid return error message
+        data['error'] = form_user.errors
+        print (form_user.errors)
+        print('fail at User create...')
         return JsonResponse(data)
+        
+    #----------------------------------------------------------------#
+    
+    # Insert correct data to invoice_line_item
+    form_profile = ProfileForm(request.POST)
+    if form_profile.is_valid():
+        profile = form_profile.save(commit=False)
+        profile.user = user
+        
+        profile.save()
+        print("Profile Created Success")
+    else :
+        # Check something error to show and rollback transaction both invoice and invoice_line_item table
+        data['error'] = form_profile.errors
+        print (form_profile.errors)
+        print('fail at Profile create...')
+        transaction.set_rollback(True)
+        return JsonResponse(data)
+    
+    #----------------------------------------------------------------#
+    form = EmployeeForm(request.POST)
+    if form.is_valid():
+        print("Employee successfully")
+        employee = form.save()
+        
+    else:
+        data['error'] = form.errors
+        print (form.errors)
+        print('fail at Employee create...')
+        transaction.set_rollback(True)
+        return JsonResponse(data)
+    
+
+    #----------------------------------------------------------------#
+        
+    
+    
+    #data['account'] = model_to_dict(customer)
+    #data['profile'] = model_to_dict(profile)
+    
+    #print("User Created Successfully without problems")
     
     print("Empoyee register successful")
     return redirect('employee_room_status')
@@ -626,6 +698,7 @@ class CustomerRegister(View):
             # if invoice from is not valid return error message
             data['error'] = form_user.errors
             print (form_user.errors)
+            print('fail at User create...')
             return JsonResponse(data)
             
         #----------------------------------------------------------------#
@@ -642,6 +715,7 @@ class CustomerRegister(View):
             # Check something error to show and rollback transaction both invoice and invoice_line_item table
             data['error'] = form_profile.errors
             print (form_profile.errors)
+            print('fail at Profile create...')
             transaction.set_rollback(True)
             return JsonResponse(data)
         
@@ -654,6 +728,7 @@ class CustomerRegister(View):
         else:
             data['error'] = form.errors
             print (form.errors)
+            print('fail at Customer create...')
             transaction.set_rollback(True)
             return JsonResponse(data)
         

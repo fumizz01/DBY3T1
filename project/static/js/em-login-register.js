@@ -68,8 +68,17 @@ $(document).ready(function () {
         const user_name = $('#user_name').val();
         const passwordValue = $('#register-password').val();
         const password2Value = $('#password_confirm').val();
+        const dateValue = $('#birthday').val();
+        const id_number = $('#id_number').val();
+        const firstValue = $('#firstname').val();
+        const lastnameValue = $('#lastname').val();
+        const sexValue = $('#sex').val();
+        const addressValue = $('#address').val();
+        const positionValue = $("#position").val();
 
-        if (!validateInputs(user_name, passwordValue, password2Value)) {
+
+
+        if (!validateInputs(user_name, passwordValue, password2Value, dateValue, id_number, firstValue, lastnameValue, sexValue, addressValue,positionValue)) {
             return
         } 
         validateDuplicateDataAndSubmitForm(user_name)
@@ -179,9 +188,60 @@ function isNumber(value) {
     return !isNaN(value) && typeof value === 'number';
 }
 
-function validateInputs(user_name, passwordValue, password2Value) {
+function validateInputs(user_name, passwordValue, password2Value, dateValue, id_number, firstValue, lastnameValue, sexValue, addressValue,positionValue) {
     var total = 0
     
+    if(firstValue === '') {
+        setError($('#firstname'), 'กรุณาระบุชื่อ');
+    } else {
+        setSuccess($('#firstname'));
+        total +=1;
+    }
+
+    if(lastnameValue === '') {
+        setError($('#lastname'), 'กรุณาระบุนามสกุล');
+    } else {
+        setSuccess($('#lastname'));
+        total +=1;
+    }
+
+    if(dateValue === '') {
+        setError($('#birthday'), 'กรุณาระบุวันเกิด');
+    } else {
+        setSuccess($('#birthday'));
+        total +=1;
+    }
+
+    if(positionValue === '') {
+        setError($('#position'), 'กรุณาระบุตำแหน่ง');
+    } else {
+        setSuccess($('#position'));
+        total +=1;
+    }
+
+
+
+    if(sexValue === '') {
+        setError($('#sex'), 'กรุณาระบุเพศ');
+    } else {
+        setSuccess($('#sex'));
+        total +=1;
+    }
+
+    if(addressValue === '') {
+        setError($('#address'), 'กรุณาระบุที่อยู่');
+    } else {
+        setSuccess($('#address'));
+        total +=1;
+    }
+
+    if(id_number === '') {
+        setError($('#id_number'), 'กรุณาระบุรหัสประจำตัวประชาชน');
+    } else {
+        setSuccess($('#id_number'));
+        total +=1;
+    }
+
     if(user_name === '') {
         setError($('#user_name'), 'กรุณาระบุชื่อผู้ใช้');
     } else {
@@ -207,7 +267,7 @@ function validateInputs(user_name, passwordValue, password2Value) {
         total +=1;
     }
     
-    if (total == 3){
+    if (total == 10){
         return true;
     }
 };
@@ -224,6 +284,7 @@ function validateDuplicateDataAndSubmitForm(user_name) {
             var flag = 1;
             console.log(all_data);
             //console.log(all_data.username_list.length);
+
             for(let i = 0; i < all_data.username_list.length; i++) {
                 let data = all_data.username_list[i];
                 

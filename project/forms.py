@@ -17,6 +17,11 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
+        
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = '__all__'
 
 class ReservationForm(forms.ModelForm):
     class Meta:
