@@ -314,7 +314,11 @@ function validateDuplicateDataAndSubmitForm(user_name) {
                 success: function (response) {
                     if (response.error) {                               // if backend return error message, log it
                         console.log(response.error);
-                        alert('การสมัครใช้งานล้มเหลว');
+                        var errorMessages = response.error.password2
+                        console.log(message);
+                        errorMessages.forEach(function(errorMessage) {
+                            alert(errorMessage);
+                        });
                     } else {
                         console.log(response);
                         alert('Register successfully! Redirecting...');
