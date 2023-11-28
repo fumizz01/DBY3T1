@@ -132,9 +132,23 @@ div.head{
     transition: all 0.25s ease-in-out;
   }
   .no_curreserve {
+    margin: 0 350px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(250px);
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     font-size: 60px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
     animation: space 3s infinite alternate;
     text-align: center;
     }
+
+    @keyframes space {
+        0% {
+            letter-spacing: 0px;
+        }
+        100% {
+            letter-spacing: 2px;
+        }
+    }   
