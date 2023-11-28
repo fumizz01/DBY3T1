@@ -49,7 +49,7 @@
             {% else %}
             0.00
             {% endif %}
-            <button class="text-detail reserve-room-button" id="reserve-room-button">จองห้อง</button>
+            <a href="https://forms.gle/aEK4YnyoRm2ATESR8"><button class="text-detail reserve-room-button" id="reserve-room-button">ชำระเงิน</button></a>
             
         </p>
     </div>
@@ -62,10 +62,10 @@
             var statusText = statusElement.text();
             if (statusText === "unpaid") {
                 statusElement.addClass('unpaid');
-            }else if(statusText === "paid"){
+            }else if(statusText === "confirmed"){
                 statusElement.addClass('paid');
             }else {
-                (".status-box").addClass('cancle');
+                $(this).addClass('cancel');
             }
         });
     });

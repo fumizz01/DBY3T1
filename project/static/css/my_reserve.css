@@ -219,6 +219,10 @@ div.head{
     text-align: center;
     }
 
+.cancel {
+    opacity: 0.35;
+}
+
 @keyframes space {
     0% {
         letter-spacing: 0px;
