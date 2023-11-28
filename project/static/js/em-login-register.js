@@ -126,7 +126,7 @@ function checkPasswordStrength(password) {
     this.update_info('number', numbers);
 
     
-	var total = characters + capitalletters + loweletters + numbers + 1;
+	var total = characters + capitalletters + loweletters + numbers ;
 	this.password_meter(total);
 }
 
@@ -147,14 +147,11 @@ function password_meter(total) {
         meter.html('');
     } else if (total === 1) {
         $('.pswd_info').slideDown();
-        meter.addClass('veryweak-password').html('very weak');
+        meter.addClass('weak-password').html('weak');
     } else if (total === 2) {
         $('.pswd_info').slideDown();
-        meter.addClass('weak-password').html('weak');
-    } else if (total === 3) {
-        $('.pswd_info').slideDown();
         meter.addClass('medium-password').html('medium');
-    } else if (total === 4) {
+    } else if (total === 3) {
         $('.pswd_info').slideDown();
         meter.addClass('average-password').html('average');
     } else {
