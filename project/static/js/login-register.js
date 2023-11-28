@@ -118,21 +118,21 @@ function checkPasswordStrength(password) {
 	var number     = /([0-9])/;
 	var upperCase  = /([A-Z])/;
 	var lowerCase  = /([a-z])/;
-	var specialCharacters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+	
     
 	var characters     = (password.length >= 8 && password.length <= 15 );
 	var capitalletters = password.match(upperCase) ? 1 : 0;
 	var loweletters    = password.match(lowerCase) ? 1 : 0;
 	var numbers        = password.match(number) ? 1 : 0;
-	var special        = password.match(specialCharacters) ? 1 : 0;
+
     
 	this.update_info('length', password.length >= 8 && password.length <= 15);
     this.update_info('capital', capitalletters);
     this.update_info('small', loweletters);
     this.update_info('number', numbers);
-    this.update_info('special', special);
+
     
-	var total = characters + capitalletters + loweletters + numbers + special;
+	var total = characters + capitalletters + loweletters + numbers + 1;
 	this.password_meter(total);
 }
 
