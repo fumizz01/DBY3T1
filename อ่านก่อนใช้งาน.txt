@@ -1,0 +1,31 @@
+ก่อนใช้งานต้องเพิ่มข้อมูลใน Database ด้วยการใช้ 2 คำสั่งต่อไปนี้
+
+INSERT INTO public.room_detail(
+ room_type, room_capacity_adult, room_capacity_child, room_price)
+ VALUES ('single bed', 2, 2, 2000),
+ ('double bed', 2, 2, 2000);
+
+เเละ 
+
+INSERT INTO public.room(
+ room_number, status, room_type)
+ VALUES ('101RM', 'available', 'single bed'),
+ ('102RM', 'available', 'single bed'),
+ ('103RM', 'available', 'single bed'),
+ ('104RM', 'available', 'single bed'),
+ ('105RM', 'available', 'single bed'),
+ ('201RM', 'available', 'double bed'),
+ ('202RM', 'available', 'double bed'),
+ ('203RM', 'available', 'double bed'),
+ ('204RM', 'available', 'double bed'),
+ ('205RM', 'available', 'double bed');
+
+Note1: สามารถแก้ไขข้อมูลของทั้ง 2 ตาราง หรือเพิ่มข้อมูลในตาราง room ได้ แต่ต้องใส่ค่าใน status เป็น available และใส่ค่าใน room_type เป็น single bed หรือ double bed
+
+Note2: ก่อนใช้งานควรลง module และดูวิธีการใช้งานในไฟล์ README ให้ครบก่อน (แต่ถ้าหากขี้เกียจก็แค่ลง module ต่อไปนี้ให้ครบก็พอ)
+
+- pip install psycopg2
+
+- pip install Django
+
+- pip install django-livereload-server
