@@ -46,6 +46,33 @@ migrate database
 python manage.py migrate
 ```
 
+# Insert Nessessary Data to Database
+relation room_detail
+```sh
+# you can modify the value of room_capacity_adult, room_capacity_child, room_price
+INSERT INTO public.room_detail(
+ room_type, room_capacity_adult, room_capacity_child, room_price)
+ VALUES ('single bed', 2, 2, 2000), 
+ ('double bed', 2, 2, 2000);
+```
+relation room
+```sh
+# you can insert more rows or modify the value
+# but the value of status has to be 'available' and room_type has to be either 'single bed' or 'double bed'
+INSERT INTO public.room(
+ room_number, status, room_type)
+ VALUES ('101RM', 'available', 'single bed'),
+ ('102RM', 'available', 'single bed'),
+ ('103RM', 'available', 'single bed'),
+ ('104RM', 'available', 'single bed'),
+ ('105RM', 'available', 'single bed'),
+ ('201RM', 'available', 'double bed'),
+ ('202RM', 'available', 'double bed'),
+ ('203RM', 'available', 'double bed'),
+ ('204RM', 'available', 'double bed'),
+ ('205RM', 'available', 'double bed');
+```
+
 # Run Server
 Optional run Liveserver
 ```sh
