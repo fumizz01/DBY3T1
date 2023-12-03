@@ -36,6 +36,15 @@ DATABASES = {
   }
 }
 ```
+# Create Database
+make migration files
+```sh
+python manage.py makemigrations
+```
+migrate database
+```sh
+python manage.py migrate
+```
 
 # Run Server
 Optional run Liveserver

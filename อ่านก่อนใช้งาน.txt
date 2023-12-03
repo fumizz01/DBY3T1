@@ -1,4 +1,12 @@
-ก่อนใช้งานต้องเพิ่มข้อมูลใน Database ด้วยการใช้ 2 คำสั่งต่อไปนี้
+GitHub: https://github.com/fumizz01/DBY3T1/
+
+ก่อนใช้งานต้องสร้าง Database ด้วยการไปใส่ข้อมูล Database ลงในไฟล์ setting.py และใช้คำสั่ง
+
+- python manage.py makemigrations
+
+- python manage.py migrate
+
+หลังสร้าง Database แล้วต้องเพิ่มข้อมูลสำคัญเข้าไปด้วยการใช้ 2 คำสั่งต่อไปนี้
 
 INSERT INTO public.room_detail(
  room_type, room_capacity_adult, room_capacity_child, room_price)
