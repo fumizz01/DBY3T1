@@ -1,93 +1,98 @@
 {% load static %}
 <html>
-    <head>
-        <title>Register</title>
 
-        {% include 'general_use/general-script.html' %}
+<head>
+    <title>Register</title>
 
-        <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
-    </head>
-    <body>
-        {% include 'general_use/em_header.html' %}
-        <div class="BG">
-            <div class="gradient-bg"></div>
-            <div class="gradient-bg item2"></div>
-        </div>
-        <div class = "box" >
-            <form id="register-form">
-                {%csrf_token %} 
-                <div class = "register-container">
-                    <h2 class="head">สมัครสมาชิก พนักงาน</h2>
-                    <div>
-                        <label for="user_name">ชื่อผู้ใช้</label>
-                        <input class="input-field" id = "user_name" name = "username" type = "text" placeholder="ชื่อผู้ใช้"  maxlength="50" >
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="firstname">ชื่อ</label>
-                        <input class="input-field" id = "firstname" name = "first_name" type = "text" placeholder="ชื่อ" >
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="lastname">นามสกุล</label>
-                        <input class="input-field" id = "lastname" name = "last_name" type = "text" placeholder="นามสกุล" >
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="birthday">วัน/เดือน/ปีเกิด</label>
-                        <input class="input-field" id = "birthday" name = "birthday" type = "date" placeholder="วัน/เดือน/ปีเกิด">
-                        <input type="hidden" id="age" name="age">
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="sex">เพศ</label>
-                        <input class="input-field" id = "sex" name = "sex" type = "text" placeholder="เพศ">
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="address">ที่อยู่</label>
-                        <input class="input-field" id = "address" name = "address" type = "text" placeholder="ที่อยู่">
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="id_number">รหัสบัตรประชาชน</label>
-                        <input class="input-field" id = "id_number" name = "identification_number" type = "text" placeholder="รหัสบัตรประชาชน"  maxlength="13" >
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="position">ตำแหน่ง</label>
-                        <input class="input-field" id = "position" name = "position" type = "text" placeholder="ตำแหน่ง" >
-                        <div class="error-message"></div>
-                    </div>
-                    <div>
-                        <label for="register-password">รหัสผ่าน</label>
-                        <input class="input-field password" id = "register-password" name = "password1" type = "password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="15" >
-                        <i class="bx bx-hide eye-icon password-validation"></i>
-                        <div class="error-message"></div>
-                    </div>
-                    <div id="password-strength-status"></div>
-                    <div>
-                        <ul class="pswd_info" id="passwordCriterion">
-                            <li data-criterion="length" class="invalid">8-15 <strong>Characters</strong></li>
-                            <li data-criterion="capital" class="invalid">At least <strong>one capital letter</strong></li>
-                            <li data-criterion="small" class="invalid">At least <strong>one small letter</strong></li>
-                            <li data-criterion="number" class="invalid">At least <strong>one number</strong></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <label for="password_confirm">ยืนยันรหัสผ่าน</label>
-                        <input class="input-field password-confirmation" id = "password_confirm" name = "password2" type = "password" placeholder="ยืนยันรหัสผ่าน" >
-                        <!-- <p id='message'></p> -->
-                        <i class="bx bx-hide eye-icon password-confirmation-icon"></i>
-                        <div class="error-message"></div>
-                    </div>
-                    <input class='submit' id = "register-button" type="submit" value="ยันยืน">
-                    <!-- <button class="submit" id = "register-button" type="submit">ยันยืน</button> -->
+    {% include 'general_use/general_script.html' %}
+
+    <link rel='stylesheet' href="{% static 'css/login_register.css' %}">
+</head>
+
+<body>
+    {% include 'general_use/em_header.html' %}
+    <div class="BG">
+        <div class="gradient_bg"></div>
+        <div class="gradient_bg item2"></div>
+    </div>
+    <div class="box">
+        <form id="register_form">
+            {%csrf_token %}
+            <div class="register-container">
+                <h2 class="head">สมัครสมาชิก พนักงาน</h2>
+                <div>
+                    <label for="user_name">ชื่อผู้ใช้</label>
+                    <input class="input_field" id="user_name" name="username" type="text" placeholder="ชื่อผู้ใช้"
+                        maxlength="50">
+                    <div class="error_message"></div>
                 </div>
-            </form>
-        </div>
-    </body>
-    <script src="{% static 'js/em-login-register.js' %}"></script>
-</html>
+                <div>
+                    <label for="firstname">ชื่อ</label>
+                    <input class="input_field" id="firstname" name="first_name" type="text" placeholder="ชื่อ">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="lastname">นามสกุล</label>
+                    <input class="input_field" id="lastname" name="last_name" type="text" placeholder="นามสกุล">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="birthday">วัน/เดือน/ปีเกิด</label>
+                    <input class="input_field" id="birthday" name="birthday" type="date" placeholder="วัน/เดือน/ปีเกิด">
+                    <input type="hidden" id="age" name="age">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="sex">เพศ</label>
+                    <input class="input_field" id="sex" name="sex" type="text" placeholder="เพศ">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="address">ที่อยู่</label>
+                    <input class="input_field" id="address" name="address" type="text" placeholder="ที่อยู่">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="id_number">รหัสบัตรประชาชน</label>
+                    <input class="input_field" id="id_number" name="identification_number" type="text"
+                        placeholder="รหัสบัตรประชาชน" maxlength="13">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="position">ตำแหน่ง</label>
+                    <input class="input_field" id="position" name="position" type="text" placeholder="ตำแหน่ง">
+                    <div class="error_message"></div>
+                </div>
+                <div>
+                    <label for="register_password">รหัสผ่าน</label>
+                    <input class="input_field password" id="register_password" name="password1" type="password"
+                        placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="15">
+                    <i class="bx bx-hide eye_icon password_validation"></i>
+                    <div class="error_message"></div>
+                </div>
+                <div id="password_strength_status"></div>
+                <div>
+                    <ul class="pswd_info" id="password_criterion">
+                        <li data_criterion="length" class="invalid">8-15 <strong>Characters</strong></li>
+                        <li data_criterion="capital" class="invalid">At least <strong>one capital letter</strong></li>
+                        <li data_criterion="small" class="invalid">At least <strong>one small letter</strong></li>
+                        <li data_criterion="number" class="invalid">At least <strong>one number</strong></li>
+                    </ul>
+                </div>
+                <div>
+                    <label for="password_confirm">ยืนยันรหัสผ่าน</label>
+                    <input class="input_field password_confirmation" id="password_confirm" name="password2"
+                        type="password" placeholder="ยืนยันรหัสผ่าน">
+                    <!-- <p id='message'></p> -->
+                    <i class="bx bx-hide eye_icon password_confirmation_icon"></i>
+                    <div class="error_message"></div>
+                </div>
+                <input class='submit' id="register_button" type="submit" value="ยันยืน">
+                <!-- <button class="submit" id = "register_button" type="submit">ยันยืน</button> -->
+            </div>
+        </form>
+    </div>
+</body>
+<script src="{% static 'js/em_login_register.js' %}"></script>
 
-    
+</html>

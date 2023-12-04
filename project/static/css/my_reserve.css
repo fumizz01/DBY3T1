@@ -68,7 +68,7 @@ div.head{
     }
 }
 
-.reserve-room-button {
+.reserve_room_button {
     margin: 35px auto 0 auto;
     margin-left: 30px;
     display: block;
@@ -103,7 +103,7 @@ div.head{
 
 }
 
-.text-price
+.text_price
 {
     color: #8C8C8C;
     font-family: kanit;
@@ -120,7 +120,7 @@ div.head{
     align-items: baseline;
 }
 
-.text-sum
+.text_sum
 {
     color: #000;
     font-family: kanit;
@@ -173,7 +173,7 @@ div.head{
     z-index: -1;
     overflow: hidden;
 }
-.gradient-bg {
+.gradient_bg {
     --size: 500px;
     --speed: 10s;
     --easing: cubic-bezier(0.5, 0.2, 0.2, 0.5);
@@ -194,7 +194,7 @@ div.head{
 }
   
   @media (min-width: 720px) {
-    .gradient-bg {
+    .gradient_bg {
       --size: 500px;
     }
   }

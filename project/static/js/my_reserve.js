@@ -1,16 +1,16 @@
 $(document).ready(function () {
     // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
-    loadData();
+    load_data();
 
     $(".status-box").each(function () {
-        var statusElement = $(this).find("#status");
-        var statusText = statusElement.text();
-        if (statusText === "unpaid") {
-            statusElement.addClass('unpaid');
+        var status_element = $(this).find("#status");
+        var status_text = status_element.text();
+        if (status_text === "unpaid") {
+            status_element.addClass('unpaid');
         }
     });
 
-    function loadData() {
+    function load_data() {
         // ทำ AJAX request ไปยัง endpoint ของคุณ
         $.ajax({
             url: '',  // แก้ไขเป็น URL ของ API หรือ endpoint ที่คุณใช้
@@ -18,7 +18,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 // ทำการเรียกฟังก์ชั่นเพื่อแสดงข้อมูล
-                displayData(data);
+                display_data(data);
             },
             error: function (error) {
                 console.log('Error:', error);
@@ -26,36 +26,36 @@ $(document).ready(function () {
         });
     }
 
-    function displayData(data) {
+    function display_data(data) {
         // เลือก element ที่ต้องการแสดงข้อมูล
-        var statusBox = $('.status-box');
-        var sumPrice = $('.sum_price .text-price');
+        var status_box = $('.status-box');
+        var sum_price = $('.sum_price .text_price');
 
         // ตรวจสอบว่ามีข้อมูลหรือไม่
         if (data.length > 0) {
             // แสดงข้อมูลจองล่าสุด
-            var latestReservation = data[data.length - 1];
+            var latest_reservation = data[data.length - 1];
 
-            $('#reservation_id').text(latestReservation.reservation_id);
-            $('#room_count').text(latestReservation.room_count + ' ห้อง');
-            $('#during').text(latestReservation.check_in + ' - ' + latestReservation.check_out);
-            $('#total_price').text(latestReservation.total_price.toFixed(2));
-            $('#status').text(latestReservation.status);
+            $('#reservation_id').text(latest_reservation.reservation_id);
+            $('#room_count').text(latest_reservation.room_count + ' ห้อง');
+            $('#during').text(latest_reservation.check_in + ' - ' + latest_reservation.check_out);
+            $('#total_price').text(latest_reservation.total_price.toFixed(2));
+            $('#status').text(latest_reservation.status);
 
             // แสดงราคารวม
-            sumPrice.text(latestReservation.total_price.toFixed(2));
+            sum_price.text(latest_reservation.total_price.toFixed(2));
 
             // กำหนดรายละเอียดการจองในปุ่ม
-            $('#reserve-room-button').attr('data-reservation-id', latestReservation.reservation_id);
+            $('#reserve_room_button').attr('data-reservation-id', latest_reservation.reservation_id);
         } else {
             // ถ้าไม่มีข้อมูล
-            statusBox.text('ไม่พบข้อมูลการจอง');
-            sumPrice.text('0.00');
+            status_box.text('ไม่พบข้อมูลการจอง');
+            sum_price.text('0.00');
         }
     }
 
     // ตรวจสอบการคลิกปุ่ม
-    $('#reserve-room-button').on('click', function () {
+    $('#reserve_room_button').on('click', function () {
         var reservationId = $(this).data('reservation-id');
         // ทำสิ่งที่คุณต้องการเมื่อคลิกปุ่ม สามารถเปิดหน้าจอจองห้องได้
         // หรือทำการ redirect ไปยังหน้าจอจองห้องของคุณ

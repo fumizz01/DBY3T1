@@ -1,15 +1,12 @@
 $(document).ready(function () {
-    /* $("#reserve-room-button").click(function() {
-        checkRoomNumber();
-      }); */
 
     document.getElementById('create_reserve').addEventListener('submit', function(event) { 
-        var urlParams = new URLSearchParams(window.location.search);
-        var adult = urlParams.get('adult');
-        var child = urlParams.get('child');
+        var url_params = new URLSearchParams(window.location.search);
+        var adult = url_params.get('adult');
+        var child = url_params.get('child');
 
-        var number_room_2 = parseInt(document.getElementById("2selected-Room-Count").innerText);
-        var number_room_1 = parseInt(document.getElementById("1selected-Room-Count").innerText);
+        var number_room_2 = parseInt(document.getElementById("2selected_Room_Count").innerText);
+        var number_room_1 = parseInt(document.getElementById("1selected_Room_Count").innerText);
 
         var number_adult = Number(adult);
         var number_child = Number(child);
@@ -44,194 +41,144 @@ $(document).ready(function () {
             alert("จำนวนห้องไม่เพียงพอ");
             event.preventDefault();
         }
-        /* event.preventDefault();
-        var data = new FormData(this);
-        $.ajax({
-            type: "POST",
-            url: "/reserve/create",
-            data: data,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-                console.log(data);
-                if (data.status == 200) {
-                    alert(data.message);
-                    window.location.href = "/my-reserve";
-                } else {
-                    alert(data.message);
-                }
-            },
-            error: function(data) {
-                console.log('Error:', data);
-            }
-        }); */
+
     }); 
 
     /* hide show password */
-    $("body").on('click', '#disable-reserve-room-button', function() {
+    $("body").on('click', '#disable_reserve_room_button', function() {
         alert('กรุณาเข้าสู่ระบบก่อนจองห้อง');
     });
 
     get_room_detail();
-    date_cal();
-    var urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams);
+    calculate_date();
+    var url_params = new URLSearchParams(window.location.search);
+    console.log(url_params);
 });
 
-var number_room_2 ;
-var number_room_1 ;
 /* validate Input */
 
 document.addEventListener('DOMContentLoaded', function () {
     // ดึงค่าจาก URL parameters
-    var urlParams = new URLSearchParams(window.location.search);
-    var checkinDate = urlParams.get('checkin');
-    var checkoutDate = urlParams.get('checkout');
-    var adult = urlParams.get('adult');
-    var child = urlParams.get('child');
+    var url_params = new URLSearchParams(window.location.search);
+    var checkin_date = url_params.get('checkin');
+    var checkout_date = url_params.get('checkout');
+    var adult = url_params.get('adult');
+    var child = url_params.get('child');
 
-    var [year_in, month_in, day_in] = checkinDate.split('-');
-    var [year_out, month_out, day_out] = checkoutDate.split('-');
+    var [year_in, month_in, day_in] = checkin_date.split('-');
+    var [year_out, month_out, day_out] = checkout_date.split('-');
 
     // แสดงค่าใน element
-    document.getElementById('2bed-checkin-dateDD').innerText = day_in;
-    document.getElementById('2bed-checkin-dateMM').innerText = month_in;
-    document.getElementById('2bed-checkin-dateYYYY').innerText = year_in;
+    document.getElementById('2bed_checkin_dateDD').innerText = day_in;
+    document.getElementById('2bed_checkin_dateMM').innerText = month_in;
+    document.getElementById('2bed_checkin_dateYYYY').innerText = year_in;
 
-    document.getElementById('2bed-checkout-dateDD').innerText = day_out;
-    document.getElementById('2bed-checkout-dateMM').innerText = month_out;
-    document.getElementById('2bed-checkout-dateYYYY').innerText = year_out;
+    document.getElementById('2bed_checkout_dateDD').innerText = day_out;
+    document.getElementById('2bed_checkout_dateMM').innerText = month_out;
+    document.getElementById('2bed_checkout_dateYYYY').innerText = year_out;
 
-    document.getElementById('1bed-checkin-dateDD').innerText = day_in;
-    document.getElementById('1bed-checkin-dateMM').innerText = month_in;
-    document.getElementById('1bed-checkin-dateYYYY').innerText = year_in;
+    document.getElementById('1bed_checkin_dateDD').innerText = day_in;
+    document.getElementById('1bed_checkin_dateMM').innerText = month_in;
+    document.getElementById('1bed_checkin_dateYYYY').innerText = year_in;
 
-    document.getElementById('1bed-checkout-dateDD').innerText = day_out;
-    document.getElementById('1bed-checkout-dateMM').innerText = month_out;
-    document.getElementById('1bed-checkout-dateYYYY').innerText = year_out;
+    document.getElementById('1bed_checkout_dateDD').innerText = day_out;
+    document.getElementById('1bed_checkout_dateMM').innerText = month_out;
+    document.getElementById('1bed_checkout_dateYYYY').innerText = year_out;
 
-    document.getElementById('2bed-checkin-dateD').innerText = day_in;
-    document.getElementById('2bed-checkin-dateM').innerText = month_in;
-    document.getElementById('2bed-checkin-dateY').innerText = year_in;
+    /* ส่วนline summary */
+    document.getElementById('2bed_checkin_dateD').innerText = day_in;
+    document.getElementById('2bed_checkin_dateM').innerText = month_in;
+    document.getElementById('2bed_checkin_dateY').innerText = year_in;
 
-    document.getElementById('2bed-checkout-dateD').innerText = day_out;
-    document.getElementById('2bed-checkout-dateM').innerText = month_out;
-    document.getElementById('2bed-checkout-dateY').innerText = year_out;
+    document.getElementById('2bed_checkout_dateD').innerText = day_out;
+    document.getElementById('2bed_checkout_dateM').innerText = month_out;
+    document.getElementById('2bed_checkout_dateY').innerText = year_out;
+    
+    document.getElementById('1bed_checkin_dateD').innerText = day_in;
+    document.getElementById('1bed_checkin_dateM').innerText = month_in;
+    document.getElementById('1bed_checkin_dateY').innerText = year_in;
+    
+    document.getElementById('1bed_checkout_dateD').innerText = day_out;
+    document.getElementById('1bed_checkout_dateM').innerText = month_out;
+    document.getElementById('1bed_checkout_dateY').innerText = year_out;
 
-    document.getElementById('1bed-checkin-dateD').innerText = day_in;
-    document.getElementById('1bed-checkin-dateM').innerText = month_in;
-    document.getElementById('1bed-checkin-dateY').innerText = year_in;
+    document.getElementById('reserve_value_adult').innerText  = adult;
+    document.getElementById('reserve_value_child').innerText  = child;
 
-    document.getElementById('1bed-checkout-dateD').innerText = day_out;
-    document.getElementById('1bed-checkout-dateM').innerText = month_out;
-    document.getElementById('1bed-checkout-dateY').innerText = year_out;
+    document.getElementById('reserve_value_child').innerText  = child;
 
-    document.getElementById('reserve-value-adult').innerText  = adult;
-    document.getElementById('reserve-value-child').innerText  = child;
+    document.getElementById('input_checkin').value = month_in + '/' + day_in + '/' + year_in;
+    document.getElementById('input_checkout').value = month_out + '/' + day_out + '/' + year_out;
 
-    document.getElementById('reserve-value-child').innerText  = child;
-
-    document.getElementById('input-checkin').value = month_in + '/' + day_in + '/' + year_in;
-    document.getElementById('input-checkout').value = month_out + '/' + day_out + '/' + year_out;
-
-    console.log('Check-in Date:', typeof checkinDate);
-    console.log('Check-out Date:', checkoutDate);
+    console.log('Check-in Date:', checkin_date);
+    console.log('Check-out Date:', checkout_date);
     console.log('Adult:', adult);
     console.log('Child:', child);
 });
 
 
-function TwoUpdateValue(elementId, increment) {
+function two_update_value(elementId, increment) {
     get_room_detail();
-    var availableRooms = parseInt($("#2-number-available-room").text());
-    let MyElement = document.getElementById(elementId);
-    let min = parseInt(MyElement.getAttribute("min"));
-    let max = Number(availableRooms);
-    let val = parseInt(MyElement.innerHTML);
-    let newValue = 0;
-    newValue = val + increment;
+    var available_rooms = parseInt($("#2_number_available_room").text());
+    let my_element = document.getElementById(elementId);
+    let min = parseInt(my_element.getAttribute("min"));
+    let max = Number(available_rooms);
+    let val = parseInt(my_element.innerHTML);
+    let new_value = 0;
+    new_value = val + increment;
 
-    if (newValue >= min && newValue <= max) {
+    if (new_value >= min && new_value <= max) {
         // Update the number_room_2 variable
-        MyElement.innerHTML = newValue;
-        document.getElementById("2number-room").innerHTML = Number(newValue);
-        document.getElementById("input-2number-room").value = newValue;
-        return newValue;
+        my_element.innerHTML = new_value;
+        document.getElementById("2number_room").innerHTML = Number(new_value);
+        document.getElementById("input_2number_room").value = new_value;
+        return new_value;
     }
     console.log(min,max)
 }
 
-function OneUpdateValue(elementId, increment) {
+function one_update_value(elementId, increment) {
     get_room_detail();
-    var availableRooms = parseInt($("#1-number-available-room").text());
-    let MyElement = document.getElementById(elementId);
-    let min = parseInt(MyElement.getAttribute("min"));
-    let max = Number(availableRooms)
-    let val = parseInt(MyElement.innerHTML);
-    let newValue = 0;
-    newValue = val + increment;
+    var available_rooms = parseInt($("#1_number_available_room").text());
+    let my_element = document.getElementById(elementId);
+    let min = parseInt(my_element.getAttribute("min"));
+    let max = Number(available_rooms)
+    let val = parseInt(my_element.innerHTML);
+    let new_value = 0;
+    new_value = val + increment;
 
-    if (newValue >= min && newValue <= max) {
-        MyElement.innerHTML = newValue;
+    if (new_value >= min && new_value <= max) {
+        my_element.innerHTML = new_value;
         // Update the number_room_1 variable
-        document.getElementById("1number-room").innerHTML = Number(newValue);
-        document.getElementById("input-1number-room").value = newValue;
-        re_room_count();
-        return newValue;
+        document.getElementById("1number_room").innerHTML = Number(new_value);
+        document.getElementById("input_1number_room").value = new_value;
+        return new_value;
     }
     console.log(min,max)
 }
 
-/* function checkRoomNumber() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var adult = urlParams.get('adult');
 
-    var number_room_2 = parseInt(document.getElementById("2selected-Room-Count").innerText);
-
-    var number_room_1 = parseInt(document.getElementById("1selected-Room-Count").innerText);
-
-    var number_adult = Number(adult);
-  
-    // คำนวณจำนวนห้องทั้งหมด
-    var total_room = number_room_2 + number_room_1;
-    var total_number_adult = number_adult / total_room;
-    console.log(total_room)
-  
-    // ตรวจสอบว่าจำนวนห้องทั้งหมดมากกว่าเท่ากับ 1 หรือน้อยกว่าเท่ากับ 2
-    if (total_number_adult >= 1 && total_number_adult <= 2) {
-      // แสดงข้อความว่า "จำนวนห้องเพียงพอ"
-      alert("จำนวนห้องเพียงพอ");
-    } else if (total_number_adult < 1) {
-      // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
-      alert("จำนวนห้องมากกว่าจำนวนคน");
-    }
-    else {
-        alert("จำนวนห้องไม่เพียงพอ");
-    }
-  }; */
-function date_cal(){
-    var urlParams = new URLSearchParams(window.location.search);
-    var startDateString = urlParams.get('checkin');
-    console.log(startDate);
-    var endDateString    = urlParams.get('checkout');
+function calculate_date(){
+    var url_params = new URLSearchParams(window.location.search);
+    var start_date_string = url_params.get('checkin');
+    var end_date_string    = url_params.get('checkout');
     
     // Convert date strings to Date objects
-    var startDate = new Date(startDateString);
-    var endDate = new Date(endDateString);
+    var start_date = new Date(start_date_string);
+    var end_date = new Date(end_date_string);
 
     // Calculate the difference in milliseconds
-    var timeDifference = endDate - startDate;
-    console.log(timeDifference.property);
+    var time_difference = end_date - start_date;
+    console.log(time_difference.property);
 
     // Calculate the difference in days
-    var dayDifference = timeDifference / (1000 * 60 * 60 * 24);
+    var day_difference = time_difference / (1000 * 60 * 60 * 24);
 
-    console.log("Number of days between the two dates:", dayDifference);
-    return dayDifference 
+    console.log("Number of days between the two dates:", day_difference);
+    return day_difference 
 };
 
 function get_room_detail(){
-    var ROW_NUMBER = 5;
     $.ajax({                                                            // call backend /invoice/detail/IN100/22
         url:  '/reservation/price',
         type:  'get',
@@ -246,23 +193,23 @@ function get_room_detail(){
             console.log(single, double);
             console.log(single.room_type, single.room_price , single.room_type_count ,single.room_capacity_adult, single.room_capacity_child);
             console.log(double.room_type, double.room_price , double.room_type_count ,double.room_capacity_adult, single.room_capacity_child);
-            var date = date_cal();
+            var date = calculate_date();
             console.log("date",date);
-            $('#2bed-price').html(parseFloat(double.room_price).toFixed(2));
-            $('#1bed-price').html(parseFloat(single.room_price).toFixed(2));
+            $('#2bed_price').html(parseFloat(double.room_price).toFixed(2));
+            $('#1bed_price').html(parseFloat(single.room_price).toFixed(2));
 
-            $('#2bed-room-capacity-adult').html(double.room_capacity_adult);
-            $('#2bed-room-capacity-child').html(double.room_capacity_child);
+            $('#2bed_room_capacity_adult').html(double.room_capacity_adult);
+            $('#2bed_room_capacity_child').html(double.room_capacity_child);
            
             $('#room-capacity-adult').html(single.room_capacity_adult);
             $('#room-capacity-child').html(single.room_capacity_child);
 
-            $('#1-number-available-room').html(single.room_type_count);
-            $('#2-number-available-room').html(double.room_type_count);
+            $('#1_number_available_room').html(single.room_type_count);
+            $('#2_number_available_room').html(double.room_type_count);
 
             //room_count 
-            var single_room_count = parseInt(document.getElementById("1selected-Room-Count").innerText);
-            var double_room_count = parseInt(document.getElementById("2selected-Room-Count").innerText);
+            var single_room_count = parseInt(document.getElementById("1selected_Room_Count").innerText);
+            var double_room_count = parseInt(document.getElementById("2selected_Room_Count").innerText);
             console.log('sr',single_room_count);
             console.log('dr',double_room_count);
             var single_total_price = single.room_price * date *single_room_count;
@@ -272,22 +219,17 @@ function get_room_detail(){
 
 
            
-            $('#2-bed-total').html(double_total_price);
-            $('#1-bed-total').html(single_total_price);
+            $('#2_bed_total').html(double_total_price);
+            $('#1_bed_total').html(single_total_price);
             var total_price = single_total_price+double_total_price;
             $('#bed-total').html(total_price);
-            $('#input-total_price').val(total_price);
+            $('#input_total_price').val(total_price);
         },
     });
 }
 
-function re_room_count(){
-    var single_room_count = parseInt(document.getElementById("1selected-Room-Count").innerText);
-    var double_room_count = parseInt(document.getElementById("2selected-Room-Count").innerText);
-    console.log('sr',single_room_count);
-};
 
-  function SubmitForm() {
+  function submit_form() {
 
     $.ajax({                                        // call backend /customer/list
         url:  '/customer/list',

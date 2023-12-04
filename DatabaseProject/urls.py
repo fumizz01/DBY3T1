@@ -27,10 +27,10 @@ urlpatterns = [
     path('logout', views.logout_user, name='logout'),
     path('register', views.register, name='register'),
     path('reserve', views.reserve, name='reserve'),
-    path('my-reserve',views.MyReservationInfo.as_view(), name='my_reserve'),
+    path('my_reserve',views.MyReservationInfo.as_view(), name='my_reserve'),
     
     path('em/reserve',views.em_reserve, name='employee_reserve'),
-    path('em/room-status',views.RoomStatusInfo.as_view(), name='employee_room_status'),
+    path('em/room_status',views.RoomStatusInfo.as_view(), name='employee_room_status'),
     path('em/register',views.em_register, name='employee_register'),
     path('em/login',views.em_login, name='em_login'),
     path('em/logout',views.em_logout, name='em_logout'),
@@ -45,13 +45,5 @@ urlpatterns = [
     #post
     path('customer/register',views.CustomerRegister.as_view(), name='customer_register'),
     path('create/reserve',views.CreateReserve.as_view(), name='create_reserve'),
-    
-    #path('customer/login',views.login_customer, name='login_customer'),
-    #path('room/status',views.RoomStatusInfo.as_view(), name='room_status'),
-    #path('reservation/list',views.ReservationList.as_view(), name='reservation_list'),
-    #path('my-reserve',views.my_reserve, name='my_reserve'),
-    #path('customer/register',views.register_user, name='register_user'),
-    #path('em/reserve',views.RoomStatusInfo.as_view(), name='employee_reserve'),
-    
-    path('change-password',views.change_password, name='change_password')
+    path('change_password',views.change_password, name='change_password')
 ]

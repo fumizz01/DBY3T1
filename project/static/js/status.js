@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $('.d-flex').each(function () {
-        var statusElement = $(this).find('.status');
-        if (statusElement.text().trim().toLowerCase() === 'unavailable') {
+        var status_element = $(this).find('.status');
+        if (status_element.text().trim().tolower_case() === 'unavailable') {
           $(this).find('.status').addClass('unavailable');
-        }else if (statusElement.text().trim().toLowerCase() === 'available'){
+        }else if (status_element.text().trim().tolower_case() === 'available'){
             $(this).find('.status').addClass('available');
         }else{
             $(this).addClass('cencel');
@@ -14,10 +14,10 @@ $(document).ready(function () {
 
 
     // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
-    loadData();
+    load_data();
 
 
-    function loadData() {
+    function load_data() {
         // ทำ AJAX request ไปยัง endpoint ของคุณ
         $.ajax({
             url: '',  // แก้ไขเป็น URL ของ API หรือ endpoint ที่คุณใช้
@@ -25,7 +25,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 // ทำการเรียกฟังก์ชั่นเพื่อแสดงข้อมูลในตาราง
-                displayData(data);
+                display_data(data);
             },
             error: function (error) {
                 console.log('Error:', error);
@@ -33,7 +33,7 @@ $(document).ready(function () {
         });
     }
 
-    function displayData(data) {
+    function display_data(data) {
         // เลือก tbody ของตาราง
         var tbody = $('#table_main tbody');
 

@@ -24,14 +24,14 @@ form {
     margin: 0;
     padding: 0;
 }
-.hotelpage-container
+.hotelpage_container
 {
     /*font zone*/
     color: #000;
     font-size: 18px;
     font-family: Kanit;
 
-    /*ขนาดของ hotelpage-container*/
+    /*ขนาดของ hotelpage_container*/
     width: 75%;
     height: 35%;
     border-radius: 8px;
@@ -42,7 +42,7 @@ form {
 
 }
 
-.header-hotelpage
+.header_hotelpage
 {
     margin-bottom: 0;
     text-align: center;
@@ -51,7 +51,7 @@ form {
     /* color: white; */
 }
 
-.text-flexline {
+.text_flexline {
     display: flex;
 }
 
@@ -165,7 +165,7 @@ div.right{
 div.left{
     padding: 10px;
 }
-p.text-inline {
+p.text_inline {
     margin:auto;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -174,7 +174,7 @@ p.text-inline {
     user-select: none;
     display: inline;
 }
-.step-inline{
+.step_inline{
     display: inline;
 }
 .dropdown .container
@@ -253,7 +253,7 @@ button.increment
     overflow: hidden;
 }
 
-.gradient-bg {
+.gradient_bg {
     z-index: -100;
     position: absolute;
     --size: 250px;
@@ -276,7 +276,7 @@ button.increment
 }
   
   @media (min-width: 100vw) {
-    .gradient-bg {
+    .gradient_bg {
       --size: 250px;
     }
   }

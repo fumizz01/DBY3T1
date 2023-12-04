@@ -28,7 +28,7 @@ ul {
     list-style-type: none;
 }
 
-div.reserve-box {
+div.reserve_box {
     display: flex;
     margin: 10px;
     margin-right: 40px;
@@ -38,12 +38,12 @@ div.reserve-box {
 }
 
 
-div.img-container {
+div.img_container {
     align-self: center;
     text-align: center;
 }
 
-img.hotel-img {
+img.hotel_img {
     width: 80%;
     height: 65%;
     max-width: 381px;
@@ -53,7 +53,7 @@ img.hotel-img {
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
-div.detail-container {
+div.detail_container {
     width: 67.5%;
     margin-right: 2.5%;
     margin-top: 10px;
@@ -65,22 +65,22 @@ div.detail-container {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-fieldset.line-detail {
+fieldset.line_detail {
     display: block;
     margin: 0;
     padding: 0;
     border: 0;
 }
 
-div.line-detail-left {
+div.line_detail_left {
     float: left;
 }
 
-div.line-detail-right {
+div.line_detail_right {
     float: right;
 }
 
-.text-detail {
+.text_detail {
     display: inline-block;
     margin-top: 0;
 
@@ -91,14 +91,14 @@ div.line-detail-right {
     color: #000;
 }
 
-.text-sub-detail-1 {
+.text-sub_detail_1 {
     display: inline-block;
     margin-top: 5px;
     margin-left: 20px; 
 
 }
 
-.text-sub-detail-2 {
+.text_sub_detail_2 {
     display: inline-block;
     margin-top: 10px;
     margin-left: 10px; 
@@ -106,7 +106,7 @@ div.line-detail-right {
 
 }
 
-.sub-detail-1
+.sub_detail_1
 {
     display: flex;
     margin-top: 1px;
@@ -114,27 +114,27 @@ div.line-detail-right {
     margin-right: 20px;
 }
 
-.sub-detail-2
+.sub_detail_2
 {
     display: flex;
     margin-left: 50px;
     margin-right: 20px;
 }
 
-.sub-detail-1 .bed-img
+.sub_detail_1 .bed_img
 {   
     width: 30px;
     height: 25px;
 }
 
-.sub-detail-2 .area-img
+.sub_detail_2 .area_img
 {
     width: 40px;
     height: 45px;
     margin-right: 5px;
 }
 
-div.summary-box {
+div.summary_box {
     padding: 10px;
     display: block;
     height: fit-content;
@@ -145,7 +145,7 @@ div.summary-box {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-button.room-detail-button {
+button.room_detail_button {
     border-radius: 20px;
     cursor: pointer;
 }
@@ -157,7 +157,7 @@ button.room-number-button {
     cursor: pointer;
 }
 
-.reserve-room-button {
+.reserve_room_button {
     margin: 35px auto 0 auto;
     display: block;
     min-width: 173px;
@@ -193,7 +193,7 @@ p {
     line-height: normal;
 }
 
-.big-font {
+.big_font {
     font-size: 28px;
     margin-top: 1px;
     margin-bottom: 16px;
@@ -203,7 +203,7 @@ div.hide {
     display: none;
 }
 
-.head-container
+.head_container
 {
     color: #000;
     font-family: Inter;
@@ -212,7 +212,7 @@ div.hide {
     text-align: center;
 }
 
-div.summary-container {
+div.summary_container {
     margin: 2.5%;
     display: block;
     height: fit-content;
@@ -222,27 +222,27 @@ div.summary-container {
     background: rgba(255,255,255,0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.content-flex{
+.content_flex{
     align-items: center;
     height: 15%;
     display: flex;
     justify-content: space-around;
 }
 
-.summary-table td
+.summary_table td
 {
     text-align: center;
     padding: 10px 35px;
 }
 
-.summary-table
+.summary_table
 {
     float: left;
     border-bottom: 1px solid #AEB6BF;
     margin-bottom: 30px;
 }
 
-.line-summary
+.line_summary
 {   
     margin-left: 3%;
     text-align: center;
@@ -285,7 +285,7 @@ div.summary-container {
     z-index: -1;
     overflow: hidden;
 }
-.gradient-bg {
+.gradient_bg {
     --size: 250x;
     --speed: 10s;
     --easing: cubic-bezier(0.5, 0.2, 0.2, 0.5);
@@ -310,7 +310,7 @@ div.summary-container {
 }
   
   @media (min-width: 720px) {
-    .gradient-bg {
+    .gradient_bg {
       --size: 250px;
     }
   }

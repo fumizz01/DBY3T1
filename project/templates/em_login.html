@@ -1,41 +1,45 @@
 {% load static %}
 <html>
-    <head>
-        <title>Login</title>
 
-        {% include 'general_use/general-script.html' %}
+<head>
+    <title>Login</title>
 
-        <link rel='stylesheet' href="{% static 'css/login-register.css' %}">
-    </head>
-    <body>
-        {% include 'general_use/em_header.html' %}
-        <div class="BG">
-            <div class="gradient-bg"></div>
-            <div class="gradient-bg item2"></div>
-        </div>
-        <div class = "box">
-            <form action = "{% url 'em_login' %}" method="post">
-                {%csrf_token %} 
-                <div id="login-container" class = "login-container">
-                    <h2>เข้าสู่ระบบ พนักงาน</h2>
-                    <p>ชื่อผู้ใช้</p>
-                    <i class='bx bxs-user-circle icon'></i>
-                    <input class="input-field" id = "login-user"  name = "username" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
-                    <p>รหัสผ่าน</p>
-                    <i class='bx bxs-lock icon'></i>
-                    <input class="input-field password" id = "login-password"  name = "password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   
-                        maxlength="15" required>
-                        <i class="bx bx-hide eye-icon password-validation"></i>
-                    <input id = "login-button" class='submit' type="submit" value="ยันยืน">
-                </div>
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="message-auth">{{ message }}</p>
-                    {% endfor %}
-                {% endif %}
-            </form>
-        </div>
-    </body>
-    <script src="{% static 'js/em-login-register.js' %}"></script>
+    {% include 'general_use/general_script.html' %}
+
+    <link rel='stylesheet' href="{% static 'css/login_register.css' %}">
+</head>
+
+<body>
+    {% include 'general_use/em_header.html' %}
+    <div class="BG">
+        <div class="gradient_bg"></div>
+        <div class="gradient_bg item2"></div>
+    </div>
+    <div class="box">
+        <form action="{% url 'em_login' %}" method="post">
+            {%csrf_token %}
+            <div id="login_container" class="login_container">
+                <h2>เข้าสู่ระบบ พนักงาน</h2>
+                <p>ชื่อผู้ใช้</p>
+                <i class='bx bxs-user-circle icon'></i>
+                <input class="input_field" id="login_user" name="username" type="text"
+                    placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
+                <p>รหัสผ่าน</p>
+                <i class='bx bxs-lock icon'></i>
+                <input class="input_field password" id="login_password" name="password" type="password"
+                    placeholder="กรุณาใส่รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="15"
+                    required>
+                <i class="bx bx-hide eye_icon password_validation"></i>
+                <input id="login_button" class='submit' type="submit" value="ยันยืน">
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <p class="message_auth">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</body>
+<script src="{% static 'js/em_login_register.js' %}"></script>
+
 </html>
-

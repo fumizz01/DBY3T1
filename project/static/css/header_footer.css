@@ -27,7 +27,7 @@ header.header{
     }
 }
 
-H1.header-logo {
+H1.header_logo {
     margin-top: 1em;
     color: #4FD2FC;
     font-family: Jomhuria;
@@ -65,19 +65,8 @@ H1.header-logo {
         font-size: 18px;
     }
 }
-/*
-.content{
-    position: relative;
-    text-align: center;
-    max-width:90%;
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-    justify-content: center;
-} */
 
-div.content-container {
+div.content_container {
     min-height: calc(100vh - (100px + 182px));
 }
 

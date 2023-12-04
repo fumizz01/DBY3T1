@@ -1,308 +1,321 @@
 {% load static %}
 <html>
-    <head>
-        <title>Reserve Hotel's Room</title>
 
-        {% include 'general_use/general-script.html' %}
+<head>
+    <title>Reserve Hotel's Room</title>
 
-        <link rel='stylesheet' href="{% static 'css/reserve.css' %}">
-    </head>
-    <body>
-        {% include 'general_use/header.html' %}
-        <div class="BG">
-            <div class="gradient-bg"></div>
-            <div class="gradient-bg item2"></div>
-            <div class="gradient-bg item3"></div>
+    {% include 'general_use/general_script.html' %}
+
+    <link rel='stylesheet' href="{% static 'css/reserve.css' %}">
+</head>
+
+<body>
+    {% include 'general_use/header.html' %}
+    <div class="BG">
+        <div class="gradient_bg"></div>
+        <div class="gradient_bg item2"></div>
+        <div class="gradient_bg item3"></div>
+    </div>
+    <div class='content_container'>
+        <div class='head'>
+            <h2 class="head">จองห้องพัก</h2>
         </div>
-        <div class='content-container'>
-            <div class='head'>
-                <h2 class="head">จองห้องพัก</h2>
-            </div>
-            <ul>
-                <li>
-                    <div class="item-box">
-                        <form>
-                            <div class="reserve-box">
-                                <div class="img-container">
-                                    <img src="{% static 'picture/double-bed-fix.jpg' %}" class="hotel-img">
-                                    <div class="sub-detail-1">
-                                        <img src="{% static 'picture/th 1.png' %}" class = "bed-img">
-                                        <p class="text-sub-detail-1">2 single bed</p>
-                                    </div>
-                                    <div class="sub-detail-2">
-                                        <img src="{% static 'picture/2763541 1.png' %}" class = "area-img">
-                                        <p class="text-sub-detail-2">ขนาดห้อง: 30 ตารางเมตร</p>
-                                    </div>
+        <ul>
+            <li>
+                <div class="item_box">
+                    <form>
+                        <div class="reserve_box">
+                            <div class="img_container">
+                                <img src="{% static 'picture/double-bed-fix.jpg' %}" class="hotel_img">
+                                <div class="sub_detail_1">
+                                    <img src="{% static 'picture/th 1.png' %}" class="bed_img">
+                                    <p class="text-sub_detail_1">2 single bed</p>
                                 </div>
-                                <div class="detail-container">
-
-                                    <h3 id="room-type" class="room-type big-font">เตียงคู่</h3>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">ความจุห้อง:</p>
-                                            <p id="2bed-room-capacity-adult" class="text-detail">2</p>
-                                            <i class="fa-solid fa-person fa-lg" style="color: #000000;"></i>
-                                            <p id="2bed-room-capacity-child" class="text-detail">2</p>
-                                            <i class="fa-solid fa-child-reaching"></i>
-                                        </div>
-                                        <div class="line-detail-right">
-                                            <p id="2bed-price" class="text-detail val big-font">0000.00</p>
-                                            <p class="text-detail val">บาท</p>
-                                            <button class="text-detail room-detail-button" id="room-detail-button">?</button>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">วันที่:</p>
-                                            <p class="text-detail" id="2bed-checkin-dateDD">DD</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="2bed-checkin-dateMM">MM</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="2bed-checkin-dateYYYY">YYYY</p>
-
-                                            <p class="text-detail">-</p>
-
-                                            <p class="text-detail" id="2bed-checkout-dateDD">DD</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="2bed-checkout-dateMM">MM</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="2bed-checkout-dateYYYY">YYYY</p>
-
-                                        </div>
-                                        <div class="line-detail-right">
-                                            <p class="text-detail">ราคาสำหรับ 1 คืน</p>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">จำนวนห้อง:</p>
-
-                                            <div class="step">
-                                                <span class="button" id="2bed-number-minus" onclick="TwoUpdateValue('2selected-Room-Count', -1)">-</span>
-                                                <p class="guest" id="2selected-Room-Count" min="0" max="10" step="1" readonly>0</p>
-                                                <span class="button" id="2bed-number-plus" onclick="TwoUpdateValue('2selected-Room-Count', 1)">+</span>
-                                            </div>     
-                                                
-                                        </div>
-                                    </fieldset>
-
-                                    <hr>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">เหลือห้อง:</p>
-                                            <p class="text-detail" id="2-number-available-room">0</p>
-                                            <p class="text-detail">ห้อง</p>
-                                        </div>
-                                    </fieldset>
-
+                                <div class="sub_detail_2">
+                                    <img src="{% static 'picture/2763541 1.png' %}" class="area_img">
+                                    <p class="text_sub_detail_2">ขนาดห้อง: 30 ตารางเมตร</p>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </li>
+                            <div class="detail_container">
 
-                <li>
-                    <div class="item-box">
-                        <form>
-                            <div class="reserve-box">
-                                <div class="img-container">
-                                    <img src="{% static 'picture/single-bed.png' %}" class="hotel-img">
-                                    <div class="sub-detail-1">
-                                        <img src="{% static 'picture/th 1.png' %}" class = "bed-img">
-                                        <p class="text-sub-detail-1">1 king size bed</p>
+                                <h3 id="room_type" class="room_type big_font">เตียงคู่</h3>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">ความจุห้อง:</p>
+                                        <p id="2bed_room_capacity_adult" class="text_detail">2</p>
+                                        <i class="fa-solid fa-person fa-lg" style="color: #000000;"></i>
+                                        <p id="2bed_room_capacity_child" class="text_detail">2</p>
+                                        <i class="fa-solid fa-child-reaching"></i>
                                     </div>
-                                    <div class="sub-detail-2">
-                                        <img src="{% static 'picture/2763541 1.png' %}" class = "area-img">
-                                        <p class="text-sub-detail-2">ขนาดห้อง: 30 ตารางเมตร</p>
+                                    <div class="line_detail_right">
+                                        <p id="2bed_price" class="text_detail val big_font">0000.00</p>
+                                        <p class="text_detail val">บาท</p>
+                                        <button class="text_detail room_detail_button"
+                                            id="room_detail_button">?</button>
                                     </div>
+                                </fieldset>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">วันที่:</p>
+                                        <p class="text_detail" id="2bed_checkin_dateDD">DD</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="2bed_checkin_dateMM">MM</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="2bed_checkin_dateYYYY">YYYY</p>
+
+                                        <p class="text_detail">-</p>
+
+                                        <p class="text_detail" id="2bed_checkout_dateDD">DD</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="2bed_checkout_dateMM">MM</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="2bed_checkout_dateYYYY">YYYY</p>
+
+                                    </div>
+                                    <div class="line_detail_right">
+                                        <p class="text_detail">ราคาสำหรับ 1 คืน</p>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">จำนวนห้อง:</p>
+
+                                        <div class="step">
+                                            <span class="button" id="2bed_number_minus"
+                                                onclick="two_update_value('2selected_Room_Count', -1)">-</span>
+                                            <p class="guest" id="2selected_Room_Count" min="0" max="10" step="1"
+                                                readonly>0</p>
+                                            <span class="button" id="2bed_number_plus"
+                                                onclick="two_update_value('2selected_Room_Count', 1)">+</span>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <hr>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">เหลือห้อง:</p>
+                                        <p class="text_detail" id="2_number_available_room">0</p>
+                                        <p class="text_detail">ห้อง</p>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <li>
+                <div class="item_box">
+                    <form>
+                        <div class="reserve_box">
+                            <div class="img_container">
+                                <img src="{% static 'picture/single-bed.png' %}" class="hotel_img">
+                                <div class="sub_detail_1">
+                                    <img src="{% static 'picture/th 1.png' %}" class="bed_img">
+                                    <p class="text-sub_detail_1">1 king size bed</p>
                                 </div>
-                                
-                                <div class="detail-container">
-
-                                    <h3 id="room-type" class="room-type big-font">เตียงเดี่ยว</h3>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">ความจุห้อง:</p>
-                                            <p id="room-capacity-value-adult" class="text-detail">2</p>
-                                            <i class="fa-solid fa-person fa-lg" style="color: #000000;"></i>
-                                            <p id="room-capacity-value-child" class="text-detail">2</p>
-                                            <i class="fa-solid fa-child-reaching"></i>
-                                        </div>
-                                        <div class="line-detail-right">
-                                            <p class="text-detail val big-font" id="1bed-price">0000.00</p>
-                                            <p class="text-detail val">บาท</p>
-                                            <button class="text-detail room-detail-button" id="room-detail-button">?</button>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-
-                                            <p class="text-detail">วันที่:</p>
-                                            <p class="text-detail" id="1bed-checkin-dateDD">DD</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="1bed-checkin-dateMM">MM</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="1bed-checkin-dateYYYY">YYYY</p>
-
-                                            <p class="text-detail">-</p>
-
-                                            <p class="text-detail" id="1bed-checkout-dateDD">DD</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="1bed-checkout-dateMM">MM</p>
-                                            <p class="text-detail">/</p>
-                                            <p class="text-detail" id="1bed-checkout-dateYYYY">YYYY</p>
-                                            
-                                        </div>
-                                        <div class="line-detail-right">
-                                            <p class="text-detail">ราคาสำหรับ 1 คืน</p>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">จำนวนห้อง:</p>
-
-                                            <div class="step">
-                                                <span class="button" id="1bed-number-minus" onclick="OneUpdateValue('1selected-Room-Count', -1)">-</span>
-                                                <p class="guest" id="1selected-Room-Count" min="0" max="10" step="1" readonly>0</p>
-                                                <span class="button" id="1bed-number-plus" onclick="OneUpdateValue('1selected-Room-Count', 1)">+</span>
-                                            </div> 
-
-                                        </div>
-                                    </fieldset>
-
-                                    <hr>
-
-                                    <fieldset class="line-detail">
-                                        <div class="line-detail-left">
-                                            <p class="text-detail">เหลือห้อง:</p>
-                                            <p class="text-detail" id="1-number-available-room">0</p>
-                                            <p class="text-detail">ห้อง</p>
-                                        </div>
-                                    </fieldset>
-
+                                <div class="sub_detail_2">
+                                    <img src="{% static 'picture/2763541 1.png' %}" class="area_img">
+                                    <p class="text_sub_detail_2">ขนาดห้อง: 30 ตารางเมตร</p>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </li>
 
-                <li>
-                    <div class="item-box">
-                        <form id="create_reserve" action="create/reserve" method="post">
-                            {% csrf_token %}
-                            <div class="summary-box">
-                                <form action="" method="post">
+                            <div class="detail_container">
 
-                                    <div class="head-container">
-                                        <h1>สรุปการจอง</h1>
+                                <h3 id="room_type" class="room_type big_font">เตียงเดี่ยว</h3>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">ความจุห้อง:</p>
+                                        <p id="room_capacity_value_adult" class="text_detail">2</p>
+                                        <i class="fa-solid fa-person fa-lg" style="color: #000000;"></i>
+                                        <p id="room_capacity_value_child" class="text_detail">2</p>
+                                        <i class="fa-solid fa-child-reaching"></i>
                                     </div>
-                                    <div class="summary-container">
-                                        <div class="content-flex">
-                                            <table class = summary-table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>ห้องเตียงคู่</td>
-                                                        <td>
-                                                            <p class="sumdate" id="2number-room">0</p>
-                                                            <input id="input-2number-room" type="hidden" name="num_double_room" value="0">
-                                                            <p class="sumdate">ห้อง</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="sumdate" id="2bed-checkin-dateD">DD</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="2bed-checkin-dateM">MM</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="2bed-checkin-dateY">YYYY</p>
-                                                            <input id="input-checkin" type="hidden" name="check_in" vaule="">
-    
-                                                            <p class="sumdate">-</p>
-    
-                                                            <p class="sumdate" id="2bed-checkout-dateD">DD</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="2bed-checkout-dateM">MM</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="2bed-checkout-dateY">YYYY</p>
-                                                            <input id="input-checkout" type="hidden" name="check_out" vaule="">
-                                                        </td>
-                                                        <td>
-                                                            <p class="sumdate" id="2-bed-total">0000.00</p>
-                                                            <p class="sumdate">บาท</p>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span class="table-remove glyphicon glyphicon-remove"></span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ห้องเตียงเดี่ยว</td>
-                                                        <td>
-                                                            <p class="sumdate" id="1number-room">0</p>
-                                                            <input id="input-1number-room" type="hidden" name="num_single_room" value="0">
-                                                            <p class="sumdate">ห้อง</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="sumdate" id="1bed-checkin-dateD">DD</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="1bed-checkin-dateM">MM</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="1bed-checkin-dateY">YYYY</p>
-    
-                                                            <p class="sumdate">-</p>
-    
-                                                            <p class="sumdate" id="1bed-checkout-dateD">DD</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="1bed-checkout-dateM">MM</p>
-                                                            <p class="sumdate">/</p>
-                                                            <p class="sumdate" id="1bed-checkout-dateY">YYYY</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="sumdate" id="1-bed-total">0000.00</p>
-                                                            <p class="sumdate">บาท</p>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span class="table-remove glyphicon glyphicon-remove"></span>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-        
-                                            <div class ='total'>
-                                                <p class="text-detail fonttotal">รวม</p>
-                                                <p class="text-detail fonttotal" id="bed-total">0000.00</p>
-                                                <input id="input-total_price" type="hidden" name="total_price" value="">
-                                                <p class="text-detail fonttotal">บาท</p>
-                                                {% if user.is_authenticated %}
-                                                    <button class="text-detail reserve-room-button" id="reserve-room-button" type="submit">จองห้อง</button>
-                                                {% else %}
-                                                    <button class="text-detail reserve-room-button" id="disable-reserve-room-button" type="button">จองห้อง</button>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-    
-                                        <div class="line-summary">
-                                            <p class="text-detail" id="reserve-value-adult">0</p>
-                                            <p class="text-detail">ผู้ใหญ่</p>
-                                            <p class="text-detail">,</p>
-                                            <p class="text-detail" id="reserve-value-child">0</p>
-                                            <p class="text-detail">เด็ก</p>
-                                        </div>
+                                    <div class="line_detail_right">
+                                        <p class="text_detail val big_font" id="1bed_price">0000.00</p>
+                                        <p class="text_detail val">บาท</p>
+                                        <button class="text_detail room_detail_button"
+                                            id="room_detail_button">?</button>
                                     </div>
-                    
-                                </form>
+                                </fieldset>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+
+                                        <p class="text_detail">วันที่:</p>
+                                        <p class="text_detail" id="1bed_checkin_dateDD">DD</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="1bed_checkin_dateMM">MM</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="1bed_checkin_dateYYYY">YYYY</p>
+
+                                        <p class="text_detail">-</p>
+
+                                        <p class="text_detail" id="1bed_checkout_dateDD">DD</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="1bed_checkout_dateMM">MM</p>
+                                        <p class="text_detail">/</p>
+                                        <p class="text_detail" id="1bed_checkout_dateYYYY">YYYY</p>
+
+                                    </div>
+                                    <div class="line_detail_right">
+                                        <p class="text_detail">ราคาสำหรับ 1 คืน</p>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">จำนวนห้อง:</p>
+
+                                        <div class="step">
+                                            <span class="button" id="1bed_number_minus"
+                                                onclick="one_update_value('1selected_Room_Count', -1)">-</span>
+                                            <p class="guest" id="1selected_Room_Count" min="0" max="10" step="1"
+                                                readonly>0</p>
+                                            <span class="button" id="1bed_number_plus"
+                                                onclick="one_update_value('1selected_Room_Count', 1)">+</span>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <hr>
+
+                                <fieldset class="line_detail">
+                                    <div class="line_detail_left">
+                                        <p class="text_detail">เหลือห้อง:</p>
+                                        <p class="text_detail" id="1_number_available_room">0</p>
+                                        <p class="text_detail">ห้อง</p>
+                                    </div>
+                                </fieldset>
+
                             </div>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
 
-        {% include 'general_use/footer.html' %} 
-    </body>
-    <script src="{% static 'js/reserve.js' %}"></script>
+            <li>
+                <div class="item_box">
+                    <form id="create_reserve" action="create/reserve" method="post">
+                        {% csrf_token %}
+                        <div class="summary_box">
+                            <form action="" method="post">
+
+                                <div class="head_container">
+                                    <h1>สรุปการจอง</h1>
+                                </div>
+                                <div class="summary_container">
+                                    <div class="content_flex">
+                                        <table class=summary_table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>ห้องเตียงคู่</td>
+                                                    <td>
+                                                        <p class="sumdate" id="2number_room">0</p>
+                                                        <input id="input_2number_room" type="hidden"
+                                                            name="num_double_room" value="0">
+                                                        <p class="sumdate">ห้อง</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate" id="2bed_checkin_dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed_checkin_dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed_checkin_dateY">YYYY</p>
+                                                        <input id="input_checkin" type="hidden" name="check_in" vaule="">
+                                                        <p class="sumdate">-</p>
+                                                        <p class="sumdate" id="2bed_checkout_dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed_checkout_dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="2bed_checkout_dateY">YYYY</p>
+                                                        <input id="input_checkout" type="hidden" name="check_out" vaule="">
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate" id="2_bed_total">0000.00</p>
+                                                        <p class="sumdate">บาท</p>
+                                                    </td>
+                                                    <td align="center">
+                                                        <span class="table_remove glyphicon glyphicon-remove"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ห้องเตียงเดี่ยว</td>
+                                                    <td>
+                                                        <p class="sumdate" id="1number_room">0</p>
+                                                        <input id="input_1number_room" type="hidden"
+                                                            name="num_single_room" value="0">
+                                                        <p class="sumdate">ห้อง</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate" id="1bed_checkin_dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed_checkin_dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed_checkin_dateY">YYYY</p>
+
+                                                        <p class="sumdate">-</p>
+
+                                                        <p class="sumdate" id="1bed_checkout_dateD">DD</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed_checkout_dateM">MM</p>
+                                                        <p class="sumdate">/</p>
+                                                        <p class="sumdate" id="1bed_checkout_dateY">YYYY</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="sumdate" id="1_bed_total">0000.00</p>
+                                                        <p class="sumdate">บาท</p>
+                                                    </td>
+                                                    <td align="center">
+                                                        <span class="table_remove glyphicon glyphicon-remove"></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class='total'>
+                                            <p class="text_detail fonttotal">รวม</p>
+                                            <p class="text_detail fonttotal" id="bed-total">0000.00</p>
+                                            <input id="input_total_price" type="hidden" name="total_price" value="">
+                                            <p class="text_detail fonttotal">บาท</p>
+                                            {% if user.is_authenticated %}
+                                            <button class="text_detail reserve_room_button" id="reserve_room_button"
+                                                type="submit">จองห้อง</button>
+                                            {% else %}
+                                            <button class="text_detail reserve_room_button"
+                                                id="disable_reserve_room_button" type="button">จองห้อง</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="line_summary">
+                                        <p class="text_detail" id="reserve_value_adult">0</p>
+                                        <p class="text_detail">ผู้ใหญ่</p>
+                                        <p class="text_detail">,</p>
+                                        <p class="text_detail" id="reserve_value_child">0</p>
+                                        <p class="text_detail">เด็ก</p>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    {% include 'general_use/footer.html' %}
+</body>
+<script src="{% static 'js/reserve.js' %}"></script>
+
 </html>

@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
     /* hide show password */
-    $("body").on('click', '#eye-pass1', function() {
+    $("body").on('click', '#eye_pass1', function() {
         $(this).toggleClass("bx-show bx-hide");
-        var input = $("#change-password");
+        var input = $("#change_password");
         if (input.attr("type") === "password") {
             input.attr("type", "text");
         } else {
@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
     });
 
-    $("body").on('click', '#eye-pass2', function() {
+    $("body").on('click', '#eye_pass2', function() {
         $(this).toggleClass("bx-show bx-hide");
         var input = $("#password_confirm");
         if (input.attr("type") === "password") {
@@ -22,19 +22,19 @@ $(document).ready(function () {
     });
 
     /* show password strength */
-    $('#password-strength-status').hide();
+    $('#password_strength_status').hide();
     $('.pswd_info').hide();
-    $('#change-password').keyup(function(event) {
-        var password = $('#change-password').val();
-        checkPasswordStrength(password);
+    $('#change_password').keyup(function(event) {
+        var password = $('#change_password').val();
+        check_password_strength(password);
     });
 
-    $( "#change-password-form" ).on( "submit", function(event) {
+    $( "#change_password_form" ).on( "submit", function(event) {
         event.preventDefault();
-        if (validateInputs()) {
+        if (validate_inputs()) {
             console.log("s")
             // If all validations pass, send a POST request
-            const formData = $("#change-password-form").serialize(); // Serialize the form data
+            const formData = $("#change_password_form").serialize(); // Serialize the form data
             
             $.ajax({
                 type: 'POST',
@@ -60,18 +60,18 @@ $(document).ready(function () {
 });
 
 /* password */
-function checkPasswordStrength(password) {
-    $('#password-strength-status').show();
+function check_password_strength(password) {
+    $('#password_strength_status').show();
 	var number     = /([0-9])/;
-	var upperCase  = /([A-Z])/;
-	var lowerCase  = /([a-z])/;
-	var specialCharacters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+	var upper_case  = /([A-Z])/;
+	var lower_case  = /([a-z])/;
+	var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
     
 	var characters     = (password.length >= 8 && password.length <= 15 );
-	var capitalletters = password.match(upperCase) ? 1 : 0;
-	var loweletters    = password.match(lowerCase) ? 1 : 0;
+	var capitalletters = password.match(upper_case) ? 1 : 0;
+	var loweletters    = password.match(lower_case) ? 1 : 0;
 	var numbers        = password.match(number) ? 1 : 0;
-	var special        = password.match(specialCharacters) ? 1 : 0;
+	var special        = password.match(special_characters) ? 1 : 0;
     
 	this.update_info('length', password.length >= 8 && password.length <= 15);
     this.update_info('capital', capitalletters);
@@ -80,82 +80,82 @@ function checkPasswordStrength(password) {
     this.update_info('special', special);
     
 	var total = characters + capitalletters + loweletters + numbers + special;
-	this.password_meter(total);
+	this.measure_password_security(total);
 }
 
 function update_info(criterion, isValid) {
-    var $passwordCriteria = $('#passwordCriterion').find('li[data-criterion="' + criterion + '"]');
+    var $password_criteria = $('#password_criterion').find('li[data_criterion="' + criterion + '"]');
     if (isValid) {
-        $passwordCriteria.removeClass('invalid').addClass('valid');
+        $password_criteria.removeClass('invalid').addClass('valid');
     } else {
-        $passwordCriteria.removeClass('valid').addClass('invalid');
+        $password_criteria.removeClass('valid').addClass('invalid');
     }
 }
 
-function password_meter(total) {
-    var meter = $('#password-strength-status');
+function measure_password_security(total) {
+    var meter = $('#password_strength_status');
     meter.removeClass();
     if (total === 0) {
         $('.pswd_info').slideUp();
         meter.html('');
     } else if (total === 1) {
         $('.pswd_info').slideDown();
-        meter.addClass('veryweak-password').html('very weak');
+        meter.addClass('veryweak_password').html('very weak');
     } else if (total === 2) {
         $('.pswd_info').slideDown();
-        meter.addClass('weak-password').html('weak');
+        meter.addClass('weak_password').html('weak');
     } else if (total === 3) {
         $('.pswd_info').slideDown();
-        meter.addClass('medium-password').html('medium');
+        meter.addClass('medium_password').html('medium');
     } else if (total === 4) {
         $('.pswd_info').slideDown();
-        meter.addClass('average-password').html('average');
+        meter.addClass('average_password').html('average');
     } else {
         $('.pswd_info').slideDown();
-        meter.addClass('strong-password').html('strong');
+        meter.addClass('strong_password').html('strong');
     }
 }
 
 /* password */
 
 /* validate Input */
-function setError(element, message) {
-    const inputControl = element.parent();
-    const errorDisplay = inputControl.find('.error-message');
+function set_error(element, message) {
+    const input_control = element.parent();
+    const error_display = input_control.find('.error_message');
     
-    errorDisplay.text(message);
-    inputControl.addClass('error').removeClass('pass');
+    error_display.text(message);
+    input_control.addClass('error').removeClass('pass');
 }
 ``
-function setSuccess(element) {
-    const inputControl = element.parent();
-    const errorDisplay = inputControl.find('.error-message');
+function set_success(element) {
+    const input_control = element.parent();
+    const error_display = input_control.find('.error_message');
     
-    errorDisplay.text('');
-    inputControl.addClass('pass').removeClass('error');
+    error_display.text('');
+    input_control.addClass('pass').removeClass('error');
 }
 
-function validateInputs() {
+function validate_inputs() {
     var total = 0
 
-    const passwordValue = $('#change-password').val();
-    const password2Value = $('#password_confirm').val();
+    const password_value = $('#change_password').val();
+    const password2_value = $('#password_confirm').val();
     
-    if(passwordValue === '') {
-        setError($('#change-password'), 'Password is required');
-    } else if (passwordValue.length < 8) {
-        setError($('#change-password'), 'Password must be at least 8 characters');
+    if(password_value === '') {
+        set_error($('#change_password'), 'Password is required');
+    } else if (password_value.length < 8) {
+        set_error($('#change_password'), 'Password must be at least 8 characters');
     } else {
-        setSuccess($('#change-password'));
+        set_success($('#change_password'));
         total +=1;
     }
     
-    if(password2Value === '') {
-        setError($('#password_confirm'), 'Please confirm your password');
-    } else if (password2Value !== passwordValue) {
-        setError($('#password_confirm'), "Passwords don't match");
+    if(password2_value === '') {
+        set_error($('#password_confirm'), 'Please confirm your password');
+    } else if (password2_value !== password_value) {
+        set_error($('#password_confirm'), "Passwords don't match");
     } else {
-        setSuccess($('#password_confirm'));
+        set_success($('#password_confirm'));
         total +=1;
     }
     
