@@ -1,8 +1,9 @@
-body{
-    font-family: Kanit; 
+body {
+    font-family: Kanit;
     background-color: #ECECEC;
     position: relative;
 }
+
 div.head {
     height: 132px;
     padding: 0px;
@@ -21,7 +22,7 @@ h2.head {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    text-shadow: 0 0 3px #000000, 0 0 5px #111212; 
+    text-shadow: 0 0 3px #000000, 0 0 5px #111212;
 }
 
 ul {
@@ -33,7 +34,7 @@ div.reserve_box {
     margin: 10px;
     margin-right: 40px;
     border-radius: 5px;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -61,7 +62,7 @@ div.detail_container {
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ffffff;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -86,7 +87,7 @@ div.line_detail_right {
 
 }
 
-.sumdate{
+.sumdate {
     display: inline-block;
     color: #000;
 }
@@ -94,41 +95,37 @@ div.line_detail_right {
 .text-sub_detail_1 {
     display: inline-block;
     margin-top: 5px;
-    margin-left: 20px; 
+    margin-left: 20px;
 
 }
 
 .text_sub_detail_2 {
     display: inline-block;
     margin-top: 10px;
-    margin-left: 10px; 
-    margin-right: 20px; 
+    margin-left: 10px;
+    margin-right: 20px;
 
 }
 
-.sub_detail_1
-{
+.sub_detail_1 {
     display: flex;
     margin-top: 1px;
     margin-left: 50px;
     margin-right: 20px;
 }
 
-.sub_detail_2
-{
+.sub_detail_2 {
     display: flex;
     margin-left: 50px;
     margin-right: 20px;
 }
 
-.sub_detail_1 .bed_img
-{   
+.sub_detail_1 .bed_img {
     width: 30px;
     height: 25px;
 }
 
-.sub_detail_2 .area_img
-{
+.sub_detail_2 .area_img {
     width: 40px;
     height: 45px;
     margin-right: 5px;
@@ -141,7 +138,7 @@ div.summary_box {
     margin: 10px;
     margin-right: 40px;
     border-radius: 5px;
-    background-color:rgba(249, 249, 249, 0.5);
+    background-color: rgba(249, 249, 249, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -167,11 +164,12 @@ button.room-number-button {
     box-sizing: border-box;
     border: 1px solid transparent;
     border-radius: 7px;
-    background-color:#4FD2FC;
+    background-color: #4FD2FC;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
     font-family: Kanit;
     font-size: large;
-    &:hover{
+
+    &:hover {
         background-color: #09c372;
         filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
         font-size: 102%;
@@ -203,8 +201,7 @@ div.hide {
     display: none;
 }
 
-.head_container
-{
+.head_container {
     color: #000;
     font-family: Inter;
     font-style: normal;
@@ -219,39 +216,36 @@ div.summary_container {
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ffffff;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.content_flex{
+
+.content_flex {
     align-items: center;
     height: 15%;
     display: flex;
     justify-content: space-around;
 }
 
-.summary_table td
-{
+.summary_table td {
     text-align: center;
     padding: 10px 35px;
 }
 
-.summary_table
-{
+.summary_table {
     float: left;
     border-bottom: 1px solid #AEB6BF;
     margin-bottom: 30px;
 }
 
-.line_summary
-{   
+.line_summary {
     margin-left: 3%;
     text-align: center;
     width: 20%;
     height: 20%;
 }
 
-.total
-{
+.total {
     text-align: center;
 }
 
@@ -262,22 +256,26 @@ div.summary_container {
         transform: translateX(0) rotate(0deg);
         /* transform: rotate(0deg) translateX(0vw); */
     }
+
     100% {
         transform: translateX(80vw) rotate(20deg);
         /* transform: rotate(20deg) translateX(80vw); */
     }
-  }
-  @keyframes rotate2 {
+}
+
+@keyframes rotate2 {
     0% {
         transform: translateX(80vw) rotate(20deg);
         /* transform: rotate(20deg) translateX(80vw); */
     }
+
     100% {
         transform: translateX(0) rotate(0deg);
         /* transform: rotate(0deg) translateX(0vw); */
     }
-  }
-.BG{
+}
+
+.BG {
     display: block;
     position: absolute;
     height: 100%;
@@ -285,6 +283,7 @@ div.summary_container {
     z-index: -1;
     overflow: hidden;
 }
+
 .gradient_bg {
     --size: 250x;
     --speed: 10s;
@@ -295,42 +294,42 @@ div.summary_container {
     filter: blur(50px);
     -webkit-filter: blur(50px);
     background: linear-gradient(#64bbe6, #9198e5);
-   /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
+    /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
     animation: rotate var(--speed) var(--easing) alternate infinite;
-    border-radius: 50% ;
+    border-radius: 50%;
     opacity: 50%;
-  }
-.item2{
+}
+
+.item2 {
     background: linear-gradient(#46f6ff, #91e5b4);
     animation: rotate2 10s cubic-bezier(0.8, 0.2, 0.2, 0.8) alternate infinite;
 }
-.item3{
+
+.item3 {
     background: linear-gradient(rgb(233, 70, 255), #e591c5);
     animation: rotate2 20s cubic-bezier(0.5, 0.5, 0.2, 0.8) alternate infinite;
 }
-  
-  @media (min-width: 720px) {
+
+@media (min-width: 720px) {
     .gradient_bg {
-      --size: 250px;
+        --size: 250px;
     }
-  }
-  
-/* This is just to transition when you change the viewport size. */
+}
+
 * {
     transition: all 0.25s ease-in-out;
-  }
+}
 
 
 
 
-.step{
+.step {
     display: inline;
     align-items: center;
     width: fit-content;
 }
-  span.button
 
-{   
+span.button {
     font-size: small;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -338,28 +337,30 @@ div.summary_container {
     -khtml-user-select: none;
     user-select: none;
     padding: 0px 6px;
-    background-color: #ffff;    
+    background-color: #ffff;
     border-radius: 5px;
     border: 1px solid #A8A8A8;
     background: #FEFEFE;
     cursor: pointer;
 }
-.guest{
+
+.guest {
     display: inline;
     color: #000;
-    font-family: Kanit; 
+    font-family: Kanit;
     font-size: medium;
     width: 20px;
     padding: 0px;
     background-color: transparent;
     border: none;
-    text-align: center; 
-    &:focus{
+    text-align: center;
+
+    &:focus {
         outline: none;
     }
 }
 
-.fonttotal{
+.fonttotal {
     font-size: 30px;
     margin-bottom: 0;
 }

@@ -5,25 +5,35 @@
 </p>
 
 # Require
-Download & Install [PostgresSQL](https://www.postgresql.org/download/)   
-> ➕PostgreSQL Server (database engine)      
-> ➕pgAdmin 4 (Web interface for Administations)          
+
+Download & Install [PostgresSQL](https://www.postgresql.org/download/)
+
+> ➕PostgreSQL Server (database engine)  
+> ➕pgAdmin 4 (Web interface for Administations)  
 > ➕Command Line Tool
 
 Install postgresql driver for python: psycopg2
+
 ```sh
 pip install psycopg2
 ```
+
 Django
+
 ```sh
 pip install Django
 ```
+
 Live server for Django
+
 ```sh
 pip install django-livereload-server
 ```
+
 # Edit Data Base for PostgreSQL
+
 edit [setting.py](DatabaseProject/settings.py)
+
 ```py
 DATABASES = {
   'default': {
@@ -36,26 +46,35 @@ DATABASES = {
   }
 }
 ```
+
 # Create Database
+
 make migration files
+
 ```sh
 python manage.py makemigrations
 ```
+
 migrate database
+
 ```sh
 python manage.py migrate
 ```
 
 # Insert Nessessary Data to Database
+
 relation room_detail
+
 ```sh
 # you can modify the value of room_capacity_adult, room_capacity_child, room_price
 INSERT INTO public.room_detail(
  room_type, room_capacity_adult, room_capacity_child, room_price)
- VALUES ('single bed', 2, 2, 2000), 
+ VALUES ('single bed', 2, 2, 2000),
  ('double bed', 2, 2, 2000);
 ```
+
 relation room
+
 ```sh
 # you can insert more rows or modify the value
 # but the value of status has to be 'available' and room_type has to be either 'single bed' or 'double bed'
@@ -74,14 +93,19 @@ INSERT INTO public.room(
 ```
 
 # Run Server
+
 Optional run Liveserver
+
 ```sh
 python manage.py livereload
 ```
+
 start server
+
 ```sh
 python manage.py runserver
 #defualt to port 8000 or edit port
 python manage.py runserver [port]
 ```
+
 Then open Browser to http://localhost:8000/

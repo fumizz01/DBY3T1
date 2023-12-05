@@ -1,5 +1,6 @@
 {% load static %}
 <html>
+
     <head>
         <title>Home</title>
 
@@ -7,58 +8,68 @@
 
         <link rel='stylesheet' href="{% static 'css/homepage.css' %}">
     </head>
-    <body class = "homepage">
+
+    <body class="homepage">
         {% include 'general_use/header.html' %}
         <div>
             <div class="content_container BG">
                 <div class="gradient_bg"></div>
                 <div class="gradient_bg item2"></div>
-                <h2 class = "header_hotelpage" id="head">ค้นหาห้องพัก</h2>
-                <div class = "box" id = "hotelpage">
-                    <form  id="homepage_form" action = "" method="post">
-                        {%csrf_token %} 
-                        <div class = "hotelpage_container" id = "hotelpage_container">
-    
+                <h2 class="header_hotelpage" id="head">ค้นหาห้องพัก</h2>
+                <div class="box" id="hotelpage">
+                    <form id="homepage_form" action="" method="post">
+                        {%csrf_token %}
+                        <div class="hotelpage_container" id="hotelpage_container">
+
                             <div class="text_flexline">
-                                <label class = "checkin" for = "text_checkin_date">เช็คอิน 
-                                    <input class = "check" id = "text_checkin_date" name = "checkin" type = "date" placeholder="กรุณาเช็คอิน" required>
+                                <label class="checkin" for="text_checkin_date">เช็คอิน
+                                    <input class="check" id="text_checkin_date" name="checkin" type="date"
+                                        placeholder="กรุณาเช็คอิน" required>
                                 </label>
-                                <label class = "checkout" for = "text_checkout_date">เช็คเอาท์ 
-                                    <input class = "check" id = "text_checkout_date" name = "checkout" type = "date" placeholder="กรุณาเช็คเอาท์" required>
+                                <label class="checkout" for="text_checkout_date">เช็คเอาท์
+                                    <input class="check" id="text_checkout_date" name="checkout" type="date"
+                                        placeholder="กรุณาเช็คเอาท์" required>
                                 </label>
                             </div>
-    
-                            <div class = "dropdown">
-                                <label class = "guest">ผู้เข้าพัก
+
+                            <div class="dropdown">
+                                <label class="guest">ผู้เข้าพัก
                                     <div class="guest">
                                         <div class="right">
-                                            <p class="text_inline" disabled="disabled" >มีผู้ใหญ่เข้าพักจำนวน</p>
+                                            <p class="text_inline" disabled="disabled">มีผู้ใหญ่เข้าพักจำนวน</p>
                                             <div class="step_inline">
-                                                <span class = "button" id="decrement adult" onclick="update_value('my_input_adult', -1)">-</span>
-                                                <input class="guest"  type="number" id="my_input_adult" name="adult" min="1" max="10" step="1" value="1" readonly >
-                                                <span  class = "button" id="increment adult" onclick="update_value('my_input_adult', 1)">+</span>
+                                                <span class="button" id="decrement adult"
+                                                    onclick="update_value('my_input_adult', -1)">-</span>
+                                                <input class="guest" type="number" id="my_input_adult" name="adult"
+                                                    min="1" max="10" step="1" value="1" readonly>
+                                                <span class="button" id="increment adult"
+                                                    onclick="update_value('my_input_adult', 1)">+</span>
                                             </div>
                                         </div>
-                                     
+
                                         <div class="left">
                                             <p class="text_inline">มีเด็กเข้าพักจำนวน</p>
                                             <div class="step_inline">
-                                                <span class = "button" id="decrement child" onclick="update_value('my_input_child', -1)">-</span>
-                                                <input class="guest"  type="number" id="my_input_child" name="adult" min="0" max="10" step="1" value="0" readonly >
-                                                <span  class = "button" id="increment child" onclick="update_value('my_input_child', 1)">+</span>
+                                                <span class="button" id="decrement child"
+                                                    onclick="update_value('my_input_child', -1)">-</span>
+                                                <input class="guest" type="number" id="my_input_child" name="adult"
+                                                    min="0" max="10" step="1" value="0" readonly>
+                                                <span class="button" id="increment child"
+                                                    onclick="update_value('my_input_child', 1)">+</span>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </label>
 
-                            <button class="search_room" id="search_room" type="button"> ค้นหา </button>
-                        </div>
+                                <button class="search_room" id="search_room" type="button"> ค้นหา </button>
+                            </div>
                     </form>
                 </div>
             </div>
         </div>
-    {% include 'general_use/footer.html' %} 
+        {% include 'general_use/footer.html' %}
     </body>
     <script src="{% static 'js/homepage.js' %}"></script>
+
 </html>

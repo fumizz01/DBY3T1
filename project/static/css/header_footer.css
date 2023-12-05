@@ -1,4 +1,4 @@
-body{
+body {
     overflow-x: visible;
     display: block;
     scroll-behavior: smooth;
@@ -8,7 +8,7 @@ body{
 
 
 
-header.header{ 
+header.header {
     background-color: white;
     padding: 5px;
     height: 90px;
@@ -16,13 +16,15 @@ header.header{
     list-style: none;
     justify-content: space-between;
     align-items: center;
-    & a{
+
+    & a {
         color: black;
         font-family: Kanit;
         display: block;
         text-decoration: none;
     }
-    & li{
+
+    & li {
         margin: 10px;
     }
 }
@@ -37,7 +39,7 @@ H1.header_logo {
     line-height: normal;
 }
 
-.nav{
+.nav {
     background-color: white;
     padding: 5px;
     height: 7%;
@@ -45,22 +47,25 @@ H1.header_logo {
     list-style: none;
     justify-content: space-between;
     align-items: center;
-    & a{
+
+    & a {
         color: black;
         font-family: Kanit;
         display: block;
         text-decoration: none;
     }
-    & li{
+
+    & li {
         display: flex;
         align-items: center;
         margin: 10px;
     }
-    & .active{
+
+    & .active {
         font-size: larger;
     }
 
-    & .icon{
+    & .icon {
         margin: 5px;
         font-size: 18px;
     }
@@ -70,7 +75,7 @@ div.content_container {
     min-height: calc(100vh - (100px + 182px));
 }
 
-footer.footer{
+footer.footer {
     position: absolute;
     width: 100%;
     font-family: Kanit;
@@ -78,22 +83,25 @@ footer.footer{
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    background-color:rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     height: 150px;
 
-    & a{
+    & a {
         text-decoration: none;
         text-align: center;
         padding: 10px;
-        & #line{
+
+        & #line {
             width: 38px;
             height: 36px;
         }
-        & img{
+
+        & img {
             opacity: 0.5;
         }
-    }   
-    & div{
+    }
+
+    & div {
         top: 0;
         width: 100%;
         height: 100%;
@@ -102,19 +110,20 @@ footer.footer{
         align-items: center;
         width: fit-content;
         text-align: center;
-        & h3{
+
+        & h3 {
             margin: 0;
         }
-        & .icon{
-            color:#4F4F4F;
+
+        & .icon {
+            color: #4F4F4F;
             font-size: 40px;
         }
 
     }
 }
 
-.header .register
-{
+.header .register {
     width: 100%;
     height: 70%;
     padding: 10px;
@@ -122,12 +131,12 @@ footer.footer{
     border-radius: 5px;
 }
 
-.header .register:hover
-{   
+.header .register:hover {
     scale: 1.07;
     border: 1px solid #c8e2eb;
     background-color: #c8e2eb;
 }
-.nav a:hover{
+
+.nav a:hover {
     scale: 1.05;
 }

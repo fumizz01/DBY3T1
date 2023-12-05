@@ -2,76 +2,78 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Reserve</title>
-    {% include 'general_use/general_script.html' %}
+    <head>
+        <title>Reserve</title>
+        {% include 'general_use/general_script.html' %}
 
-    <link rel='stylesheet' href="{% static 'css/my_reserve.css' %}">
-</head>
+        <link rel='stylesheet' href="{% static 'css/my_reserve.css' %}">
+    </head>
 
-<body>
-    {% include 'general_use/header.html' %}
-    <div class="BG">
-        <div class="gradient_bg"></div>
-        <div class="gradient_bg item2"></div>
-    </div>
-    {% if my_reserve_info %}
-    <div class="content">
-        <h1>การจองของฉัน</h1>
-        <div class="head">
-            <span>รหัสการจอง</span>
-            <span>จำนวนห้อง</span>
-            <span>วันที่เข้า</span>
-            <span>วันที่ออก</span>
-            <span>ราคา</span>
-            <span>สถานะ</span>
+    <body>
+        {% include 'general_use/header.html' %}
+        <div class="BG">
+            <div class="gradient_bg"></div>
+            <div class="gradient_bg item2"></div>
         </div>
+        <!-- หาก user มีการ จองห้อง -->
+        {% if my_reserve_info %}
+        <div class="content">
+            <h1>การจองของฉัน</h1>
+            <div class="head">
+                <span>รหัสการจอง</span>
+                <span>จำนวนห้อง</span>
+                <span>วันที่เข้า</span>
+                <span>วันที่ออก</span>
+                <span>ราคา</span>
+                <span>สถานะ</span>
+            </div>
 
-        {% for item in my_reserve_info %}
-        <div class="status-box">
-            <span id="reservation_id">{{ item.reservation_id }}</span>
-            <span id="room_count">{{ item.room_count }}</span>
-            <span id="checkin">{{ item.reservation_id__check_in }}</span>
-            <span id="checkout">{{ item.reservation_id__check_out }}</span>
-            <span id="total_price">{{ item.reservation_id__total_price }}</span>
-            <span id="status">{{ item.reservation_id__status }}</span>
-        </div>
-        {% endfor %}
-        {% else %}
-        <h1 class='no_curreserve'>คุณไม่มีการจอง ณ ขณะนี้</h1>
-        {% endif %}
-    </div>
-
-    <div class="sum_price">
-        <p class="text_sum">รวม</p>
-        <p class="text_price">
-            {% if sum_total_price %}
-            {{ sum_total_price }}
+            <!-- แสดงข้อมูลการของของuser จาก database -->
+            {% for item in my_reserve_info %}
+            <div class="status-box">
+                <span id="reservation_id">{{ item.reservation_id }}</span>
+                <span id="room_count">{{ item.room_count }}</span>
+                <span id="checkin">{{ item.reservation_id__check_in }}</span>
+                <span id="checkout">{{ item.reservation_id__check_out }}</span>
+                <span id="total_price">{{ item.reservation_id__total_price }}</span>
+                <span id="status">{{ item.reservation_id__status }}</span>
+            </div>
+            {% endfor %}
             {% else %}
-            0.00
+            <h1 class='no_curreserve'>คุณไม่มีการจอง ณ ขณะนี้</h1>
             {% endif %}
-            <a href="https://forms.gle/aEK4YnyoRm2ATESR8" style="text-decoration: none ;">
-                <button class="text_detail reserve_room_button"id="reserve_room_button">ชำระเงิน</button>
-            </a>
+        </div>
 
-        </p>
-    </div>
+        <div class="sum_price">
+            <p class="text_sum">รวม</p>
+            <p class="text_price">
+                {% if sum_total_price %}
+                {{ sum_total_price }}
+                {% else %}
+                0.00
+                {% endif %}
+                <a href="https://forms.gle/aEK4YnyoRm2ATESR8" style="text-decoration: none ;">
+                    <button class="text_detail reserve_room_button" id="reserve_room_button">ชำระเงิน</button>
+                </a>
 
-</body>
-<script>
-    $(document).ready(function () {
-        $(".status-box").each(function () {
-            var status_element = $(this).find("#status");
-            var status_text = status_element.text();
-            if (status_text === "unpaid") {
-                status_element.addClass('unpaid');
-            } else if (status_text === "confirmed") {
-                status_element.addClass('paid');
-            } else {
-                $(this).addClass('cancel');
-            }
+            </p>
+        </div>
+
+    </body>
+    <script>
+        $(document).ready(function () {
+            $(".status-box").each(function () {
+                var status_element = $(this).find("#status");
+                var status_text = status_element.text();
+                if (status_text === "unpaid") {
+                    status_element.addClass('unpaid');
+                } else if (status_text === "confirmed") {
+                    status_element.addClass('paid');
+                } else {
+                    $(this).addClass('cancel');
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </html>

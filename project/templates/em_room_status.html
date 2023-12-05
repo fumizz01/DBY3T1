@@ -1,13 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>Room Status</title>
         {% include 'general_use/general_script.html' %}
 
         <link rel='stylesheet' href="{% static 'css/em_room_status.css' %}">
-        
+
     </head>
+
     <body>
         {% include 'general_use/em_header.html' %}
         <div class="BG">
@@ -16,10 +18,10 @@
         </div>
 
         <div class="content">
-            <table class="table_main" id = "table_main">
+            <table class="table_main" id="table_main">
                 <thead>
-                    <tr class = "d-flex">
-                        <th scope="row" >เลขห้อง</th>
+                    <tr class="d-flex">
+                        <th scope="row">เลขห้อง</th>
                         <th scope="row">วันที่เข้า</th>
                         <th scope="row">วันที่ออก</th>
                         <th scope="row">ราคา</th>
@@ -27,7 +29,7 @@
                         <th scope="row">สถานะ
                             <!-- Add a dropdown filter -->
                             <select id="statusFilter" onchange="filter()">
-                                <option value="">All</option>
+                                <option value>All</option>
                                 <option value="unavailable">Unavailable</option>
                                 <option value="available">Available</option>
                             </select>
@@ -35,18 +37,19 @@
                     </tr>
                     <!-- Hidden Table Row (tr) for Copy to Fill Data -->
                     {% for item in room_status %}
-                    <tr class = "d-flex">
-                        <td class ="room_number" scope="row">{{item.room_number}}</td>
-                        <td class ="check_in" scope="row">{{item.reservation_id__check_in}}</td>
-                        <td class ="check_out" scope="row">{{item.reservation_id__check_out}}</td>
-                        <td class ="price" scope="row">{{item.room_number__room_type__room_price}}</td>
-                        <td class ="customer" scope="row">{{item.reservation_id__customer_id}}</td>
-                        <td class ="status" scope="row">{{item.room_number__status}}</td> 
+                    <tr class="d-flex">
+                        <td class="room_number" scope="row">{{item.room_number}}</td>
+                        <td class="check_in" scope="row">{{item.reservation_id__check_in}}</td>
+                        <td class="check_out" scope="row">{{item.reservation_id__check_out}}</td>
+                        <td class="price" scope="row">{{item.room_number__room_type__room_price}}</td>
+                        <td class="customer" scope="row">{{item.reservation_id__customer_id}}</td>
+                        <td class="status" scope="row">{{item.room_number__status}}</td>
                     </tr>
                     {% endfor %}
                 </thead>
             </table>
         </div>
     </body>
-    <script src="{% static 'js/status.js' %}"></script>
+    <script src="{% static 'js/room_status.js' %}"></script>
+
 </html>

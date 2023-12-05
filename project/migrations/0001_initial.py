@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,104 +14,178 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('customer_id', models.CharField(max_length=10, primary_key=True, serialize=False)),
-                ('identification_number', models.CharField(max_length=13, unique=True)),
-                ('first_name', models.CharField(blank=True, max_length=30, null=True)),
-                ('last_name', models.CharField(blank=True, max_length=30, null=True)),
-                ('age', models.IntegerField()),
-                ('email', models.CharField(blank=True, max_length=50, null=True)),
-                ('phone_number', models.CharField(blank=True, max_length=15, null=True)),
+                (
+                    "customer_id",
+                    models.CharField(max_length=10, primary_key=True, serialize=False),
+                ),
+                ("identification_number", models.CharField(max_length=13, unique=True)),
+                ("first_name", models.CharField(blank=True, max_length=30, null=True)),
+                ("last_name", models.CharField(blank=True, max_length=30, null=True)),
+                ("age", models.IntegerField()),
+                ("email", models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "phone_number",
+                    models.CharField(blank=True, max_length=15, null=True),
+                ),
             ],
             options={
-                'db_table': 'customer',
-                'managed': True,
+                "db_table": "customer",
+                "managed": True,
             },
         ),
         migrations.CreateModel(
-            name='Reservation',
+            name="Reservation",
             fields=[
-                ('reservation_id', models.CharField(max_length=10, primary_key=True, serialize=False)),
-                ('check_in', models.DateField(blank=True, null=True)),
-                ('check_out', models.DateField(blank=True, null=True)),
-                ('total_price', models.FloatField(blank=True, null=True)),
-                ('status', models.CharField(blank=True, max_length=50, null=True)),
-                ('customer_id', models.ForeignKey(db_column='customer_id', on_delete=django.db.models.deletion.CASCADE, to='project.customer')),
+                (
+                    "reservation_id",
+                    models.CharField(max_length=10, primary_key=True, serialize=False),
+                ),
+                ("check_in", models.DateField(blank=True, null=True)),
+                ("check_out", models.DateField(blank=True, null=True)),
+                ("total_price", models.FloatField(blank=True, null=True)),
+                ("status", models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "customer_id",
+                    models.ForeignKey(
+                        db_column="customer_id",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="project.customer",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'reservation',
-                'managed': True,
+                "db_table": "reservation",
+                "managed": True,
             },
         ),
         migrations.CreateModel(
-            name='RoomDetail',
+            name="RoomDetail",
             fields=[
-                ('room_type', models.CharField(max_length=20, primary_key=True, serialize=False)),
-                ('room_capacity_adult', models.IntegerField()),
-                ('room_capacity_child', models.IntegerField()),
-                ('room_price', models.FloatField(blank=True, null=True)),
+                (
+                    "room_type",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
+                ("room_capacity_adult", models.IntegerField()),
+                ("room_capacity_child", models.IntegerField()),
+                ("room_price", models.FloatField(blank=True, null=True)),
             ],
             options={
-                'db_table': 'room_detail',
-                'managed': True,
+                "db_table": "room_detail",
+                "managed": True,
             },
         ),
         migrations.CreateModel(
-            name='Room',
+            name="Room",
             fields=[
-                ('room_number', models.CharField(max_length=10, primary_key=True, serialize=False)),
-                ('status', models.CharField(blank=True, max_length=20, null=True)),
-                ('room_type', models.ForeignKey(db_column='room_type', on_delete=django.db.models.deletion.CASCADE, to='project.roomdetail')),
+                (
+                    "room_number",
+                    models.CharField(max_length=10, primary_key=True, serialize=False),
+                ),
+                ("status", models.CharField(blank=True, max_length=20, null=True)),
+                (
+                    "room_type",
+                    models.ForeignKey(
+                        db_column="room_type",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="project.roomdetail",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'room',
-                'managed': True,
+                "db_table": "room",
+                "managed": True,
             },
         ),
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('user_code', models.CharField(max_length=10, primary_key=True, serialize=False)),
-                ('role', models.CharField(blank=True, max_length=50, null=True)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "user_code",
+                    models.CharField(max_length=10, primary_key=True, serialize=False),
+                ),
+                ("role", models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Employee',
+            name="Employee",
             fields=[
-                ('employee_id', models.CharField(max_length=50, primary_key=True, serialize=False)),
-                ('identification_number', models.CharField(max_length=13, unique=True)),
-                ('first_name', models.CharField(blank=True, max_length=30, null=True)),
-                ('last_name', models.CharField(blank=True, max_length=30, null=True)),
-                ('sex', models.CharField(blank=True, max_length=30, null=True)),
-                ('birth_date', models.DateField(blank=True, null=True)),
-                ('address', models.CharField(blank=True, max_length=100, null=True)),
-                ('position', models.CharField(blank=True, max_length=20, null=True)),
-                ('user_code', models.ForeignKey(db_column='user_code', on_delete=django.db.models.deletion.CASCADE, to='project.profile')),
+                (
+                    "employee_id",
+                    models.CharField(max_length=50, primary_key=True, serialize=False),
+                ),
+                ("identification_number", models.CharField(max_length=13, unique=True)),
+                ("first_name", models.CharField(blank=True, max_length=30, null=True)),
+                ("last_name", models.CharField(blank=True, max_length=30, null=True)),
+                ("sex", models.CharField(blank=True, max_length=30, null=True)),
+                ("birth_date", models.DateField(blank=True, null=True)),
+                ("address", models.CharField(blank=True, max_length=100, null=True)),
+                ("position", models.CharField(blank=True, max_length=20, null=True)),
+                (
+                    "user_code",
+                    models.ForeignKey(
+                        db_column="user_code",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="project.profile",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'employee',
-                'managed': True,
+                "db_table": "employee",
+                "managed": True,
             },
         ),
         migrations.AddField(
-            model_name='customer',
-            name='user_code',
-            field=models.ForeignKey(db_column='user_code', on_delete=django.db.models.deletion.CASCADE, to='project.profile'),
+            model_name="customer",
+            name="user_code",
+            field=models.ForeignKey(
+                db_column="user_code",
+                on_delete=django.db.models.deletion.CASCADE,
+                to="project.profile",
+            ),
         ),
         migrations.CreateModel(
-            name='ReservationLineItem',
+            name="ReservationLineItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('item_no', models.IntegerField()),
-                ('reservation_id', models.ForeignKey(db_column='reservation_id', on_delete=django.db.models.deletion.CASCADE, to='project.reservation')),
-                ('room_number', models.ForeignKey(db_column='room_number', on_delete=django.db.models.deletion.CASCADE, to='project.room')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("item_no", models.IntegerField()),
+                (
+                    "reservation_id",
+                    models.ForeignKey(
+                        db_column="reservation_id",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="project.reservation",
+                    ),
+                ),
+                (
+                    "room_number",
+                    models.ForeignKey(
+                        db_column="room_number",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="project.room",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'reservation_line_item',
-                'managed': True,
-                'unique_together': {('reservation_id', 'item_no')},
+                "db_table": "reservation_line_item",
+                "managed": True,
+                "unique_together": {("reservation_id", "item_no")},
             },
         ),
     ]

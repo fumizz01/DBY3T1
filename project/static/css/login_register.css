@@ -1,5 +1,5 @@
 /* login */
-body{
+body {
     width: 100%;
     height: auto;
     position: relative;
@@ -7,18 +7,21 @@ body{
     padding: 0;
     background-color: #ECECEC;
 }
+
 /*hide scrollbar */
 html::-webkit-scrollbar {
     display: none;
-  }
+}
 
-body.login{
+body.login {
     overflow: hidden;
 }
-body.register{
+
+body.register {
     overflow-x: hidden;
 }
-body.change_password{
+
+body.change_password {
     overflow-x: hidden;
 }
 
@@ -26,34 +29,39 @@ form {
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin:auto;
+    margin: auto;
 }
-.submit{
+
+.submit {
     cursor: pointer;
 }
 
 .box {
-    font-family: Kanit; 
+    font-family: Kanit;
 }
 
 .login_container {
     min-width: 400px;
     min-height: 300px;
     margin: 50px auto;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    & .icon{
+
+    & .icon {
         min-width: 40px;
     }
-    & h2{
+
+    & h2 {
         margin: 20px auto;
         text-align: center;
     }
-    & p{
+
+    & p {
         margin: 5px;
     }
+
     & .submit {
         margin: 35px auto 0 auto;
         display: block;
@@ -64,20 +72,23 @@ form {
         box-sizing: border-box;
         border: 1px solid transparent;
         border-radius: 7px;
-        background-color:#4FD2FC;
+        background-color: #4FD2FC;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
         font-family: Kanit;
         font-size: large;
     }
-    & .submit:hover{
+
+    & .submit:hover {
         background-color: #09c372;
         filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
         font-size: 102%;
     }
-    &  i{
+
+    & i {
         padding: 7.5px;
         position: absolute;
     }
+
     .input_field {
         outline: none;
         font-family: Kanit;
@@ -87,18 +98,22 @@ form {
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+
         &::placeholder {
-            transition: color 0.3s ease; 
+            transition: color 0.3s ease;
         }
+
         &:focus::placeholder {
             color: transparent;
         }
+
         &:focus {
             border: 1px solid black;
         }
     }
 }
-.eye_icon{
+
+.eye_icon {
     margin-left: -30px;
     cursor: pointer;
     position: absolute;
@@ -115,18 +130,21 @@ form {
     width: 574px;
     /* height: fit-content; */
     margin: 50px auto;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    & .icon{
+
+    & .icon {
         min-width: 40px;
     }
-    & h2{
+
+    & h2 {
         margin: 20px auto;
         text-align: center;
     }
+
     & .submit {
         margin: 35px auto 0 auto;
         display: block;
@@ -137,22 +155,24 @@ form {
         box-sizing: border-box;
         border: 1px solid transparent;
         border-radius: 7px;
-        background-color:#4FD2FC;
+        background-color: #4FD2FC;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
         font-family: Kanit;
         font-size: large;
 
-        &:hover{
+        &:hover {
             background-color: #09c372;
             filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
             font-size: 102%;
         }
 
     }
-    &  i{
+
+    & i {
         padding: 5px;
         position: absolute;
     }
+
     .input_field {
         outline: none;
         padding: 5px;
@@ -160,12 +180,15 @@ form {
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+
         &::placeholder {
-            transition: color 0.3s ease; 
+            transition: color 0.3s ease;
         }
+
         &:focus::placeholder {
             color: transparent;
         }
+
         &:focus {
             border: 1px solid black;
         }
@@ -173,23 +196,26 @@ form {
 }
 
 /* change_password_html */
-.change_password_container {    
+.change_password_container {
     position: relative;
     width: 574px;
     /* height: fit-content; */
     margin: 50px auto;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    & .icon{
+
+    & .icon {
         min-width: 40px;
     }
-    & h2{
+
+    & h2 {
         margin: 20px auto;
         text-align: center;
     }
+
     & .submit {
         margin: 35px auto 0 auto;
         display: block;
@@ -200,22 +226,24 @@ form {
         box-sizing: border-box;
         border: 1px solid transparent;
         border-radius: 7px;
-        background-color:#4FD2FC;
+        background-color: #4FD2FC;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
         font-family: Kanit;
         font-size: large;
 
-        &:hover{
+        &:hover {
             background-color: #09c372;
             filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.15));
             font-size: 102%;
         }
 
     }
-    &  i{
+
+    & i {
         padding: 5px;
         position: absolute;
     }
+
     .input_field {
         padding: 5px;
         width: 100%;
@@ -225,13 +253,15 @@ form {
     }
 }
 
-.pass .input_field{
+.pass .input_field {
     border-color: #09c372;
 }
-.error .input_field{
+
+.error .input_field {
     border-color: #ff3860;
 }
-.error_message{
+
+.error_message {
     font-size: smaller;
     color: #ff3860;
 }
@@ -253,42 +283,51 @@ form {
 
 /* password */
 .pswd_info {
-	list-style: none;
-	margin: 5px 0px;
-	padding: 0;
+    list-style: none;
+    margin: 5px 0px;
+    padding: 0;
 }
+
 .pswd_info .invalid {
-	padding-left: 20px;
-	background:url(img/invalid.png) no-repeat 0 50%;
-	color:#ec3f41;
+    padding-left: 20px;
+    background: url(img/invalid.png) no-repeat 0 50%;
+    color: #ec3f41;
 }
+
 .pswd_info .valid {
-	padding-left: 20px;
-	background:url(img/valid.png) no-repeat 0 50%;   
-	color:#3a7d34;
+    padding-left: 20px;
+    background: url(img/valid.png) no-repeat 0 50%;
+    color: #3a7d34;
 }
+
 #password_strength_status {
     color: white;
-	font-size:small;
-	padding: 5px 10px;
-	border-radius: 4px;
-	margin-top: 5px;
+    font-size: small;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 5px;
 }
+
 .veryweak_password {
-	background-color: #FF0000;
+    background-color: #FF0000;
 }
+
 .weak_password {
-	background-color: #d35400;
+    background-color: #d35400;
 }
+
 .medium_password {
-	background-color: #f39c12;
+    background-color: #f39c12;
 }
+
 .average_password {
-	background-color: #f1c40f;	
+    background-color: #f1c40f;
 }
+
 .strong_password {
-	background-color: #229954;
+    background-color: #229954;
 }
+
 /* password */
 
 /* background */
@@ -298,22 +337,26 @@ form {
         transform: translateX(0) rotate(0deg);
         /* transform: rotate(0deg) translateX(0vw); */
     }
+
     100% {
         transform: translateX(80vw) rotate(20deg);
         /* transform: rotate(20deg) translateX(80vw); */
     }
-  }
-  @keyframes rotate2 {
+}
+
+@keyframes rotate2 {
     0% {
         transform: translateX(80vw) rotate(20deg);
         /* transform: rotate(20deg) translateX(80vw); */
     }
+
     100% {
         transform: translateX(0) rotate(0deg);
         /* transform: rotate(0deg) translateX(0vw); */
     }
-  }
-.BG{
+}
+
+.BG {
     top: 0;
     display: block;
     position: absolute;
@@ -322,6 +365,7 @@ form {
     z-index: -1;
     overflow: hidden;
 }
+
 .gradient_bg {
     --size: 500px;
     --speed: 10s;
@@ -332,29 +376,30 @@ form {
     filter: blur(50px);
     -webkit-filter: blur(50px);
     background: linear-gradient(#e66465, #9198e5);
-   /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
+    /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
     animation: rotate var(--speed) var(--easing) alternate infinite;
-    border-radius: 50% ;
+    border-radius: 50%;
     opacity: 50%;
-  }
-.item2{
+}
+
+.item2 {
     background: linear-gradient(#46f6ff, #91e597);
     animation: rotate2 var(--speed) var(--easing) alternate infinite;
 }
-  
-  @media (min-width: 720px) {
+
+@media (min-width: 720px) {
     .gradient_bg {
-      --size: 500px;
+        --size: 500px;
     }
-  }
-  
+}
+
 /* This is just to transition when you change the viewport size. */
 * {
     transition: all 0.25s ease-in-out;
-  }
+}
 
-.message_auth{
-    color: rgba(255, 0, 0,0.8);
+.message_auth {
+    color: rgba(255, 0, 0, 0.8);
     font-size: smaller;
     margin-top: -2%;
     padding: 10px;
@@ -365,23 +410,26 @@ form {
     border-radius: 20px;
     transition: all 0.25s ease-in-out;
     animation: shine 2.5s alternate infinite 0.5s, show 0.2s linear;
-    
+
 }
 
 @keyframes shine {
     0% {
-        box-shadow: rgba(255,0,0, 0) 0px 0px 10px , rgba(255,0,0, 0) 0px 0px 10px, rgba(255,0,0, 0) 0px 0px 10px, rgba(255,0,0, 0) 0px 0px 10px ;
+        box-shadow: rgba(255, 0, 0, 0) 0px 0px 10px, rgba(255, 0, 0, 0) 0px 0px 10px, rgba(255, 0, 0, 0) 0px 0px 10px, rgba(255, 0, 0, 0) 0px 0px 10px;
     }
+
     100% {
-        box-shadow: rgba(255,0,0, .35) 0px 0px 10px , rgba(255,0,0, .25) 0px 0px 10px, rgba(255,0,0, .25) 0px 0px 10px, rgba(255,0,0, .25) 0px 0px 10px ;
+        box-shadow: rgba(255, 0, 0, .35) 0px 0px 10px, rgba(255, 0, 0, .25) 0px 0px 10px, rgba(255, 0, 0, .25) 0px 0px 10px, rgba(255, 0, 0, .25) 0px 0px 10px;
     }
 }
-@keyframes show{
-    0%{
+
+@keyframes show {
+    0% {
         transform: translateY(-5px);
         opacity: 0;
     }
-    100%{
+
+    100% {
         transform: translateY(0px);
         opacity: 1;
     }
@@ -392,5 +440,4 @@ form {
 .inherited-styles-for-exported-element {
     font-family: CerebriSans-Regular, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     font-size: 100%;
-  }
-  
+}

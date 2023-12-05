@@ -1,20 +1,20 @@
-body{
-    position: relative;
-    margin: 0;
-    padding: 0;
-    background-color: #ECECEC;
-    overflow-x: hidden;
-    height: fit-content;
-    font-family: kanit;
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: #ECECEC;
+  overflow-x: hidden;
+  height: fit-content;
+  font-family: kanit;
 
 }
-.content_container{
+
+.content_container {
   margin-top: 10px;
   text-align: center;
 }
 
-.table
-{
+.table {
   scale: 0.8;
   margin-top: 0;
   margin: auto;
@@ -22,7 +22,7 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 25px;
   border-spacing: 0;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   /* font */
@@ -33,31 +33,39 @@ body{
   line-height: normal;
 }
 
-.table th,td
-{
+.table th,
+td {
   text-align: center;
   padding: 16px 24px;
 }
-.table td{
+
+.table td {
   border-top: 1px solid rgba(0, 0, 0, 0.25);
 }
-.table th,td{
+
+.table th,
+td {
   border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
-th:last-child,td:last-child {
-  padding:16px 48px;
+
+th:last-child,
+td:last-child {
+  padding: 16px 48px;
   border-right: 0px;
 }
-th:nth-child(2),td:nth-child(2) {
-  padding:16px 72px;
+
+th:nth-child(2),
+td:nth-child(2) {
+  padding: 16px 72px;
 }
 
-td{
-  &.waiting{
-    color: #FF1A1A; 
-  
+td {
+  &.waiting {
+    color: #FF1A1A;
+
   }
-  &.complete{
+
+  &.complete {
     color: #91e597;
 
   }
@@ -65,9 +73,13 @@ td{
 
 
 @keyframes waviy {
-  0%,40%,100% {
+
+  0%,
+  40%,
+  100% {
     transform: translateY(0)
   }
+
   20% {
     transform: translateY(-20px)
   }
@@ -80,25 +92,25 @@ td{
 
 @keyframes rotate {
   0% {
-      transform: translateX(0) rotate(0deg);
-      /* transform: rotate(0deg) translateX(0vw); */
+    transform: translateX(0) rotate(0deg);
   }
+
   100% {
-      transform: translateX(80vw) rotate(20deg);
-      /* transform: rotate(20deg) translateX(80vw); */
+    transform: translateX(80vw) rotate(20deg);
   }
 }
+
 @keyframes rotate2 {
   0% {
-      transform: translateX(80vw) rotate(20deg);
-      /* transform: rotate(20deg) translateX(80vw); */
+    transform: translateX(80vw) rotate(20deg);
   }
+
   100% {
-      transform: translateX(0) rotate(0deg);
-      /* transform: rotate(0deg) translateX(0vw); */
+    transform: translateX(0) rotate(0deg);
   }
 }
-.BG{
+
+.BG {
   top: 0;
   display: block;
   position: absolute;
@@ -107,6 +119,7 @@ td{
   z-index: -1;
   overflow: hidden;
 }
+
 .gradient_bg {
   --size: 500px;
   --speed: 10s;
@@ -117,12 +130,12 @@ td{
   filter: blur(50px);
   -webkit-filter: blur(50px);
   background: linear-gradient(#e66465, #9198e5);
- /*  background: linear-gradient(hsl(158, 82, 57, 85%), hsl(252, 82, 57)); */
   animation: rotate var(--speed) var(--easing) alternate infinite;
-  border-radius: 50% ;
+  border-radius: 50%;
   opacity: 50%;
 }
-.item2{
+
+.item2 {
   background: linear-gradient(#46f6ff, #91e597);
   animation: rotate2 var(--speed) var(--easing) alternate infinite;
 }
@@ -133,7 +146,6 @@ td{
   }
 }
 
-/* This is just to transition when you change the viewport size. */
 * {
   transition: all 0.25s ease-in-out;
 }

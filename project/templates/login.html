@@ -1,5 +1,6 @@
 {% load static %}
 <html>
+
     <head>
         <title>Login</title>
 
@@ -7,6 +8,7 @@
 
         <link rel='stylesheet' href="{% static 'css/login_register.css' %}">
     </head>
+
     <body class='login'>
 
         {% include 'general_use/header.html' %}
@@ -14,30 +16,32 @@
             <div class="gradient_bg"></div>
             <div class="gradient_bg item2"></div>
         </div>
-        <div class = "box">
+        <div class="box">
             <form action="" method="post" id="login-form">
                 {% csrf_token %}
 
-                <div id="login_container" class = "login_container">
+                <div id="login_container" class="login_container">
                     <h2>เข้าสู่ระบบ</h2>
                     <p>ชื่อผู้ใช้</p>
                     <i class='bx bxs-user-circle icon'></i>
-                    <input class="input_field" id = "login_user"  name = "username" type = "text" placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
+                    <input class="input_field" id="login_user" name="username" type="text"
+                        placeholder="กรุณาใส่ ชื่อผู้ใช้/id" required>
                     <p>รหัสผ่าน</p>
                     <i class='bx bxs-lock icon'></i>
-                    <input class="input_field password" id = "login_password"  name = "password" type = "password" placeholder="กรุณาใส่รหัสผ่าน" maxlength="15" required>
+                    <input class="input_field password" id="login_password" name="password" type="password"
+                        placeholder="กรุณาใส่รหัสผ่าน" maxlength="15" required>
                     <i class="bx bx-hide eye_icon password_validation"></i>
-                    <button id = "login_button" class='submit' type="submit">ยืนยัน</button>
+                    <button id="login_button" class='submit' type="submit">ยืนยัน</button>
                 </div>
 
                 {% if messages %}
-                    {% for message in messages %}
-                        <p class="message_auth">{{ message }}</p>
-                    {% endfor %}
+                {% for message in messages %}
+                <p class="message_auth">{{ message }}</p>
+                {% endfor %}
                 {% endif %}
             </form>
         </div>
     </body>
     <script src="{% static 'js/login_register.js' %}"></script>
-</html>
 
+</html>
