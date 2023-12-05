@@ -29,12 +29,14 @@ from itertools import chain
 from operator import attrgetter
 
 
+# หากเข้า domain แบบไม่มี path ให้ redirect ไปหน้า home
 def home(request):
     return HttpResponseRedirect(reverse("home"))
 
 
-# Create your views here.
+# หน้า home สำหรับจองห้องพัก
 def index(request):
+    # เข้าได้แค่คนที่ไม่ล็อคอิน หรือ คนที่ล็อคอินเป็น customer
     if request.user.is_authenticated and request.user.profile.role == "employee":
         logout(request)
         return redirect("login")
@@ -42,7 +44,9 @@ def index(request):
     return render(request, "hotelpage.html")
 
 
+# redirect ไปหน้า register สำหรับ customer
 def register(request):
+    # เข้าได้แค่คนที่ไม่ล็อคอิน
     if request.user.is_authenticated:
         logout(request)
         return redirect("register")
@@ -51,9 +55,9 @@ def register(request):
         return render(request, "register.html")
 
 
+# หน้ากดจองห้องพัก
 def reserve(request):
-    # if request.POST:
-    #    print(request.POST)
+    # เข้าได้แค่คนที่ไม่ล็อคอิน หรือ คนที่ล็อคอินเป็น customer
     if request.user.is_authenticated and request.user.profile.role == "employee":
         logout(request)
         return redirect("login")
@@ -61,21 +65,26 @@ def reserve(request):
     return render(request, "reserve.html")
 
 
+# หน้าล็อคอินสำหรับ employee
 def em_login(request):
     print(request.POST)
+    # กรณีกดปุ่ม submit การล็อคอิน
     if request.POST:
         username = request.POST["username"]
         password = request.POST["password"]
 
         user = authenticate(request, username=username, password=password)
+        # ตรวจสอบว่ามี user อยู่ในระบบไหม
         if user is not None:
             u = User.objects.get(username=username)
             print(u.profile.role)
+            # ตรวจสอบว่า user เป็น employee ไหม
             if u.profile.role == "employee":
                 login(request, user)
                 print("Login successful")
                 return redirect("employee_room_status")
 
+        # ข้อความ error
         messages.success(
             request,
             (
@@ -85,188 +94,72 @@ def em_login(request):
         print("Login failed")
         return redirect("em_login")
 
+    # กรณีคนที่ล็อคอินอยู่แล้วพยายามเข้ามาหน้านี้ (เข้าได้แค่คนที่ไม่ล็อคอิน)
     elif request.user.is_authenticated:
         logout(request)
         return redirect("em_login")
 
+    # กรณีคนที่ไม่ล็อคอินเข้าหน้านี้
     else:
         return render(request, "em_login.html", {})
 
 
+# เมื่อกดปุ่มล็อคเอ้าท์ในฝั่ง employee
 def em_logout(request):
     logout(request)
     return redirect("em_login")
 
-
-@transaction.atomic
-def em_register(request):
-    if request.user.is_authenticated:
-        logout(request)
-        return redirect("em_login")
-
-    if not request.POST:
-        return render(request, "em_register.html")
-
-    if Employee.objects.count() != 0:
-        employee_id_max = Employee.objects.aggregate(Max("employee_id"))[
-            "employee_id__max"
-        ]
-        print(employee_id_max)
-        employee_id_temp = [re.findall(r"\d+", employee_id_max)[0]][0]
-        next_employee_id = str(int(employee_id_temp) + 1) + "EM"
-        next_employee_id = next_employee_id.rjust(8, "0")
-        # print(employee_id_temp)
-    else:
-        next_employee_id = "000000EM"
-
-    if Profile.objects.count() != 0:
-        user_code_max = Profile.objects.aggregate(Max("user_code"))["user_code__max"]
-        user_code_temp = [re.findall(r"\d+", user_code_max)[0]][0]
-        next_user_code = str(int(user_code_temp) + 1) + "UA"
-        next_user_code = next_user_code.rjust(8, "0")
-        # print(user_code_temp)
-    else:
-        next_user_code = "000000UA"
-
-    print(request.POST)
-
-    request.POST = request.POST.copy()
-    request.POST["employee_id"] = next_employee_id
-    request.POST["user_code"] = next_user_code
-    request.POST["role"] = "employee"
-    data = dict()
-
-    form_user = UserCreationForm(request.POST)
-    if form_user.is_valid():
-        user = form_user.save()
-        username = form_user.cleaned_data["username"]
-        password = form_user.cleaned_data["password1"]
-
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        print("User Created Success")
-
-    else:
-        # if invoice from is not valid return error message
-        data["error"] = form_user.errors
-        print(form_user.errors)
-        print("fail at User create...")
-        return JsonResponse(data)
-
-    # ----------------------------------------------------------------#
-
-    # Insert correct data to invoice_line_item
-    form_profile = ProfileForm(request.POST)
-    if form_profile.is_valid():
-        profile = form_profile.save(commit=False)
-        profile.user = user
-
-        profile.save()
-        print("Profile Created Success")
-    else:
-        # Check something error to show and rollback transaction both invoice and invoice_line_item table
-        data["error"] = form_profile.errors
-        print(form_profile.errors)
-        print("fail at Profile create...")
-        transaction.set_rollback(True)
-        return JsonResponse(data)
-
-    # ----------------------------------------------------------------#
-    form = EmployeeForm(request.POST)
-    if form.is_valid():
-        print("Employee successfully")
-        employee = form.save()
-
-    else:
-        data["error"] = form.errors
-        print(form.errors)
-        print("fail at Employee create...")
-        transaction.set_rollback(True)
-        return JsonResponse(data)
-
-    # ----------------------------------------------------------------#
-
-    # data['account'] = model_to_dict(customer)
-    # data['profile'] = model_to_dict(profile)
-
-    # print("User Created Successfully without problems")
-
-    print("Empoyee register successful")
-    return redirect("employee_room_status")
-
-
-def em_reserve(request):
-    if not request.user.is_authenticated:
-        return redirect("em_login")
-
-    elif request.user.profile.role == "customer":
-        logout(request)
-        return redirect("em_login")
-
+# หน้าล็อคอินสำหรับ customer
+def login_user(request):
+    print("Enter login page")
+    # กรณีกดปุ่ม submit การล็อคอิน
     if request.POST:
-        with transaction.atomic():
-            room_number_update = ReservationLineItem.objects.filter(
-                reservation_id=request.POST["reservation_id"]
-            ).values()
+        print("Loging in....")
 
-            if request.POST["submit-as"] == "cancel":
-                Reservation.objects.filter(
-                    reservation_id=request.POST["reservation_id"]
-                ).update(status="cancelled")
-                for item in room_number_update:
-                    Room.objects.filter(room_number=item["room_number_id"]).update(
-                        status="available"
-                    )
+        username = request.POST["username"]
+        password = request.POST["password"]
 
-            elif request.POST["submit-as"] == "confirm":
-                Reservation.objects.filter(
-                    reservation_id=request.POST["reservation_id"]
-                ).update(status="confirmed")
+        user = authenticate(request, username=username, password=password)
+        # ตรวจสอบว่ามี user อยู่ในระบบไหม
+        if user is not None:
+            u = User.objects.get(username=username)
+            print(u.profile.role)
+            # ตรวจสอบว่า user เป็น employee ไหม
+            if u.profile.role == "customer":
+                login(request, user)
+                print("Login successful")
+                return redirect("home")
 
-            return redirect("employee_reserve")
-
-    reserve_info = list(
-        ReservationLineItem.objects.select_related("reservation_id")
-        .filter(reservation_id__status="unpaid")
-        .values(
-            "reservation_id",
-            "reservation_id__customer_id",
-            "reservation_id__check_in",
-            "reservation_id__check_out",
-            "reservation_id__total_price",
+        messages.success(
+            request,
+            (
+                "ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."
+            ),
         )
-        .order_by("reservation_id")
-        .annotate(room_count=Count("room_number"))
-    )
-
-    data = dict()
-    data["reserve_info"] = reserve_info
-
-    print(data["reserve_info"])
-
-    return render(request, "em_reserve.html", data)
-
-
-""" def em_room_status(request):
+        print("Login failed")
+        return redirect("login")
     
-    if not request.user.is_authenticated:
-        return redirect('em_login')
-    
-    elif request.user.profile.role == 'customer':
+    # กรณีคนที่ล็อคอินอยู่แล้วพยายามเข้ามาหน้านี้ (เข้าได้แค่คนที่ไม่ล็อคอิน)
+    elif request.user.is_authenticated:
         logout(request)
-        return redirect('em_login')
+        return redirect("login")
     
-    return render(request, 'em_room_status.html') """
+    # กรณีคนที่ไม่ล็อคอินเข้าหน้านี้
+    else:
+        return render(request, "login.html", {})
 
-""" def my_reserve(request):
-    return render(request, 'my_reserve.html') """
+# เมื่อกดปุ่มล็อคเอ้าท์ในฝั่ง customer
+def logout_user(request):
+    logout(request)
+    return redirect("login")
 
-
+# กดปุ่มเปลี่ยนรหัสผ่าน
 def change_password(request):
     return render(request, "change_password.html")
 
 
 # -----------------------------GET-----------------------------------#
+# ข้อมูลบัญชีของลูกค้า
 class CustomerAccountInformationList(View):
     def get(self, request):
         print("Get Customer Info")
@@ -301,7 +194,7 @@ class CustomerAccountInformationList(View):
         print(data)
         return JsonResponse(data)
 
-
+# ข้อมูลชื่อและรหัสผู้ใช้ทั้งหมด
 class UsernameList(View):
     def get(self, request):
         username_list = list(
@@ -316,7 +209,7 @@ class UsernameList(View):
         data["username_list"] = username_list
         return JsonResponse(data)
 
-
+# ข้อมูลการจอง
 class ReservationInfo(View):
     def get(self, request):
         reservation_info = list(
@@ -337,7 +230,7 @@ class ReservationInfo(View):
         print(data["reservation_info"])
         return JsonResponse(data)
 
-
+# ข้อมูลของห้องและสถานะ
 class RoomStatusInfo(View):
     def get(self, request):
         if not request.user.is_authenticated:
@@ -401,9 +294,10 @@ class RoomStatusInfo(View):
 
         return render(request, "em_room_status.html", data)
 
-
+# หน้าแสดงข้อมูลการจองของ user
 class MyReservationInfo(View):
     def get(self, request):
+        # เข้าได้แค่คนที่ล็อคอินเป็น customer
         if not request.user.is_authenticated:
             return redirect("login")
 
@@ -439,9 +333,13 @@ class MyReservationInfo(View):
 
 
 # -----------------------------POST-----------------------------------#
+
+# บันทึกข้อมูลการจองของ customer
 class CreateReserve(View):
     @transaction.atomic
     def post(self, request):
+        
+        # สร้างรหัสการจองหมายเลขต่อไป
         if Reservation.objects.count() != 0:
             reservation_id_max = Reservation.objects.aggregate(Max("reservation_id"))[
                 "reservation_id__max"
@@ -456,7 +354,7 @@ class CreateReserve(View):
 
         customer_id = getCustomerId(request)
 
-        # reservation #
+        
         request.POST = request.POST.copy()
         request.POST["reservation_id"] = next_reservation_id
         request.POST["customer_id"] = customer_id
@@ -466,8 +364,10 @@ class CreateReserve(View):
 
         form_reservation = ReservationForm(request.POST)
         if form_reservation.is_valid():
+            # บันทึกข้อมูลการจองในตาราง reservation สำเร็จ
             reservation = form_reservation.save()
-
+            
+            # เปลี่ยนสถานะห้องที่จองให้เป็น unavailable 
             total_rooms = int(request.POST["num_single_room"]) + int(
                 request.POST["num_double_room"]
             )
@@ -484,9 +384,6 @@ class CreateReserve(View):
                     Room.objects.filter(
                         room_number=available_single_room[0].room_number
                     ).update(status="unavailable")
-                    # available_single_room[i].status = "unavailable"
-                    # available_single_room[i].save()
-                    # Room.objects.bulk_update(available_single_room, ["status"])
 
             available_double_room = Room.objects.filter(
                 status="available", room_type="double bed"
@@ -499,12 +396,8 @@ class CreateReserve(View):
                     Room.objects.filter(
                         room_number=available_double_room[0].room_number
                     ).update(status="unavailable")
-
-                    # available_double_room[i].status = "unavailable"
-                    # available_double_room[i].save()
-                    # Room.objects.bulk_update(available_double_room, ["status"])
-
-            # reservation line item #
+                    
+            # บันทึกข้อมูลรายละเอียดการจองในตาราง reservation_line_item
             for i in range(total_rooms):
                 lineitem = dict()
                 lineitem["reservation_id"] = next_reservation_id
@@ -515,15 +408,16 @@ class CreateReserve(View):
 
                 try:
                     formlineitem.save()
-                    pass
+                    # บันทึกข้อมูลรายละเอียดการจองนั้นๆสำเร็จ
                 except:
-                    # Check something error to show and rollback transaction both invoice and invoice_line_item table
+                    # บันทึกข้อมูลรายละเอียดการจองไม่สำเร็จ
                     data["error"] = formlineitem.errors
                     print(formlineitem.errors)
-                    transaction.set_rollback(True)
+                    transaction.set_rollback(True) #ย้อนกลับการบันทึกข้อมูลก่อนหน้า
                     return JsonResponse(data)
 
         else:
+            # บันทึกข้อมูลการจองไม่สำเร็จ
             data["error"] = form_reservation.errors
             print(form_reservation.errors)
             return JsonResponse(data)
@@ -531,16 +425,13 @@ class CreateReserve(View):
         print(request.POST)
         return redirect("my_reserve")
 
-
+# บันทึกข้อมูลการสมัครใช้งานของ customer
 class CustomerRegister(View):
     @transaction.atomic
     def post(self, request):
-        if not request.POST:
-            print("Go to register page")
-            form = UserCreationForm()
-            return render(request, "register_user.html", {"form": form})
 
         print("Registering.....")
+        # สร้างรหัสลูกค้าหมายเลขต่อไป
         if Customer.objects.count() != 0:
             customer_id_max = Customer.objects.aggregate(Max("customer_id"))[
                 "customer_id__max"
@@ -552,7 +443,8 @@ class CustomerRegister(View):
             # print(customer_id_temp)
         else:
             next_customer_id = "000000CS"
-
+            
+        # สร้างรหัสผู้ใช้หมายเลขต่อไป
         if Profile.objects.count() != 0:
             user_code_max = Profile.objects.aggregate(Max("user_code"))[
                 "user_code__max"
@@ -563,7 +455,8 @@ class CustomerRegister(View):
             # print(user_code_temp)
         else:
             next_user_code = "000000UA"
-
+            
+        # สร้างรหัส user id สำหรับเชื่อมตารางใน database เลขต่อไป
         if Profile.objects.count() != 0:
             user_id_max = Profile.objects.aggregate(Max("user_id"))["user_id__max"]
             user_id_temp = [re.findall(r"\d+", str(user_id_max))[0]][0]
@@ -582,10 +475,8 @@ class CustomerRegister(View):
         if request.POST["age"] == "":
             request.POST["age"] == "0"
 
-        # print(request.POST)
 
         data = dict()
-        # Insert correct data to invoice
 
         print(request.POST)
 
@@ -593,6 +484,7 @@ class CustomerRegister(View):
 
         form_user = UserCreationForm(request.POST)
         if form_user.is_valid():
+            # บันทึกข้อมูลผู้ใช้สำเร็จ
             user = form_user.save()
             username = form_user.cleaned_data["username"]
             password = form_user.cleaned_data["password1"]
@@ -602,7 +494,7 @@ class CustomerRegister(View):
             print("User Created Success")
 
         else:
-            # if invoice from is not valid return error message
+            # บันทึกข้อมูลผู้ใช้ไม่สำเร็จ, เก็บข้อความ error ไว้
             data["error"] = form_user.errors
             print(form_user.errors)
             print("fail at User create...")
@@ -613,30 +505,33 @@ class CustomerRegister(View):
         # Insert correct data to invoice_line_item
         form_profile = ProfileForm(request.POST)
         if form_profile.is_valid():
+            # บันทึกข้อมูลผู้ใช้สำเร็จ
             profile = form_profile.save(commit=False)
             profile.user = user
 
             profile.save()
             print("Profile Created Success")
         else:
-            # Check something error to show and rollback transaction both invoice and invoice_line_item table
+            # บันทึกข้อมูลผู้ใช้ไม่สำเร็จ, เก็บข้อความ error ไว้
             data["error"] = form_profile.errors
             print(form_profile.errors)
             print("fail at Profile create...")
-            transaction.set_rollback(True)
+            transaction.set_rollback(True) # ย้อนกลับการบันทึกข้อมูลก่อนหน้านี้
             return JsonResponse(data)
 
         # ----------------------------------------------------------------#
         form = CustomerForm(request.POST)
         if form.is_valid():
+            # บันทึกข้อมูล customer สำเร็จ
             print("Customer successfully")
             customer = form.save()
 
         else:
+            # บันทึกข้อมูล customer ไม่สำเร็จ, เก็บข้อความ error ไว้
             data["error"] = form.errors
             print(form.errors)
             print("fail at Customer create...")
-            transaction.set_rollback(True)
+            transaction.set_rollback(True) # ย้อนกลับการบันทึกข้อมูลก่อนหน้านี้
             return JsonResponse(data)
 
         # ----------------------------------------------------------------#
@@ -647,47 +542,166 @@ class CustomerRegister(View):
         print("User Created Successfully without problems")
 
         return JsonResponse(data)
-
-
-def login_user(request):
-    # print(request.POST)
-    print("Enter login page")
-    if request.POST:
-        print("Loging in....")
-
-        username = request.POST["username"]
-        password = request.POST["password"]
-
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            u = User.objects.get(username=username)
-            print(u.profile.role)
-            if u.profile.role == "customer":
-                login(request, user)
-                print("Login successful")
-                return redirect("home")
-
-        messages.success(
-            request,
-            (
-                "ไม่สามารถล็อคอินด้วย username และ password ที่กรอกได้. กรุณาลองใหม่อีกครั้ง..."
-            ),
-        )
-        print("Login failed")
-        return redirect("login")
-
-    elif request.user.is_authenticated:
+    
+# หน้าสมัครสมาชิกสำหรับ employee
+@transaction.atomic
+def em_register(request):
+    # เข้าได้แค่คนที่ไม่ล็อคอิน
+    if request.user.is_authenticated:
         logout(request)
-        return redirect("login")
+        return redirect("em_login")
+
+    # กรณีกดเข้าหน้าสมัครสมาชิกเฉยๆ
+    if not request.POST:
+        return render(request, "em_register.html")
+
+    # กรณีกดปุ่ม submit การสมัครสมาชิก
+
+    # สร้างรหัสพนักงานหมายเลขต่อไป
+    if Employee.objects.count() != 0:
+        employee_id_max = Employee.objects.aggregate(Max("employee_id"))[
+            "employee_id__max"
+        ]
+        print(employee_id_max)
+        employee_id_temp = [re.findall(r"\d+", employee_id_max)[0]][0]
+        next_employee_id = str(int(employee_id_temp) + 1) + "EM"
+        next_employee_id = next_employee_id.rjust(8, "0")
+        # print(employee_id_temp)
+    else:
+        next_employee_id = "000000EM"
+
+    # สร้างรหัส user หมายเลขต่อไป
+    if Profile.objects.count() != 0:
+        user_code_max = Profile.objects.aggregate(Max("user_code"))["user_code__max"]
+        user_code_temp = [re.findall(r"\d+", user_code_max)[0]][0]
+        next_user_code = str(int(user_code_temp) + 1) + "UA"
+        next_user_code = next_user_code.rjust(8, "0")
+        # print(user_code_temp)
+    else:
+        next_user_code = "000000UA"
+
+    print(request.POST)
+
+    request.POST = request.POST.copy()
+    request.POST["employee_id"] = next_employee_id
+    request.POST["user_code"] = next_user_code
+    request.POST["role"] = "employee"
+    data = dict()
+
+    form_user = UserCreationForm(request.POST)
+    if form_user.is_valid():
+        # บันทึกข้อมูลผู้ใช้สำเร็จ
+        user = form_user.save()
+        username = form_user.cleaned_data["username"]
+        password = form_user.cleaned_data["password1"]
+
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        print("User Created Success")
 
     else:
-        return render(request, "login.html", {})
+        # บันทึกข้อมูลผู้ใช้ไม่สำเร็จ, เก็บข้อความ error ไว้
+        data["error"] = form_user.errors
+        print(form_user.errors)
+        print("fail at User create...")
+        return JsonResponse(data)
+
+    # ----------------------------------------------------------------#
+
+    form_profile = ProfileForm(request.POST)
+    if form_profile.is_valid():
+        # บันทึกข้อมูลผู้ใช้สำเร็จ
+        profile = form_profile.save(commit=False)
+        profile.user = user
+
+        profile.save()
+        print("Profile Created Success")
+    else:
+        # บันทึกข้อมูลผู้ใช้ไม่สำเร็จ, เก็บข้อความ error ไว้
+        data["error"] = form_profile.errors
+        print(form_profile.errors)
+        print("fail at Profile create...")
+        transaction.set_rollback(True)  # ย้อนกลับการบันทึกข้อมูลก่อนหน้านี้
+        return JsonResponse(data)
+
+    # ----------------------------------------------------------------#
+    form = EmployeeForm(request.POST)
+    if form.is_valid():
+        # บันทึกข้อมูล employee สำเร็จ
+        print("Employee successfully")
+        employee = form.save()
+
+    else:
+        # บันทึกข้อมูล employee ไม่สำเร็จ, เก็บข้อความ error ไว้
+        data["error"] = form.errors
+        print(form.errors)
+        print("fail at Employee create...")
+        transaction.set_rollback(True)  # ย้อนกลับการบันทึกข้อมูลก่อนหน้านี้
+        return JsonResponse(data)
+
+    # ----------------------------------------------------------------#
+
+    print("Empoyee register successful")
+    return redirect("employee_room_status")
 
 
-def logout_user(request):
-    logout(request)
-    return redirect("login")
+# หน้าดูการจองของ employee
+def em_reserve(request):
+    # เข้าได้แค่คนที่ล็อคอินเป็น employee
+    if not request.user.is_authenticated:
+        return redirect("em_login")
 
+    elif request.user.profile.role == "customer":
+        logout(request)
+        return redirect("em_login")
+
+    # เมื่อกด ยืนยัน หรือ ยกเลิก การจอง
+    if request.POST:
+        with transaction.atomic():
+            room_number_update = ReservationLineItem.objects.filter(
+                reservation_id=request.POST["reservation_id"]
+            ).values()
+
+            # กรณีกด ยกเลิก
+            if request.POST["submit-as"] == "cancel":
+                Reservation.objects.filter(
+                    reservation_id=request.POST["reservation_id"]
+                ).update(status="cancelled")
+                for item in room_number_update:
+                    Room.objects.filter(room_number=item["room_number_id"]).update(
+                        status="available"
+                    )
+
+            # กรณีกด ยืนยัน
+            elif request.POST["submit-as"] == "confirm":
+                Reservation.objects.filter(
+                    reservation_id=request.POST["reservation_id"]
+                ).update(status="confirmed")
+
+            return redirect("employee_reserve")
+        
+    reserve_info = list(
+        ReservationLineItem.objects.select_related("reservation_id")
+        .filter(reservation_id__status="unpaid")
+        .values(
+            "reservation_id",
+            "reservation_id__customer_id",
+            "reservation_id__check_in",
+            "reservation_id__check_out",
+            "reservation_id__total_price",
+        )
+        .order_by("reservation_id")
+        .annotate(room_count=Count("room_number"))
+    )
+
+    data = dict()
+    data["reserve_info"] = reserve_info
+
+    print(data["reserve_info"])
+
+    return render(request, "em_reserve.html", data)
+
+#----------------------- ฟังก์ชั่นทั่วไป ---------------------#
 
 def getCustomerId(request):
     field_name = "customer_id"

@@ -133,7 +133,7 @@ function set_error(element, message) {
   error_display.text(message);
   input_control.addClass("error").removeClass("pass");
 }
-/* หากsuccess เปลี่ยนเป็น class pass*/
+/* หาก success เปลี่ยนเป็น class pass*/
 function set_success(element) {
   const input_control = element.parent();
   const error_display = input_control.find(".error_message");

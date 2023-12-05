@@ -1,8 +1,6 @@
 $(document).ready(function () {
-  /* เมื่อทำการ submit form create reserve */
-  document
-    .getElementById("create_reserve")
-    .addEventListener("submit", function (event) {
+  // เมื่อกด submit การจอง
+  document.getElementById("create_reserve").addEventListener("submit", function (event) {
       var url_params = new URLSearchParams(window.location.search);
       var adult = url_params.get("adult");
       var child = url_params.get("child");
@@ -17,46 +15,44 @@ $(document).ready(function () {
       var number_adult = Number(adult);
       var number_child = Number(child);
 
-      // คำนวณจำนวนห้องทั้งหมด
+      // คำนวณจำนวนห้องที่เหมาะสม
       var total_room = number_room_2 + number_room_1;
       var total_number_adult = number_adult / total_room;
       var total_number_child = number_child / total_room;
       console.log(total_number_adult, total_number_child);
 
-      // ตรวจสอบว่าจำนวนห้องทั้งหมดมากกว่าเท่ากับ 1 หรือน้อยกว่าเท่ากับ 2
-      if (
-        total_number_adult >= 1 &&
+      // ตรวจสอบว่าจำนวนห้องเหมาะสมกับจำนวนคนที่เข้าพักไหม
+      if (total_number_adult >= 1 &&
         total_number_adult <= 2 &&
         total_number_child <= 2
       ) {
-        // แสดงข้อความว่า "จำนวนห้องเพียงพอ"
         alert("จำนวนห้องเพียงพอ");
       } else if (
         total_number_adult < 1 &&
         total_number_child >= 1 &&
         total_number_child <= 2
       ) {
-        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
         alert("จำนวนห้องมากกว่าจำนวนคน(ผู้ใหญ่)");
         event.preventDefault();
+
       } else if (total_number_adult < 1 && total_number_child < 2) {
-        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
         alert("จำนวนห้องมากกว่าจำนวนคน(ผู้ใหญ่)");
         event.preventDefault();
+
       } else if (total_number_adult < 1 && total_number_child > 2) {
-        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
         alert(
           "เด็กอายุต่ำกว่า 18 ปี จำเป็นต้องมีผู้ใหญ่อยู่ด้วยอย่างน้อย 1 คน"
         );
         event.preventDefault();
+
       } else if (
         total_number_adult >= 1 &&
         total_number_adult <= 2 &&
         total_number_child > 1
       ) {
-        // แสดงข้อความว่า "จำนวนห้องไม่เพียงพอ"
         alert("จำนวนเด็กเกินกว่าความจุของห้อง");
         event.preventDefault();
+
       } else {
         alert("จำนวนห้องไม่เพียงพอ");
         event.preventDefault();
@@ -75,7 +71,6 @@ $(document).ready(function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // ดึงค่าจาก URL parameters
   var url_params = new URLSearchParams(window.location.search);
   var checkin_date = url_params.get("checkin");
   var checkout_date = url_params.get("checkout");
@@ -85,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var [year_in, month_in, day_in] = checkin_date.split("-");
   var [year_out, month_out, day_out] = checkout_date.split("-");
 
-  // แสดงค่าใน element
+  // แสดงค่าส่วนของแต่ละประเภทห้องพัก
   document.getElementById("2bed_checkin_dateDD").innerText = day_in;
   document.getElementById("2bed_checkin_dateMM").innerText = month_in;
   document.getElementById("2bed_checkin_dateYYYY").innerText = year_in;
@@ -102,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("1bed_checkout_dateMM").innerText = month_out;
   document.getElementById("1bed_checkout_dateYYYY").innerText = year_out;
 
-  /* ส่วนline summary */
+  /* แสดงค่าส่วนสรุปการจอง */
   document.getElementById("2bed_checkin_dateD").innerText = day_in;
   document.getElementById("2bed_checkin_dateM").innerText = month_in;
   document.getElementById("2bed_checkin_dateY").innerText = year_in;
@@ -147,7 +142,6 @@ function two_update_value(elementId, increment) {
   new_value = val + increment;
 
   if (new_value >= min && new_value <= max) {
-    // อัพเดตตัวแปร number_room_2
     my_element.innerHTML = new_value;
     document.getElementById("2number_room").innerHTML = Number(new_value);
     document.getElementById("input_2number_room").value = new_value;
@@ -169,7 +163,6 @@ function one_update_value(elementId, increment) {
 
   if (new_value >= min && new_value <= max) {
     my_element.innerHTML = new_value;
-    // อัพเดตตัวแปร number_room_1
     document.getElementById("1number_room").innerHTML = Number(new_value);
     document.getElementById("input_1number_room").value = new_value;
     return new_value;
@@ -177,7 +170,7 @@ function one_update_value(elementId, increment) {
   console.log(min, max);
 }
 
-/* คำนวนวันจาก check in check out */
+/* คำนวนวันจาก check in, check out */
 function calculate_date() {
   var url_params = new URLSearchParams(window.location.search);
   var start_date_string = url_params.get("checkin");
@@ -201,7 +194,6 @@ function calculate_date() {
 /* รับรายละเอียดของ ห้อง จาก database */
 function get_room_detail() {
   $.ajax({
-    // call backend /reservation/price
     url: "/reservation/price",
     type: "get",
     dataType: "json",
@@ -267,7 +259,7 @@ function get_room_detail() {
   });
 }
 
-// รับข้อมูลในรูปแบบ JSON จาก backend /customer/list
+// ดึงข้อมูลลูกค้าจาก database
 function submit_form() {
   $.ajax({
     url: "/customer/list",

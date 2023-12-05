@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  /* เพิ่ม class "active" หากดป็น Url ปัจจุบัน ในแถบ nav */
+  /* เพิ่ม class "active" หากดเป็น Url ปัจจุบัน ในแถบ nav */
   set_navigation();
 
   function set_navigation() {

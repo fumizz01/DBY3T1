@@ -161,4 +161,3 @@ function prevent_default_inputs() {
   }
 }
 
-/* validate Input */
