@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'DatabaseProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '#database_name',
+        'NAME': 'DBP',
         'USER': 'postgres',
-        'PASSWORD': '#password',
+        'PASSWORD': '191120',
         'HOST': 'localhost',
         'PORT': '5432',
     }

@@ -3,38 +3,18 @@
     <a href="{% url 'employee_room_status' %}" class="header_logo">
         <h1 class="header_logo">Hotel</h1>
     </a>
+
+    <!-- แสดง Navigation Bar แบบมีเงื่อนไข -->
     <ul class="nav">
         {% if user.is_authenticated %}
-        <li>
-            <a href="{% url 'employee_room_status' %}">สถานะห้อง</a>
-        </li>
-        <li>
-            <a href="{% url 'employee_reserve' %}">การจอง</a>
-        </li>
+        <li><a href="{% url 'employee_room_status' %}">สถานะห้อง</a></li>
+        <li><a href="{% url 'employee_reserve' %}">การจอง</a></li>
         <li><a href="{% url 'em_logout' %}">ออกจากระบบ</a></li>
 
         {% else %}
         <li><a href="{% url 'em_login' %}">เข้าสู่ระบบ</a></li>
-        <li>
-            <a class="register" href="{% url 'employee_register' %}">ลงทะเบียน</a>
-        </li>
+        <li><a class="register" href="{% url 'employee_register' %}">ลงทะเบียน</a></li>
         {% endif %}
     </ul>
+
 </header>
-
-<script>
-    set_navigation();
-
-    function set_navigation() {
-        var path = window.location.pathname;
-        path = path.replace(/\/$/, "");
-        path = decodeURIComponent(path);
-
-        $(".nav a").each(function () {
-            var href = $(this).attr("href");
-            if (path.substring(1, href.length + 1) === href) {
-                $(this).closest("li").addClass("active");
-            }
-        });
-    }
-</script>

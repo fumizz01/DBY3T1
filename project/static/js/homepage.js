@@ -1,5 +1,4 @@
 $(document).ready( function () {
-    set_navigation();
     set_default_date();
 
     document.getElementById('search_room').addEventListener('click', function () {
@@ -110,15 +109,3 @@ function update_value(inputId, increment) {
 }
 
 
-function set_navigation() {
-    var path = window.location.pathname;
-    path = path.replace(/\/$/, "");
-    path = decodeURIComponent(path);
-
-    $(".nav a").each(function () {
-        var href = $(this).attr('href');
-        if (path.substring(1, href.length+1) === href) {
-            $(this).closest('li').addClass('active');
-        }
-    });
-}
