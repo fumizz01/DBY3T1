@@ -189,11 +189,15 @@ function prevent_default_inputs(
 
   if (tel === "") {
     set_error($("#tel"), "กรุณาระบุเบอร์โทร");
+    console.log(tel.length);
   } else if (!is_number(Number(tel))) {
     set_error($("#tel"), "กรุณากรอกเฉพาะตัวเลข");
-  } else if (tel.length < 8) {
+    console.log(tel.length);
+  } else if (tel.length < 10) {
+    console.log(tel.length);
     set_error($("#tel"), "must be at least 10 characters");
   } else {
+    console.log(tel.length);
     set_success($("#tel"));
     total += 1;
   }
@@ -202,7 +206,7 @@ function prevent_default_inputs(
     set_error($("#id_number"), "กรุณาระบุรหัสบัตรประชาชน");
   } else if (!is_number(Number(id_number))) {
     set_error($("#id_number"), "กรุณากรอกเฉพาะตัวเลข");
-  } else if (id_number.length < 8) {
+  } else if (id_number.length < 13) {
     set_error($("#id_number"), "must be at least 13 characters");
   } else {
     set_success($("#id_number"));
