@@ -266,20 +266,25 @@ class RoomStatusInfo(View):
             
         i = 0
         for item in data["room_status"]:
-            reserve_info = data["reserve_info"][i]
-            if item["status"] == "unavailable" and item['room_number'] == reserve_info["room_number"]:
-                item["check_in"] = reserve_info["reservation_id__check_in"]
-                item["check_out"] = reserve_info["reservation_id__check_out"]
-                item["customer_id"] = reserve_info["reservation_id__customer_id"]
-                #item["customer_id"] = reserve_info["reservation_id"] ใช้สำหรับ debug
-                i += 1
-            
-            elif item["status"] == "available" and item['room_number'] == reserve_info["room_number"]:
-                item["check_in"] = "-"
-                item["check_out"] = "-"
-                item["customer_id"] = "-"
-                i += 1
-            else:
+            try:
+                reserve_info = data["reserve_info"][i]
+                if item["status"] == "unavailable" and item['room_number'] == reserve_info["room_number"]:
+                    item["check_in"] = reserve_info["reservation_id__check_in"]
+                    item["check_out"] = reserve_info["reservation_id__check_out"]
+                    item["customer_id"] = reserve_info["reservation_id__customer_id"]
+                    #item["customer_id"] = reserve_info["reservation_id"] ใช้สำหรับ debug
+                    i += 1
+                
+                elif item["status"] == "available" and item['room_number'] == reserve_info["room_number"]:
+                    item["check_in"] = "-"
+                    item["check_out"] = "-"
+                    item["customer_id"] = "-"
+                    i += 1
+                else:
+                    item["check_in"] = "-"
+                    item["check_out"] = "-"
+                    item["customer_id"] = "-"
+            except IndexError: # ถ้าเกิด IndexError แปลว่าห้องหมายเลขหลังจากนี้จะว่างเสมอ
                 item["check_in"] = "-"
                 item["check_out"] = "-"
                 item["customer_id"] = "-"
