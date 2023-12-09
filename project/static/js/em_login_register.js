@@ -297,3 +297,11 @@ function validate_duplicate_data_and_submit_form(user_name) {
     },
   });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  var birthday_Input = document.getElementById("birthday");
+  var current_date = new Date().toISOString().split("T")[0];
+
+  birthday_Input.setAttribute("max", current_date);
+});
+
