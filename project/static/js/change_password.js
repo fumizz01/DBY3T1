@@ -25,12 +25,12 @@ $(document).ready(function () {
   $(".pswd_info").hide();
   $("#change_password").keyup(function (event) {
     var password = $("#change_password").val();
-    validate_password(password);
+    validatePassword(password);
   });
 
   $("#change_password_form").on("submit", function (event) {
     event.preventDefault();
-    if (prevent_default_inputs()) {
+    if (preventDefaultInputs()) {
       console.log("s");
       // If all validations pass, send a POST request
       const formData = $("#change_password_form").serialize(); // Serialize the form data
@@ -56,7 +56,7 @@ $(document).ready(function () {
 });
 
 // ตรวจสอบความถูกต้องของ password
-function validate_password(password) {
+function validatePassword(password) {
   $("#password_strength_status").show();
   var number = /([0-9])/;
   var upper_case = /([A-Z])/;
@@ -76,7 +76,7 @@ function validate_password(password) {
   this.update_info("special", special);
 
   var total = characters + capitalletters + loweletters + numbers + special;
-  this.measure_password_security(total);
+  this.measurePasswordSecurity(total);
 }
 
 function update_info(criterion, isValid) {
@@ -90,7 +90,7 @@ function update_info(criterion, isValid) {
   }
 }
 // วัดระดับความปลอดภัยของ password
-function measure_password_security(total) {
+function measurePasswordSecurity(total) {
   var meter = $("#password_strength_status");
   meter.removeClass();
   if (total === 0) {
@@ -115,7 +115,7 @@ function measure_password_security(total) {
 }
 
 /* แสดงข้อความ หาก error พร้อมเหตุผล เปลี่ยนเป็น class error */
-function set_error(element, message) {
+function setError(element, message) {
   const input_control = element.parent();
   const error_display = input_control.find(".error_message");
 
@@ -123,7 +123,7 @@ function set_error(element, message) {
   input_control.addClass("error").removeClass("pass");
 }
 ``;
-function set_success(element) {
+function setSuccess(element) {
   const input_control = element.parent();
   const error_display = input_control.find(".error_message");
 
@@ -132,27 +132,27 @@ function set_success(element) {
 }
 
 // ตรวจสอบ inputs เบื้องต้นว่าเหมือนเดิมหรือไม่ พร้อม แสดงข้อความ หาก error
-function prevent_default_inputs() {
+function preventDefaultInputs() {
   var total = 0;
 
   const password_value = $("#change_password").val();
   const password2_value = $("#password_confirm").val();
 
   if (password_value === "") {
-    set_error($("#change_password"), "Password is required");
+    setError($("#change_password"), "Password is required");
   } else if (password_value.length < 8) {
-    set_error($("#change_password"), "Password must be at least 8 characters");
+    setError($("#change_password"), "Password must be at least 8 characters");
   } else {
-    set_success($("#change_password"));
+    setSuccess($("#change_password"));
     total += 1;
   }
 
   if (password2_value === "") {
-    set_error($("#password_confirm"), "Please confirm your password");
+    setError($("#password_confirm"), "Please confirm your password");
   } else if (password2_value !== password_value) {
-    set_error($("#password_confirm"), "Passwords don't match");
+    setError($("#password_confirm"), "Passwords don't match");
   } else {
-    set_success($("#password_confirm"));
+    setSuccess($("#password_confirm"));
     total += 1;
   }
 

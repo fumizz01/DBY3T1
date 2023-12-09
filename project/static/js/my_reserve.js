@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
-  load_data();
+  loadData();
 
   $(".status-box").each(function () {
     var status_element = $(this).find("#status");
@@ -10,7 +10,7 @@ $(document).ready(function () {
     }
   });
 
-  function load_data() {
+  function loadData() {
     // ทำ AJAX request ไปยัง endpoint ของคุณ
     $.ajax({
       url: "", // แก้ไขเป็น URL ของ API หรือ endpoint ที่คุณใช้
@@ -18,7 +18,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (data) {
         // ทำการเรียกฟังก์ชั่นเพื่อแสดงข้อมูล
-        display_data(data);
+        displayData(data);
       },
       error: function (error) {
         console.log("Error:", error);
@@ -26,7 +26,7 @@ $(document).ready(function () {
     });
   }
 
-  function display_data(data) {
+  function displayData(data) {
     // เลือก element ที่ต้องการแสดงข้อมูล
     var status_box = $(".status-box");
     var sum_price = $(".sum_price .text_price");

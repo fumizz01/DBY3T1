@@ -28,7 +28,7 @@ $(document).ready(function () {
   $(".pswd_info").hide();
   $("#register_password").keyup(function (event) {
     var password = $("#register_password").val();
-    validate_password(password);
+    validatePassword(password);
   });
 
   /* ส่งค่าจาก form เมื่อกด submit */
@@ -47,7 +47,7 @@ $(document).ready(function () {
     const position_value = $("#position").val();
 
     if (
-      !prevent_default_inputs(
+      !preventDefaultInputs(
         user_name,
         password_value,
         password2_value,
@@ -62,12 +62,12 @@ $(document).ready(function () {
     ) {
       return;
     }
-    validate_duplicate_data_and_submit_form(user_name);
+    validateDuplicateDataAndSubmitForm(user_name);
   });
 });
 
 // ตรวจสอบความถูกต้องของ password
-function validate_password(password) {
+function validatePassword(password) {
   $("#password_strength_status").show();
   var number = /([0-9])/;
   var upper_case = /([A-Z])/;
@@ -84,7 +84,7 @@ function validate_password(password) {
   this.update_info("number", numbers);
 
   var total = characters + capitalletters + loweletters + numbers;
-  this.measure_password_security(total);
+  this.measurePasswordSecurity(total);
 }
 // อัพเดทความถูกต้องของ password
 function update_info(criterion, isValid) {
@@ -98,7 +98,7 @@ function update_info(criterion, isValid) {
   }
 }
 // วัดระดับความปลอดภัยของ password
-function measure_password_security(total) {
+function measurePasswordSecurity(total) {
   var meter = $("#password_strength_status");
   meter.removeClass();
   if (total === 0) {
@@ -120,7 +120,7 @@ function measure_password_security(total) {
 }
 
 /* แสดงข้อความ หาก error พร้อมเหตุผล เปลี่ยนเป็น class error */
-function set_error(element, message) {
+function setError(element, message) {
   const input_control = element.parent();
   const error_display = input_control.find(".error_message");
 
@@ -129,7 +129,7 @@ function set_error(element, message) {
 }
 
 /* หากsuccess เปลี่ยนเป็น class pass*/
-function set_success(element) {
+function setSuccess(element) {
   const input_control = element.parent();
   const error_display = input_control.find(".error_message");
   error_display.text("");
@@ -137,12 +137,12 @@ function set_success(element) {
 }
 
 // ตรวจเช็คว่าเป็นตัวเลขไหม
-function is_number(value) {
+function isNumber(value) {
   return !isNaN(value) && typeof value === "number";
 }
 
 // ตรวจสอบ inputs เบื้องต้นว่าเหมือนเดิมหรือไม่ พร้อม แสดงข้อความ หาก error
-function prevent_default_inputs(
+function preventDefaultInputs(
   user_name,
   password_value,
   password2_value,
@@ -157,79 +157,79 @@ function prevent_default_inputs(
   var total = 0;
 
   if (first_value === "") {
-    set_error($("#firstname"), "กรุณาระบุชื่อ");
+    setError($("#firstname"), "กรุณาระบุชื่อ");
   } else {
-    set_success($("#firstname"));
+    setSuccess($("#firstname"));
     total += 1;
   }
 
   if (lastname_value === "") {
-    set_error($("#lastname"), "กรุณาระบุนามสกุล");
+    setError($("#lastname"), "กรุณาระบุนามสกุล");
   } else {
-    set_success($("#lastname"));
+    setSuccess($("#lastname"));
     total += 1;
   }
 
   if (date_value === "") {
-    set_error($("#birthday"), "กรุณาระบุวันเกิด");
+    setError($("#birthday"), "กรุณาระบุวันเกิด");
   } else {
-    set_success($("#birthday"));
+    setSuccess($("#birthday"));
     total += 1;
   }
 
   if (position_value === "") {
-    set_error($("#position"), "กรุณาระบุตำแหน่ง");
+    setError($("#position"), "กรุณาระบุตำแหน่ง");
   } else {
-    set_success($("#position"));
+    setSuccess($("#position"));
     total += 1;
   }
 
   if (sex_value === "") {
-    set_error($("#sex"), "กรุณาระบุเพศ");
+    setError($("#sex"), "กรุณาระบุเพศ");
   } else {
-    set_success($("#sex"));
+    setSuccess($("#sex"));
     total += 1;
   }
 
   if (address_value === "") {
-    set_error($("#address"), "กรุณาระบุที่อยู่");
+    setError($("#address"), "กรุณาระบุที่อยู่");
   } else {
-    set_success($("#address"));
+    setSuccess($("#address"));
     total += 1;
   }
 
   if (id_number === "") {
-    set_error($("#id_number"), "กรุณาระบุรหัสประจำตัวประชาชน");
+    setError($("#id_number"), "กรุณาระบุรหัสประจำตัวประชาชน");
   } else {
-    set_success($("#id_number"));
+    setSuccess($("#id_number"));
     total += 1;
   }
 
   if (user_name === "") {
-    set_error($("#user_name"), "กรุณาระบุชื่อผู้ใช้");
+    setError($("#user_name"), "กรุณาระบุชื่อผู้ใช้");
   } else {
-    set_success($("#user_name"));
+    setSuccess($("#user_name"));
     total += 1;
   }
 
   if (password_value === "") {
-    set_error($("#register_password"), "Password is required");
+    setError($("#register_password"), "Password is required");
   } else if (password_value.length < 8) {
-    set_error(
+    setError(
       $("#register_password"),
       "Password must be at least 8 characters"
     );
   } else {
-    set_success($("#register_password"));
+    setSuccess($("#register_password"));
     total += 1;
   }
 
   if (password2_value === "") {
-    set_error($("#password_confirm"), "Please confirm your password");
+    setError($("#password_confirm"), "Please confirm your password");
   } else if (password2_value !== password_value) {
-    set_error($("#password_confirm"), "Passwords don't match");
+    setError($("#password_confirm"), "Passwords don't match");
   } else {
-    set_success($("#password_confirm"));
+    setSuccess($("#password_confirm"));
     total += 1;
   }
 
@@ -239,7 +239,7 @@ function prevent_default_inputs(
 }
 
 /* ตรวจสอบว่ามี ข้อมูลสำคัญ ซ้ำกับใน database ไหม */
-function validate_duplicate_data_and_submit_form(user_name) {
+function validateDuplicateDataAndSubmitForm(user_name) {
   $.ajax({
     // call backend /username/list
     url: "/username/list",
@@ -260,7 +260,7 @@ function validate_duplicate_data_and_submit_form(user_name) {
             .getElementById("user_name")
             .parentElement.classList.contains("error")
         ) {
-          set_error($("#user_name"), "ชื่อผู้ใช้ซ้ำกับข้อมูลในระบบ");
+          setError($("#user_name"), "ชื่อผู้ใช้ซ้ำกับข้อมูลในระบบ");
           console.log("error");
           flag = 0;
         }
@@ -280,9 +280,9 @@ function validate_duplicate_data_and_submit_form(user_name) {
         success: function (response) {
           if (response.error) {
             console.log(response.error);
-            var errorMessages = response.error.password2;
-            errorMessages.forEach(function (errorMessage) {
-              alert(errorMessage);
+            var error_messages = response.error.password2;
+            error_messages.forEach(function (error_message) {
+              alert(error_message);
             });
           } else {
             console.log(response);

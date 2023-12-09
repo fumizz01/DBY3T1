@@ -64,8 +64,8 @@ $(document).ready(function () {
     alert("กรุณาเข้าสู่ระบบก่อนจองห้อง");
   });
 
-  get_room_detail();
-  calculate_date();
+  getRoomDetail();
+  calculateDate();
   var url_params = new URLSearchParams(window.location.search);
   console.log(url_params);
 });
@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* อัพเดตค่าเมื่อ เพิ่มลด จำนวนห้อง ของ ห้องคู่่ */
-function two_update_value(elementId, increment) {
-  get_room_detail();
+function twoUpdateValue(elementId, increment) {
+  getRoomDetail();
   var available_rooms = parseInt($("#2_number_available_room").text());
   let my_element = document.getElementById(elementId);
   let min = parseInt(my_element.getAttribute("min"));
@@ -151,8 +151,8 @@ function two_update_value(elementId, increment) {
 }
 
 /* อัพเดตค่าเมื่อ เพิ่มลด จำนวนห้อง ของ ห้องเดี่ยว */
-function one_update_value(elementId, increment) {
-  get_room_detail();
+function oneUpdateValue(elementId, increment) {
+  getRoomDetail();
   var available_rooms = parseInt($("#1_number_available_room").text());
   let my_element = document.getElementById(elementId);
   let min = parseInt(my_element.getAttribute("min"));
@@ -171,7 +171,7 @@ function one_update_value(elementId, increment) {
 }
 
 /* คำนวนวันจาก check in, check out */
-function calculate_date() {
+function calculateDate() {
   var url_params = new URLSearchParams(window.location.search);
   var start_date_string = url_params.get("checkin");
   var end_date_string = url_params.get("checkout");
@@ -192,7 +192,7 @@ function calculate_date() {
 }
 
 /* รับรายละเอียดของ ห้อง จาก database */
-function get_room_detail() {
+function getRoomDetail() {
   $.ajax({
     url: "/reservation/price",
     type: "get",
@@ -222,7 +222,7 @@ function get_room_detail() {
         single.room_capacity_child
       );
       // รับค่าจำนวนวัน
-      var date = calculate_date();
+      var date = calculateDate();
       console.log("date", date);
       $("#2bed_price").html(parseFloat(double.room_price).toFixed(2));
       $("#1bed_price").html(parseFloat(single.room_price).toFixed(2));
@@ -260,7 +260,7 @@ function get_room_detail() {
 }
 
 // ดึงข้อมูลลูกค้าจาก database
-function submit_form() {
+function submitForm() {
   $.ajax({
     url: "/customer/list",
     type: "get",
