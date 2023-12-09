@@ -11,16 +11,16 @@ $(document).ready(function () {
   });
 
   // ทำการเรียก function เมื่อหน้าเว็บโหลดเสร็จ
-  load_data();
+  loadData();
 });
 
-function load_data() {
+function loadData() {
   $.ajax({
     url: "",
     type: "GET",
     dataType: "json",
     success: function (data) {
-      display_data(data);
+      displayData(data);
     },
     error: function (error) {
       console.log("Error:", error);
@@ -28,7 +28,7 @@ function load_data() {
   });
 }
 
-function display_data(data) {
+function displayData(data) {
   // เลือก tbody ของตาราง
   var tbody = $("#table_main tbody");
 

@@ -39,11 +39,11 @@
                     {% for item in room_status %}
                     <tr class="d-flex">
                         <td class="room_number" scope="row">{{item.room_number}}</td>
-                        <td class="check_in" scope="row">{{item.reservation_id__check_in}}</td>
-                        <td class="check_out" scope="row">{{item.reservation_id__check_out}}</td>
-                        <td class="price" scope="row">{{item.room_number__room_type__room_price}}</td>
-                        <td class="customer" scope="row">{{item.reservation_id__customer_id}}</td>
-                        <td class="status" scope="row">{{item.room_number__status}}</td>
+                        <td class="check_in" scope="row">{{item.check_in}}</td>
+                        <td class="check_out" scope="row">{{item.check_out}}</td>
+                        <td class="price" scope="row">{{item.room_type__room_price}}</td>
+                        <td class="customer" scope="row">{{item.customer_id}}</td>
+                        <td class="status" scope="row">{{item.status}}</td>
                     </tr>
                     {% endfor %}
                 </thead>

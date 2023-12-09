@@ -1,8 +1,8 @@
 $(document).ready(function () {
   /* เพิ่ม class "active" หากดเป็น Url ปัจจุบัน ในแถบ nav */
-  set_navigation();
+  setNavigation();
 
-  function set_navigation() {
+  function setNavigation() {
     var path = window.location.pathname;
     path = path.replace(/\/$/, "");
     path = decodeURIComponent(path);

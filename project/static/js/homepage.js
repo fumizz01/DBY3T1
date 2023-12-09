@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  set_default_date();
+  setDefaultDate();
 
   document.getElementById("search_room").addEventListener("click", function () {
     // ดึงค่าจาก text_checkin_date และ text_checkout_date
@@ -26,7 +26,7 @@ $(document).ready(function () {
 });
 
 /* บันทึกวันปัจุบัน เพื่อตั้งเป็นค่าเริ่มต้นการเข้าพัก*/
-function set_default_date() {
+function setDefaultDate() {
   todayDate = new Date();
   document.getElementById("text_checkin_date").valueAsDate = new Date(
     todayDate
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* อัพเดทค่าเมื่อทำการเพิ่มลดจำนวนคน */
-function update_value(inputId, increment) {
+function updateValue(inputId, increment) {
   let my_input = document.getElementById(inputId);
   let min = parseInt(my_input.getAttribute("min"));
   let max = parseInt(my_input.getAttribute("max"));
