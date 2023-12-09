@@ -41,7 +41,7 @@ def index(request):
         logout(request)
         return redirect("login")
 
-    return render(request, "hotelpage.html")
+    return render(request, "homepage.html")
 
 
 # redirect ไปหน้า register สำหรับ customer
